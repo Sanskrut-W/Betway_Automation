@@ -222,7 +222,7 @@ export const test = base.extend<PageFixtures>({
     await bookABetPage.goto();
     await use(bookABetPage);
   },
-  
+
   betSaverPage: async ({ page }, use) => {
     await page.setViewportSize({ width: 1300, height: 780 });
     const betSaverPage = new BetSaverPage(page);
@@ -235,6 +235,7 @@ export const test = base.extend<PageFixtures>({
     await page.setViewportSize({ width: 1300, height: 780 });
     const transactionHistoryPage = new TransactionHistoryPage(page);
     await transactionHistoryPage.goto();
+    await transactionHistoryPage.page.getByText('Got it').first().click();
     await transactionHistoryPage.Login();
     await use(transactionHistoryPage);
   },
