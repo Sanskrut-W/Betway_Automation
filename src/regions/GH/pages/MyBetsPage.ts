@@ -55,8 +55,8 @@ export class MyBetsPage {
     async gotoSports() {
         await this.page.goto('https://www.betway.com.gh/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
-        await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
-        await this.myBetsLocatorsRegistry.closePromotionPopup.click();
+        // await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
+        // await this.myBetsLocatorsRegistry.closePromotionPopup.click();
     }
  
    async login() {

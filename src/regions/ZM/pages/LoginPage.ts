@@ -1,4 +1,4 @@
-const data = require('../links/navbarLinks.json')[0];
+// const data = require('../links/navbarLinks.json')[0];
 const apidata = require('../apis/Sign-upPage/api.json')[0];
 
 const userData = require('../json-data/userData.json');
@@ -101,7 +101,7 @@ export class LoginPage extends HomePage{
     }
 
     async gotoAviatorPage() {
-        await this.page.goto(data.aviator);
+        await this.page.goto('https://new.betway.co.za/lobby/casino-games/game/aviator');
         await this.page.waitForLoadState('domcontentloaded');
     }
 

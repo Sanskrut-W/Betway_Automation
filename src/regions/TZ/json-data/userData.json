@@ -1,14 +1,8 @@
 {
   "user1": {
-<<<<<<< HEAD
     "name": "Lall aIE",
     "mobile": "999845637",
     "password": "87654321"
-=======
-    "name":"Lall aIE",
-    "mobile": "888999666",
-    "password": "12345"
->>>>>>> 5a5b4121bc25aee4cc94f3f94f3a7659390d9f37
   },
   "user2": {
     "mobile": "888999666",
@@ -19,13 +13,8 @@
     "password": "12345"
   },
   "user4": {
-<<<<<<< HEAD
     "mobile": "999111676",
     "password": "123456"
-=======
-    "mobile": "888999666",
-    "password": "12345"
->>>>>>> 5a5b4121bc25aee4cc94f3f94f3a7659390d9f37
   },
   "user5": {
     "mobile": "888999666",

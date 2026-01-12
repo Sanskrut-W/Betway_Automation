@@ -95,14 +95,14 @@ export class BetSaverPage {
     async goto() {
         await this.page.goto('https://www.betway.com.gh/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
-        await this.locatorsRegistry.closePromotionPopupGH.click();
+        // await this.locatorsRegistry.closePromotionPopupGH.click();
     }
     async Login() {
         await this.locatorsRegistry.mobileNumber.fill(userData.user4.mobile);
         await this.locatorsRegistry.password.fill(userData.user4.password);
         await this.locatorsRegistry.loginButton.click();
         await this.page.waitForTimeout(1000);
-        // await this.locatorsRegistry.closePopup.click();
+        await this.locatorsRegistry.closePopup.click();
     }
 
 

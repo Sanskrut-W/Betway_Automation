@@ -83,8 +83,8 @@ export class BetslipPage extends SportsPage {
   // Navigation Methods
   async goto() {
     await this.page.goto('https://www.betway.com.gh/sport/soccer', { waitUntil: 'domcontentloaded' });
-    await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 15000 });
-    await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
+    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 15000 });
+    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
   }
 
   // Login Methods
