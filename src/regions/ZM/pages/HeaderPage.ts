@@ -33,7 +33,7 @@ export class HeaderPage extends HomePage {
       closeHamburgerMenu: getLocator(this.page, configs["closeHamburgerMenu"]),
       quickLinks: getLocator(this.page, configs["quickLinks"]),
       myAccount: getLocator(this.page, configs["myAccount"]),
-      bettingRules: getLocator(this.page, configs["bettingRules"]),
+      bettingRules: getLocator(this.page, configs["bettingRulesZM"]).nth(0),
       statistics: getLocator(this.page, configs["statistics"]),
       oddsFormat: getLocator(this.page, configs["oddsFormat"]),
       // countryCode: getLocator(this.page, configs["countryCode"]),

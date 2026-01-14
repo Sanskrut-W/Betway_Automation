@@ -102,7 +102,7 @@ export class BetSaverPage {
         await this.locatorsRegistry.password.fill(userData.user4.password);
         await this.locatorsRegistry.loginButton.click();
         await this.page.waitForTimeout(1000);
-        await this.locatorsRegistry.closePopup.click();
+        // await this.locatorsRegistry.closePopup.click();
     }
 
 

@@ -1,29 +1,51 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
 
 export default defineConfig({
-  testDir: './src/regions/TZ/tests',
+  testDir: './src/regions/NG/tests',
+
   fullyParallel: true,
-  timeout: 200000,
+  timeout: 90000,
+
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 3 : 3,
+
+  // 👉 Retry ONLY failed tests once
+  retries: 1,
+
+  // Workers
+  workers: process.env.CI ? 7 : 7,
+
+  // Reports
   reporter: [
-    ['html', { outputFolder: 'playwright-report', open: 'never' }], ['list']
-    // ['allure-playwright', { outputFolder: 'src/regions/ZA/reports/allure-results' }]
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+    ['list'],
+    ['json', { outputFile: path.resolve(__dirname, 'src/regions/NG/reports', process.env.PLAYWRIGHT_JSON_OUTPUT_NAME || 'test-results.json') }],
+    ['allure-playwright', { resultsDir: path.resolve(__dirname, 'src/regions/NG/reports/allure-results') }],
   ],
+
+  // ['json', { outputFile: 'test-results.json' }],
+  // ['allure-playwright', { resultsDir: path.resolve(__dirname, 'src/regions/NG/reports/allure-results') }],
   use: {
-    baseURL: 'https://en.betway.co.ng/sport/soccer',
-    viewport: null,                        // <- This disables the fixed viewport size, so browser window controls actual size
+    baseURL: 'https://betway.com.ng/',
+
+    // Use real browser window size
+    viewport: null,
+    deviceScaleFactor: undefined,
+
     launchOptions: {
       args: ['--start-maximized'],
     },
+
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+
+    actionTimeout: 60000,
+    navigationTimeout: 60000,
   },
 
   projects: [
     {
-      name: 'TZ Region',
+      name: 'NG Region',
       use: {
         ...devices['Desktop Chrome'],
         viewport: null,
@@ -31,8 +53,7 @@ export default defineConfig({
         launchOptions: {
           args: ['--start-maximized'],
         },
-      }
+      },
     },
   ],
 });
-
