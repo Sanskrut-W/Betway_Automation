@@ -1,6 +1,7 @@
 import { test } from '../../../fixtures/MasterFixtureFile';
 import path from 'path';
 import { ScreenshotHelper } from '../../../../Common-Flows/ScreenshotHelper';
+import { expect } from '@playwright/test';
 const projectRoot = path.resolve(__dirname, '../../..');
 const screenshotDir = path.join(projectRoot, 'screenshots/module/footer');
 
@@ -54,8 +55,13 @@ test.describe('Footer Module Tests', () => {
     });
 
     test('T32 b -Verify functionality of "Betting Rules" at footer section', async ({ homePage }, testInfo) => {
-        await homePage.clickBettingRulesLink();
+        const [newPage] = await Promise.all([
+            homePage.page.context().waitForEvent('page'),
+            homePage.HomePagelocatorsRegistry.BettingRules.click()
+        ]);
+        await expect(newPage).toHaveURL('https://cms1.gmgamingsystems.com/medialibraries/content.gmgamingsystems.com/Synapse/Betting%20rules/BettingRules_MZ_en.pdf');
         await ScreenshotHelper(homePage.page, screenshotDir, 'T32-b.png', testInfo);
+        await newPage.close();
     });
 
     test('T33 -b -Verify functionality of "Betway App" at Footer section', async ({ homePage }, testInfo) => {
@@ -74,6 +80,6 @@ test.describe('Footer Module Tests', () => {
     });
 
 });
-// npx playwright test src/regions/ZA/tests/smoke/footer/footer.spec.ts --config=playwright.ZA.config.ts --headed
+// npx playwright test src/regions/MZ/tests/smoke/footer/footer.spec.ts --config=playwright.MZ.config.ts --headed
 // 2.allure generate allure-results --clean -o allure-report
-// 3.allure open src/regions/ZA/reports/allure-report 
+// 3.allure open src/regions/MZ/reports/allure-report 

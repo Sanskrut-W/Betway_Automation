@@ -74,6 +74,6 @@ test.describe('Footer Module Tests', () => {
     });
 
 });
-// npx playwright test src/regions/ZA/tests/smoke/footer/footer.spec.ts --config=playwright.ZA.config.ts --headed
+// npx playwright test src/regions/NG/tests/smoke/footer/footer.spec.ts --config=playwright.NG.config.ts --headed
 // 2.allure generate allure-results --clean -o allure-report
-// 3.allure open src/regions/ZA/reports/allure-report 
+// 3.allure open src/regions/NG/reports/allure-report 

@@ -1,4 +1,4 @@
-const data = require('../links/navbarLinks.json')[0];
+// const data = require('../links/navbarLinks.json')[0];
 const apidata = require('../apis/Sign-upPage/api.json')[0];
 
 const userData = require('../json-data/userData.json');
@@ -12,9 +12,9 @@ import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelRea
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElementBorder, highlightElements } from '../../Common-Flows/HighlightElements';
 import { HomePage } from './HomePage';
-const LOCATOR_URL="https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
+const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
 
-export class LoginPage extends HomePage{
+export class LoginPage extends HomePage {
 
     readonly LoginPagelocatorsRegistry: Record<string, import('@playwright/test').Locator>;
     page: import('@playwright/test').Page;
@@ -94,14 +94,14 @@ export class LoginPage extends HomePage{
     async goto() {
         await this.page.goto('/');
         await this.page.waitForLoadState('domcontentloaded');
-        if(await this.page.locator('#modal-close-btn').nth(1).isVisible()){
+        if (await this.page.locator('#modal-close-btn').nth(1).isVisible()) {
             await this.page.locator('#modal-close-btn').nth(1).waitFor({ state: 'visible', });
             await this.page.locator('#modal-close-btn').nth(1).click();
         }
     }
 
     async gotoAviatorPage() {
-        await this.page.goto(data.aviator);
+        await this.page.goto('https://new.betway.co.za/lobby/casino-games/game/aviator');
         await this.page.waitForLoadState('domcontentloaded');
     }
 
