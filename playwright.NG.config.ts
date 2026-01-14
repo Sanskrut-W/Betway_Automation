@@ -28,6 +28,7 @@ export default defineConfig({
   use: {
     baseURL: 'https://www.betway.com.ng/',
 
+
     // Use real browser window size
     viewport: null,
     deviceScaleFactor: undefined,

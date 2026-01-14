@@ -9,104 +9,104 @@ const screenshotDir = path.join(projectRoot, 'screenshots/smoke/betslip');
 
 test.describe('Betslip Module - GH', () => {
 
-  // test('T1-Verify Betslip Section without selecting any odd ', async ({ betslipPage }, testInfo) => {
-  //   await betslipPage.verifyBetslipSection();
-  //   await ScreenshotHelper(betslipPage.page, screenshotDir, 'T1-betslipButton.png', testInfo);
-  // });
+  test('T1-Verify Betslip Section without selecting any odd ', async ({ betslipPage }, testInfo) => {
+    await betslipPage.verifyBetslipSection();
+    await ScreenshotHelper(betslipPage.page, screenshotDir, 'T1-betslipButton.png', testInfo);
+  });
 
-  // test('T2-Verify betslip settings section', async ({ betslipPage, page }, testInfo) => {
-  //   await betslipPage.verifyBetslipSettingsSection();
-  //   await ScreenshotHelper(page, screenshotDir, 'T2-betslip-settings-1.png', testInfo);
-  //   await betslipPage.clickContinueButton();
-  //   await betslipPage.clickSettingsButton();
-  //   await betslipPage.clickCloseIcon();
-  // });
+  test('T2-Verify betslip settings section', async ({ betslipPage, page }, testInfo) => {
+    await betslipPage.verifyBetslipSettingsSection();
+    await ScreenshotHelper(page, screenshotDir, 'T2-betslip-settings-1.png', testInfo);
+    await betslipPage.clickContinueButton();
+    await betslipPage.clickSettingsButton();
+    await betslipPage.clickCloseIcon();
+  });
 
-  // test('T3-Verify functionality of "Setting" button on betslip', async ({ betslipPage, page }, testInfo) => {
-  //   await betslipPage.clickBetslipButton();
-  //   await betslipPage.verifySettingsButtonVisible();
-  //   await betslipPage.clickSettingsButton();
-  //   await ScreenshotHelper(page, screenshotDir, 'T3-betslip-settings-button.png', testInfo);
-  // });
+  test('T3-Verify functionality of "Setting" button on betslip', async ({ betslipPage, page }, testInfo) => {
+    await betslipPage.clickBetslipButton();
+    await betslipPage.verifySettingsButtonVisible();
+    await betslipPage.clickSettingsButton();
+    await ScreenshotHelper(page, screenshotDir, 'T3-betslip-settings-button.png', testInfo);
+  });
 
-  // test('T4-Verify functionality of "Accept all odds & line changes" toggle button', async ({ betslipPage, page }, testInfo) => {
-  //   await betslipPage.clickBetslipButton();
-  //   await betslipPage.clickSettingsButton();
-  //   await betslipPage.verifyAcceptOddsToggleVisible();
-  //   // await betslipPage.clickAcceptOddsToggle();
-  //   await ScreenshotHelper(page, screenshotDir, 'T4-betslip-toggle-button.png', testInfo);
-  // });
+  test('T4-Verify functionality of "Accept all odds & line changes" toggle button', async ({ betslipPage, page }, testInfo) => {
+    await betslipPage.clickBetslipButton();
+    await betslipPage.clickSettingsButton();
+    await betslipPage.verifyAcceptOddsToggleVisible();
+    // await betslipPage.clickAcceptOddsToggle();
+    await ScreenshotHelper(page, screenshotDir, 'T4-betslip-toggle-button.png', testInfo);
+  });
 
-  // test('T6-Verify functionality of "Keep bets in betslip" toggle button', async ({ betslipPage, page }, testInfo) => {
-  //   await betslipPage.clickBetslipButton();
-  //   await betslipPage.clickSettingsButton();
-  //   await betslipPage.verifyKeepBetsToggleVisible();
-  //   // await betslipPage.clickKeepBetsToggle();
-  //   await ScreenshotHelper(page, screenshotDir, 'T6-betslip-toggle-button.png', testInfo);
-  // });
+  test('T6-Verify functionality of "Keep bets in betslip" toggle button', async ({ betslipPage, page }, testInfo) => {
+    await betslipPage.clickBetslipButton();
+    await betslipPage.clickSettingsButton();
+    await betslipPage.verifyKeepBetsToggleVisible();
+    // await betslipPage.clickKeepBetsToggle();
+    await ScreenshotHelper(page, screenshotDir, 'T6-betslip-toggle-button.png', testInfo);
+  });
 
-  // test('T7-Verify functionality of "Continue" button on betslip settings popup', async ({ betslipPage, page }, testInfo) => {
-  //   await betslipPage.clickBetslipButton();
-  //   await betslipPage.clickSettingsButton();
-  //   await betslipPage.verifyContinueButtonVisible();
-  //   await ScreenshotHelper(page, screenshotDir, 'T7-betslip-continue-button.png', testInfo);
-  //   await betslipPage.clickContinueButton();
-  //   await ScreenshotHelper(page, screenshotDir, 'T7-betslip-continue-button.png', testInfo);
-  // });
+  test('T7-Verify functionality of "Continue" button on betslip settings popup', async ({ betslipPage, page }, testInfo) => {
+    await betslipPage.clickBetslipButton();
+    await betslipPage.clickSettingsButton();
+    await betslipPage.verifyContinueButtonVisible();
+    await ScreenshotHelper(page, screenshotDir, 'T7-betslip-continue-button.png', testInfo);
+    await betslipPage.clickContinueButton();
+    await ScreenshotHelper(page, screenshotDir, 'T7-betslip-continue-button.png', testInfo);
+  });
 
-  // test('T8-Verify functionality of "Close" icon on betslip settings popup', async ({ betslipPage, page }, testInfo) => {
-  //   await betslipPage.clickBetslipButton();
-  //   await betslipPage.clickSettingsButton();
-  //   await betslipPage.verifyCloseIconVisible();
-  //   await ScreenshotHelper(page, screenshotDir, 'T8-betslip-close-icon.png', testInfo);
-  //   await betslipPage.clickCloseIcon();
-  // });
+  test('T8-Verify functionality of "Close" icon on betslip settings popup', async ({ betslipPage, page }, testInfo) => {
+    await betslipPage.clickBetslipButton();
+    await betslipPage.clickSettingsButton();
+    await betslipPage.verifyCloseIconVisible();
+    await ScreenshotHelper(page, screenshotDir, 'T8-betslip-close-icon.png', testInfo);
+    await betslipPage.clickCloseIcon();
+  });
 
-  // test('T9-Verify functionality of "Delete" icon  on Betslip', async ({ betslipPage, page }, testInfo) => {
-  //   await OddsSelectionAbove(1, 1, page);
-  //   await betslipPage.verifyDeleteIcon();
-  //   await ScreenshotHelper(page, screenshotDir, 'T9-betslip-delete-icon.png', testInfo);
-  //   await betslipPage.clickDeleteIcon();
-  //   await ScreenshotHelper(page, screenshotDir, 'T9-betslip-delete-icon-after-click.png', testInfo); // Renamed for clarity
-  // });
+  test('T9-Verify functionality of "Delete" icon  on Betslip', async ({ betslipPage, page }, testInfo) => {
+    await OddsSelectionAbove(1, 1, page);
+    await betslipPage.verifyDeleteIcon();
+    await ScreenshotHelper(page, screenshotDir, 'T9-betslip-delete-icon.png', testInfo);
+    await betslipPage.clickDeleteIcon();
+    await ScreenshotHelper(page, screenshotDir, 'T9-betslip-delete-icon-after-click.png', testInfo); // Renamed for clarity
+  });
 
-  // test('T10-Verify functionality of "Select All" checkbox on Betslip', async ({ betslipPage, page }, testInfo) => {
-  //   await OddsSelectionAbove(2, 1, page);
-  //   await betslipPage.verifySelectAllCheckbox();
-  //   await betslipPage.uncheckSelectAllCheckbox();
-  //   await ScreenshotHelper(page, screenshotDir, 'T10-betslip-select-all-unchecked.png', testInfo);
-  //   await betslipPage.checkSelectAllCheckbox();
-  //   await ScreenshotHelper(page, screenshotDir, 'T10-betslip-select-all-checked.png', testInfo);
-  // });
+  test('T10-Verify functionality of "Select All" checkbox on Betslip', async ({ betslipPage, page }, testInfo) => {
+    await OddsSelectionAbove(2, 1, page);
+    await betslipPage.verifySelectAllCheckbox();
+    await betslipPage.uncheckSelectAllCheckbox();
+    await ScreenshotHelper(page, screenshotDir, 'T10-betslip-select-all-unchecked.png', testInfo);
+    await betslipPage.checkSelectAllCheckbox();
+    await ScreenshotHelper(page, screenshotDir, 'T10-betslip-select-all-checked.png', testInfo);
+  });
 
-  // test('T11-Single section- Verify Content of the of the betslip by selecting odd', async ({ betslipPage, page }, testInfo) => {
-  //   await OddsSelectionAbove(1, 1, page);
-  //   await betslipPage.verifySingleTab();
-  //   await ScreenshotHelper(page, screenshotDir, 'T11-betslip-single-tab.png', testInfo);
-  // });
+  test('T11-Single section- Verify Content of the of the betslip by selecting odd', async ({ betslipPage, page }, testInfo) => {
+    await OddsSelectionAbove(1, 1, page);
+    await betslipPage.verifySingleTab();
+    await ScreenshotHelper(page, screenshotDir, 'T11-betslip-single-tab.png', testInfo);
+  });
 
-  // test('T12-Multi section- Verify Content of the of the betslip by selecting odd', async ({ betslipPage, page }, testInfo) => {
-  //   await OddsSelectionAbove(2, 1, page);
-  //   await betslipPage.verifyMultiTab();
-  //   await betslipPage.clickMultiTab();
-  //   await ScreenshotHelper(page, screenshotDir, 'T12-betslip-multi-tab.png', testInfo);
-  // });
+  test('T12-Multi section- Verify Content of the of the betslip by selecting odd', async ({ betslipPage, page }, testInfo) => {
+    await OddsSelectionAbove(2, 1, page);
+    await betslipPage.verifyMultiTab();
+    await betslipPage.clickMultiTab();
+    await ScreenshotHelper(page, screenshotDir, 'T12-betslip-multi-tab.png', testInfo);
+  });
 
-  // test('T13-Verify functionality of "Close" button of leg on Betslip inside single section of the betslip', async ({ betslipPage, page }, testInfo) => {
-  //   await OddsSelectionAbove(1, 1, page);
-  //   await betslipPage.verifyRemoveLegIcon();
-  //   await ScreenshotHelper(page, screenshotDir, 'T13-betslip-remove-leg-icon-Single.png', testInfo);
-  //   await betslipPage.clickRemoveLegIcon();
-  //   await betslipPage.clickBetslipButton();
-  //   await ScreenshotHelper(page, screenshotDir, 'T13-betslip-remove-leg-after-click-Single.png', testInfo);
-  // });
+  test('T13-Verify functionality of "Close" button of leg on Betslip inside single section of the betslip', async ({ betslipPage, page }, testInfo) => {
+    await OddsSelectionAbove(1, 1, page);
+    await betslipPage.verifyRemoveLegIcon();
+    await ScreenshotHelper(page, screenshotDir, 'T13-betslip-remove-leg-icon-Single.png', testInfo);
+    await betslipPage.clickRemoveLegIcon();
+    await betslipPage.clickBetslipButton();
+    await ScreenshotHelper(page, screenshotDir, 'T13-betslip-remove-leg-after-click-Single.png', testInfo);
+  });
 
-  // test('T14-Verify functionality of Wager amount text box inside single section of the betslip', async ({ betslipPage, page }, testInfo) => {
-  //   await OddsSelectionAbove(1, 1, page);
-  //   await betslipPage.verifyBetAmountInput();
-  //   await betslipPage.enterBetAmount('10');
-  //   await ScreenshotHelper(page, screenshotDir, 'T14-betslip-bet-amount-input-Single.png', testInfo);
-  // });
+  test('T14-Verify functionality of Wager amount text box inside single section of the betslip', async ({ betslipPage, page }, testInfo) => {
+    await OddsSelectionAbove(1, 1, page);
+    await betslipPage.verifyBetAmountInput();
+    await betslipPage.enterBetAmount('10');
+    await ScreenshotHelper(page, screenshotDir, 'T14-betslip-bet-amount-input-Single.png', testInfo);
+  });
 
   test('T35-Verify functionality of Wager amount text box inside multi section of the betslip', async ({ betslipPage, page }, testInfo) => {
     await OddsSelectionAbove(2, 1, page);

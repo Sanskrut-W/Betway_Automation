@@ -47,7 +47,7 @@ export default defineConfig({
   retries: 1,
 
   // Workers
-  workers: process.env.CI ? 3 : 3,
+  workers: process.env.CI ? 7 : 7,
 
   // Reports (same structure as ZA)
   reporter: [

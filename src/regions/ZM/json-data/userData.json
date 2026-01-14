@@ -1,23 +1,23 @@
 {
   "user1": {
-    "name": "Lall aIE",
-    "mobile": "999845637",
-    "password": "87654321"
+    "name":"Lall aIE",
+    "mobile": "998654321",
+    "password": "12345"
   },
   "user2": {
-    "mobile": "999889793",
-    "password": "123456789"
+    "mobile": "998654321",
+    "password": "12345"
   },
   "user3": {
-    "mobile": "834447889 ",
+    "mobile": "998654321 ",
     "password": "12345"
   },
   "user4": {
-    "mobile": "830269632",
+    "mobile": "998654321",
     "password": "12345"
   },
   "user5": {
-    "mobile": "808080806",
-    "password": "Pass1234"
+    "mobile": "998654321",
+    "password": "12345"
   }
 }
