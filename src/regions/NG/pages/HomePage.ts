@@ -20,7 +20,7 @@ export class HomePage {
         this.footerLinksContainer = getLocator(this.page, configs["howtobet"]).locator('..');
         this.HomePagelocatorsRegistry = {
             ContactUs: getLocator(this.page, configs["ContactUs"]),
-            howtobet: getLocator(this.page, configs["howtobet"]),
+            howtobet: getLocator(this.page, configs["howtobet2"]),
             FAQs: getLocator(this.footerLinksContainer, configs["FAQs"]),
             TermsAndConditions: getLocator(this.page, configs["TermsAndConditions"]),
             BettingRules: getLocator(this.page, configs["BettingRules"]),
