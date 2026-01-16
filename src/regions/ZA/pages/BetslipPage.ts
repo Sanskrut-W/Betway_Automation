@@ -80,7 +80,7 @@ export class BetslipPage extends SportsPage {
 
   // Navigation Methods
   async goto() {
-    await this.page.goto('https://new.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
+    await this.page.goto('https://www.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
     // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
     // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
   }
@@ -96,8 +96,8 @@ export class BetslipPage extends SportsPage {
   // }
 
   async Login() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(userData.user1.mobile);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(userData.user1.password);
+    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(userData.user4.mobile);
+    await this.BetslipPageLocatorsRegistry.passwordInput.fill(userData.user4.password);
     await this.page.keyboard.press('Enter');
 
     // Try to close promotion popup ONLY if it appears

@@ -97,8 +97,8 @@ export class HeaderPage extends HomePage {
     await this.HeaderPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
     await this.HeaderPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
     await this.page.keyboard.press('Enter');
-    // await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
-    // await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
+    await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
+    await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
     // await this.closePromotionPopup();
     await this.page.waitForLoadState('domcontentloaded');
   }

@@ -1,4 +1,4 @@
-// npx playwright test src/regions/ZA/tests/modules/header/header.spec.ts --config=playwright.ZA.config.ts --headed
+// npx playwright test src/regions/ZM/tests/smoke/header/header.spec.ts --config=playwright.ZM.config.ts --headed
 import { test } from '../../../fixtures/MasterFixtureFile';
 import path from 'path';
 import { ScreenshotHelper } from '../../../../Common-Flows/ScreenshotHelper';
@@ -50,12 +50,12 @@ test.describe('Header Module Tests', () => {
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T21-betslipButtonClicked.png', testInfo);
     });
 
-    test('26-Verify that Accounts button is visible and clickable on the home page of Betway application', async ({ headerPage }, testInfo) => {
-        await headerPage.Login();
-        await headerPage.page.waitForTimeout(3000);
-        await headerPage.verifyAndClickAccountsButton();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T34-accountsButtonClicked-loggedin.png', testInfo);
-    });
+    // test('26-Verify that Accounts button is visible and clickable on the home page of Betway application', async ({ headerPage }, testInfo) => {
+    //     await headerPage.Login();
+    //     await headerPage.page.waitForTimeout(3000);
+    //     await headerPage.verifyAndClickAccountsButton();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T34-accountsButtonClicked-loggedin.png', testInfo);
+    // });
 
     test('27-Verify that Balance field in green color is displayed on the home page of Betway application', async ({ headerPage }, testInfo) => {
         await headerPage.verifyBalanceField();

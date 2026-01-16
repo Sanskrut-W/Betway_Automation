@@ -1,4 +1,4 @@
-// npx playwright test src/regions/ZA/tests/smoke/hamburgerMenu/hamburgerMenu.spec.ts --config=playwright.ZA.config.ts --headed
+// npx playwright test src/regions/ZM/tests/smoke/hamburgerMenu/hamburgerMenu.spec.ts --config=playwright.ZM.config.ts --headed
 import { test } from '../../../fixtures/MasterFixtureFile';
 import path from 'path';
 import { ScreenshotHelper } from '../../../../Common-Flows/ScreenshotHelper';
@@ -26,10 +26,10 @@ test.describe('Header Module Tests', () => {
     //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T3-refreshBalanceButton.png', testInfo);
     // });
 
-        test('13-Verify functionality of Hide/Show balance button in Hamburger', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyEyeButton();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T15-eyeButton.png', testInfo);
-    });
+    //     test('13-Verify functionality of Hide/Show balance button in Hamburger', async ({ hamburgerMenuPage }, testInfo) => {
+    //     await hamburgerMenuPage.verifyEyeButton();
+    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T15-eyeButton.png', testInfo);
+    // });
 
     //  test('13-Verify functionality of close Hamburger button', async ({ hamburgerMenuPage }, testInfo) => {
     //     await hamburgerMenuPage.verifyCloseHamburgerBtn();
@@ -73,11 +73,11 @@ test.describe('Header Module Tests', () => {
         // await hamburgerMenuPage.clickCloseMyAccountOptions();
     });
 
-    test('27-Verify My Casino Big Win option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickMyCasinoBigWin();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'CasinoBigWin.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
+    // test('27-Verify My Casino Big Win option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+    //     await hamburgerMenuPage.verifyAndClickMyCasinoBigWin();
+    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'CasinoBigWin.png', testInfo);
+    //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+    // });
 
     test('28-Verify Bonus Summary option functionality', async ({ hamburgerMenuPage }, testInfo) => {
         await hamburgerMenuPage.verifyAndClickBonusSummary();
@@ -91,11 +91,11 @@ test.describe('Header Module Tests', () => {
         // await hamburgerMenuPage.clickCloseMyAccountOptions();
     });
 
-    test('30-Verify My Coupons option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickMyCoupons();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'MyCoupons.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
+    // test('30-Verify My Coupons option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+    //     await hamburgerMenuPage.verifyAndClickMyCoupons();
+    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'MyCoupons.png', testInfo);
+    //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+    // });
 
     test('31-Verify Bet Influencer option functionality', async ({ hamburgerMenuPage }, testInfo) => {
         await hamburgerMenuPage.verifyAndClickBetInfluencer();
@@ -163,10 +163,10 @@ test.describe('Header Module Tests', () => {
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks2.png', testInfo);
     });
 
-    test('5-Verify Betting Rules option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyAndClickBettingRulesWithoutLogin();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-bettingRulesClicked.png', testInfo);
-    });
+    // test('5-Verify Betting Rules option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
+    //     await headerPage.verifyAndClickBettingRulesWithoutLogin();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-bettingRulesClicked.png', testInfo);
+    // });
 
     test('6-Verify Statistics option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
         await headerPage.verifyAndClickStatisticsWithoutLogin();

@@ -10,7 +10,7 @@ const userData = require('../../../json-data/userData.json');
 const projectRoot = path.resolve(__dirname, '../../..');
 const screenshotDir = path.join(projectRoot, 'screenshots/module/betInfluencer');
 //14,15,25,26,29,31,19
-test.describe.serial('BetInfluencer Tests', () => {
+test.describe('BetInfluencer Tests', () => {
 
     test("Get all booking Codes for account", async ({ betinfluencerModal }, testInfo) => {
         await storeAllBookingCode(betinfluencerModal);

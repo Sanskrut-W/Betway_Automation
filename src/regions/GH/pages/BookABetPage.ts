@@ -85,7 +85,7 @@ export class BookABetPage {
     async goto() {
         await this.page.goto('https://www.betway.com.gh/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
-        await this.locatorsRegistry.closePromotionPopupGH.click();
+        // await this.locatorsRegistry.closePromotionPopupGH.click();
     }
 
     async closePopup() {

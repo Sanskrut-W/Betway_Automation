@@ -47,7 +47,7 @@ export class GamingLobbyPage {
     }
 
     async goto() {
-        await this.page.goto('https://new.betway.co.za/sport/soccer');
+        await this.page.goto('https://www.betway.co.za/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
     }
 

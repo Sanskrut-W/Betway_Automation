@@ -88,8 +88,8 @@ export class HeaderPage extends HomePage {
   // Navigation Methods
   async goto() {
     await this.page.goto('https://www.betway.com.gh/sport/soccer', { waitUntil: 'domcontentloaded' });
-      await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',timeout:15000});
-    await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
+  //     await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',timeout:15000});
+  //   await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
   }
 
   async Login() {

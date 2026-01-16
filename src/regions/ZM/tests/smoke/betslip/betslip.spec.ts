@@ -1,4 +1,4 @@
-// npx playwright test src/regions/ZA/tests/smoke/betslip/betslip.spec.ts --config=playwright.ZA.config.ts --headed
+// npx playwright test src/regions/ZM/tests/smoke/betslip/betslip.spec.ts --config=playwright.ZM.config.ts --headed
 import { test } from '../../../fixtures/MasterFixtureFile';
 import path from 'path';
 import { ScreenshotHelper } from '../../../../Common-Flows/ScreenshotHelper';
@@ -7,7 +7,7 @@ import { OddsSelection, OddsSelectionAbove } from '../../../commonflows/OddSelec
 const projectRoot = path.resolve(__dirname, '../../..');
 const screenshotDir = path.join(projectRoot, 'screenshots/smoke/betslip');
 
-test.describe('Betslip Module - ZA', () => {
+test.describe('Betslip Module - ZM', () => {
 
   test('T1-Verify Betslip Section without selecting any odd ', async ({ betslipPage }, testInfo) => {
     await betslipPage.verifyBetslipSection();
@@ -202,7 +202,7 @@ test.describe('Betslip Module - ZA', () => {
   });
 
   test('T24-Multi- Verify "Win boost" amount calculation on betslip.', async ({ betslipPage, page }, testInfo) => {
-    await OddsSelectionAbove(2, 2, page);
+    await OddsSelectionAbove(2, 1.21, page);
     await betslipPage.verifyWinBoostCalculation();
     await ScreenshotHelper(page, screenshotDir, 'T24-betslip-Win-boost-amount-calculation-multi.png', testInfo);
   });
@@ -221,7 +221,7 @@ test.describe('Betslip Module - ZA', () => {
   // });
 
   test('T26-Multi-Verify Win Boost tool tip', async ({ betslipPage, page }, testInfo) => {
-    await OddsSelectionAbove(2, 3.57, page);
+    await OddsSelectionAbove(2, 1.21, page);
     await betslipPage.verifyWinBoostToolTip();
     await ScreenshotHelper(page, screenshotDir, 'T26-betslip-Win-boost-tool-tip-multi.png', testInfo);
   });

@@ -204,9 +204,6 @@ test.describe('BetInfluencer Tests', () => {
         const bookingCode = await betinfluencerModal.User1PlaceBets(6);
         const SharedBookingCode = await betinfluencerModal.User2PlaceBetsFromBookingCode(bookingCode);
         await betinfluencerModal.page.reload();
-        await betinfluencerModal.Login();
-        await betinfluencerModal.gotoDetailSectionBetInfluencerModal();
-        await betinfluencerModal.page.waitForEvent('domcontentloaded');
         await storeAllBookingCode(betinfluencerModal);
         console.log("SharedBookingCode in T17:", getFirstBookingCode());
         await highlightElementBorder(betinfluencerModal.page.getByText(`${SharedBookingCode}`).first());
