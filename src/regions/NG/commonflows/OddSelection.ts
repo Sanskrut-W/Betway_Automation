@@ -3,7 +3,7 @@ export async function OddsSelection(numberOflegs: number, page: import('@playwri
 
 
     await page.reload({ waitUntil: 'domcontentloaded' });
-    const apiUrl = "https://new.betway.co.za/sportsapi/br/v1/BetBook/Highlights/?countryCode=ZA&sportId=soccer";
+    const apiUrl = "https://www.betway.com.ng/sportsapi/br/v1/BetBook/Upcoming/?countryCode=NG&sportId=soccer";
     const response = await page.waitForResponse((resp: { url: () => string; status: () => number; }) => resp.url().startsWith(apiUrl) && resp.status() === 200);
     const data = await response.json();
     for (let i = 0; i < numberOflegs; i++) {
@@ -20,7 +20,7 @@ export async function OddsSelection(numberOflegs: number, page: import('@playwri
 
 export async function placeBetWithIndex(legNum: number, page: import('@playwright/test').Page) {
     await page.reload({ waitUntil: 'domcontentloaded' });
-    const apiUrl = "https://new.betway.co.za/sportsapi/br/v1/BetBook/Highlights/?countryCode=ZA&sportId=soccer";
+    const apiUrl = "https://www.betway.com.ng/sportsapi/br/v1/BetBook/Upcoming/?countryCode=NG&sportId=soccer";
     const response = await page.waitForResponse((resp: { url: () => string; status: () => number; }) => resp.url().startsWith(apiUrl) && resp.status() === 200);
     const data = await response.json();
     for (let i = legNum; i < 10; i++) {
@@ -56,7 +56,7 @@ export async function EsportsOddsSelection(numberOflegs: number, page: import('@
 export async function DrawNoBetOddsSelection(numberOflegs: number, page: import('@playwright/test').Page) {
     await page.locator('#pv_id_3').click();
     await page.getByText('Draw No Bet').last().click();
-    const apiUrl = "https://new.betway.co.za/sportsapi/br/v1/BetBook/Highlights/?countryCode=ZA&sportId=soccer";
+    const apiUrl = "https://www.betway.com.ng/sportsapi/br/v1/BetBook/Upcoming/?countryCode=NG&sportId=soccer";
     const response = await page.waitForResponse((resp: { url: () => string; status: () => number; }) => resp.url().startsWith(apiUrl) && resp.status() === 200);
     const data = await response.json();
     for (let i = 0; i < numberOflegs; i++) {
@@ -123,13 +123,13 @@ export async function OddsSelectionAbove(numberOflegs: number, minOdd: number, p
     await page.reload({ waitUntil: 'domcontentloaded' });
 
     // close modal if present
-    try { await page.locator('#modal-close-btn').click({ timeout: 10000 }); } catch {}
+    try { await page.locator('#modal-close-btn').click({ timeout: 10000 }); } catch { }
 
     // ensure Upcoming tab is active
     await page.locator('#sports-tabs div').filter({ hasText: 'Upcoming' }).click();
 
     // wait for API response
-    const apiUrl = "https://new.betway.co.za/sportsapi/br/v1/BetBook/Upcoming/?countryCode=ZA&sportId=soccer";
+    const apiUrl = "https://www.betway.com.ng/sportsapi/br/v1/BetBook/Upcoming/?countryCode=NG&sportId=soccer";
     const response = await page.waitForResponse((resp: { url: () => string; status: () => number; }) =>
         resp.url().startsWith(apiUrl) && resp.status() === 200);
     const data = await response.json();

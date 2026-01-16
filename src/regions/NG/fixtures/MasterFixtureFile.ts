@@ -220,13 +220,15 @@ export const test = base.extend<PageFixtures>({
     await page.setViewportSize({ width: 1300, height: 780 });
     const bookABetPage = new BookABetPage(page);
     await bookABetPage.goto();
+    await bookABetPage.page.getByText('Got it').first().click();
     await use(bookABetPage);
   },
-  
+
   betSaverPage: async ({ page }, use) => {
     await page.setViewportSize({ width: 1300, height: 780 });
     const betSaverPage = new BetSaverPage(page);
     await betSaverPage.goto();
+    await betSaverPage.page.getByText('Got it').first().click();
     await betSaverPage.Login();
     await use(betSaverPage);
   },
@@ -235,6 +237,7 @@ export const test = base.extend<PageFixtures>({
     await page.setViewportSize({ width: 1300, height: 780 });
     const transactionHistoryPage = new TransactionHistoryPage(page);
     await transactionHistoryPage.goto();
+    await transactionHistoryPage.page.getByText('Got it').first().click();
     await transactionHistoryPage.Login();
     await use(transactionHistoryPage);
   },
@@ -250,6 +253,7 @@ export const test = base.extend<PageFixtures>({
     await page.setViewportSize({ width: 1300, height: 780 });
     const feedsPage = new FeedsPage(page);
     await feedsPage.goto();
+    await feedsPage.page.getByText('Got it').first().click();
     await feedsPage.Login();
     await use(feedsPage);
   }
