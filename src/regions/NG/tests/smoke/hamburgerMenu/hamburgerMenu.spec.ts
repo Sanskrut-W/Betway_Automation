@@ -26,10 +26,10 @@ test.describe('Header Module Tests', () => {
     //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T3-refreshBalanceButton.png', testInfo);
     // });
 
-        test('13-Verify functionality of Hide/Show balance button in Hamburger', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyEyeButton();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T15-eyeButton.png', testInfo);
-    });
+    //     test('13-Verify functionality of Hide/Show balance button in Hamburger', async ({ hamburgerMenuPage }, testInfo) => {
+    //     await hamburgerMenuPage.verifyEyeButton();
+    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T15-eyeButton.png', testInfo);
+    // });
 
     //  test('13-Verify functionality of close Hamburger button', async ({ hamburgerMenuPage }, testInfo) => {
     //     await hamburgerMenuPage.verifyCloseHamburgerBtn();

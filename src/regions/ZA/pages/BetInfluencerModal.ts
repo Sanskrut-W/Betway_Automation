@@ -10,7 +10,7 @@ import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
 import { getFirstBookingCode } from '../commonflows/storeAllBookingCode';
 import { BetslipPage } from './BetslipPage';
 import { GetBookingCode } from '../../Common-Flows/GetBookingCode';
-import { OddsSelection } from '../../Common-Flows/OddSelection';
+import { OddsSelectionAbove } from '../commonflows/OddSelection';
 const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
 const userData = require('../json-data/userData.json');
 
@@ -133,7 +133,7 @@ export class BetInfluencerModal extends BetslipPage {
     async User1PlaceBets(legsCount: number) {
         await this.gotoSportsPage();
         await this.LoginArgs(`${userData.user1.mobile}`, `${userData.user1.password}`);
-        await OddsSelection(legsCount, this.page);
+        await OddsSelectionAbove(legsCount,1.2, this.page);
         await this.clickBetNowBtn();
         const bookingCode = await this.SportsPagelocatorRegistry.bookingCodeMessage.locator('..').innerText();
         console.log(bookingCode);
@@ -143,7 +143,7 @@ export class BetInfluencerModal extends BetslipPage {
     }
 
     async User2PlaceBetsFromBookingCode(bookingCode: any) {
-        await this.LoginArgs(`${userData.user4.mobile}`, `${userData.user4.password}`)
+        await this.LoginArgs(`${userData.user5.mobile}`, `${userData.user5.password}`)
         await this.BetInfluencerModalLocatorRegistry.welcomeUser.waitFor({ state: 'visible' })
         await this.BetInfluencerModalLocatorRegistry.betslipButton.click();
         const SharedBookingCode = await GetBookingCode(bookingCode)

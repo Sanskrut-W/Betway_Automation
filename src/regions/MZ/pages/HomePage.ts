@@ -19,7 +19,7 @@ export class HomePage {
         const configs = loadLocatorsFromExcel(Locator_Url, "HomePage");
         this.footerLinksContainer = getLocator(this.page, configs["ContactUs"]).locator('..');
         this.HomePagelocatorsRegistry = {
-            ContactUs: getLocator(this.page, configs["ContactUs"]),
+            ContactUs: getLocator(this.page, configs["ContactUs"]).nth(1),
             howtobet: getLocator(this.page, configs["howtobet2"]),
             FAQs: getLocator(this.footerLinksContainer, configs["FAQs"]),
             TermsAndConditions: getLocator(this.footerLinksContainer, configs["TermsAndConditions"]),

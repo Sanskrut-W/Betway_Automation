@@ -53,8 +53,8 @@ export class BetslipPage extends SportsPage {
       cashBtnMulti: getLocator(this.page, configs["cashBtnMulti"]),
       freebetBtnMulti: getLocator(this.page, configs["freebetBtnMulti"]),
       cashOutIcon: getLocator(this.page, configs["cashOutIcon"]),
-      winBoostToolTip: getLocator(this.page, configs["winBoostToolTip"]),
-      winBoostValue: getLocator(this.page, configs["winBoostValue"]),
+      winBoostToolTip: getLocator(this.page, configs["winBoostToolTipNG"]),
+      winBoostValue: getLocator(this.page, configs["winBoostValueNG"]),
       betSaverText: getLocator(this.page, configs["betSaverText"]),
       totalBetwayReturnMulti: getLocator(this.page, configs["totalBetwayReturnMulti"]),
       totalBetwayReturnSingle: getLocator(this.page, configs["totalBetwayReturnSingle"]),
@@ -74,13 +74,13 @@ export class BetslipPage extends SportsPage {
 
     // Special handling for winBoostInfoIcon (complex locator)
     this.BetslipPageLocatorsRegistry.winBoostInfoIcon = this.page.locator('div', {
-      hasText: /^Win Boost 3%\. 1 more for 4% \(Min odds 1\.2\)Bet Saver not active$/
+      hasText: /^Win Boost 3%\. 1 more for 5% \(Min odds 1\.2\)Bet Saver not active$/
     }).getByRole('img').nth(1);
   }
 
   // Navigation Methods
   async goto() {
-    await this.page.goto('https://new.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
+    await this.page.goto('https://www.betway.com.ng/sport/soccer', { waitUntil: 'domcontentloaded' });
     // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
     // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
   }
@@ -90,8 +90,8 @@ export class BetslipPage extends SportsPage {
     await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
     await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
     await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
+    await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', });
+    await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
     await this.page.waitForLoadState('domcontentloaded');
   }
 

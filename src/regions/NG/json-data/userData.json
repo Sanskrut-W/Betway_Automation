@@ -1,25 +1,26 @@
 {
   "user1": {
-    "name":"Lall aIE",
-    "mobile": "999845637",
-    "password": "87654321"
+    "name":"Vanie Govender",
+    "mobile": "8323498723",
+    "password": "aa12345678"
   },
   "user2": {
-    "mobile": "999889793",
-    "password": "123456789"
+    "mobile": "8323498723",
+    "password": "aa12345678"
   },
   "user3": {
-    "mobile": "834447889 ",
-    "password": "12345"
+    "mobile": "8323498723",
+    "password": "aa12345678"
   },
 
   "user4": {
-    "mobile": "222212222",
-    "password": "1234567890"
+    "mobile": "8323498723",
+    "password": "aa12345678"
   },
 
   "user5": {
-    "mobile": "808080806",
-    "password": "Pass1234"
+    "name":"Vanie Govender",
+    "mobile": "8323498723",
+    "password": "aa12345678"
   }
 }

@@ -90,8 +90,8 @@ export class BetslipPage extends SportsPage {
     await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
     await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
     await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
+    await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
+    await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
     await this.page.waitForLoadState('domcontentloaded');
   }
 

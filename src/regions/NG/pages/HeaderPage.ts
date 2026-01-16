@@ -33,9 +33,9 @@ export class HeaderPage extends HomePage {
       closeHamburgerMenu: getLocator(this.page, configs["closeHamburgerMenu"]),
       quickLinks: getLocator(this.page, configs["quickLinks"]),
       myAccount: getLocator(this.page, configs["myAccount"]),
-      bettingRules: getLocator(this.page, configs["bettingRules"]),
+      bettingRules: getLocator(this.page, configs["bettingRules"]).nth(0),
       statistics: getLocator(this.page, configs["statistics"]),
-      oddsFormat: getLocator(this.page, configs["oddsFormat"]),
+      oddsFormat: getLocator(this.page, configs["oddsFormat"]).nth(0),
       // countryCode: getLocator(this.page, configs["countryCode"]),
       allBalanceFieldHamburger: getLocator(this.page, configs["allBalanceFieldHamburger"]),
       depositFund: getLocator(this.page, configs["depositFund"]),
@@ -87,7 +87,7 @@ export class HeaderPage extends HomePage {
 
   // Navigation Methods
   async goto() {
-    await this.page.goto('https://new.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
+    await this.page.goto('https://www.betway.com.ng/sport/soccer', { waitUntil: 'domcontentloaded' });
     //   await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',timeout:15000});
     // await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
   }
@@ -166,7 +166,7 @@ export class HeaderPage extends HomePage {
   async verifyEyeButton() {
     // Scope to the login form area that contains both Mobile Number and Password fields
     const formContainer = this.page.locator('form').filter({
-      hasText: '+27Forgot Username?Forgot Password?'
+      hasText: '+234Forgot Username?Forgot Password?'
     });
 
     // From within that form, target the eye SVG next to the password input

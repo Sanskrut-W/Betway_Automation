@@ -35,7 +35,7 @@ export class HeaderPage extends HomePage {
       myAccount: getLocator(this.page, configs["myAccount"]),
       bettingRules: getLocator(this.page, configs["bettingRules"]).nth(0),
       statistics: getLocator(this.page, configs["statistics"]),
-      oddsFormat: getLocator(this.page, configs["oddsFormat"]),
+      oddsFormat: getLocator(this.page, configs["oddsFormat"]).nth(0),
       // countryCode: getLocator(this.page, configs["countryCode"]),
       allBalanceFieldHamburger: getLocator(this.page, configs["allBalanceFieldHamburger"]),
       depositFund: getLocator(this.page, configs["depositFund"]),
