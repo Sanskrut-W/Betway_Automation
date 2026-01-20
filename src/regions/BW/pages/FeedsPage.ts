@@ -64,7 +64,7 @@ export class FeedsPage {
     // --- Utility Functions (Keep for page object internal use) ---
 
     async goto() {
-        await this.page.goto('https://betway.co.zm/sport/soccer');
+        await this.page.goto('https://www.betway.co.za/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
     }
 
@@ -72,7 +72,6 @@ export class FeedsPage {
         await this.locatorsRegistry.mobileNumber.fill(`${userData.user4.mobile}`);
         await this.locatorsRegistry.password.fill(`${userData.user4.password}`);
         await this.locatorsRegistry.loginButton.click();
-        await this.page.waitForTimeout(2000);
         // await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
         // await this.locatorsRegistry.closePopup.click();
         await this.page.waitForTimeout(1000);
@@ -236,7 +235,7 @@ export class FeedsPage {
         await this.locatorsRegistry.searchInFeeds.fill('Champions');
         await this.locatorsRegistry.searchInFeeds.press('Backspace');
         await this.page.waitForTimeout(4000);
-        await this.locatorsRegistry.searchInFeeds.press('Backspace');
+
         // T21a Ready state for follow
         await this.locatorsRegistry.suggestedFeedsFollow.click();
         await this.page.waitForTimeout(2000);
@@ -275,7 +274,7 @@ export class FeedsPage {
         await this.locatorsRegistry.searchInFeeds.press('Backspace');
         await this.page.waitForTimeout(4000);
         // T23 Screenshot happens now.
-        await this.locatorsRegistry.searchInFeeds.press('Backspace');
+
         // T24: Follow action
         await this.locatorsRegistry.suggestedFeedsFollow.click();
         await this.page.waitForTimeout(2000);

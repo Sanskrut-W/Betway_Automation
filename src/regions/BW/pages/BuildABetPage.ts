@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { highlightElements } from '../../../regions/Common-Flows/HighlightElements'; 
-import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader"; 
-import { getLocator } from "../../../global/utils/file-utils/locatorResolver"; 
+import { highlightElements } from '../../Common-Flows/HighlightElements';
+import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader";
+import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 
 const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx";
 const userData = require('../json-data/userData.json');
@@ -12,7 +12,7 @@ export class BuildABetPage {
 
     constructor(page: Page) {
         this.page = page;
-        const configs = loadLocatorsFromExcel(LOCATOR_URL, "BuildABetPage"); 
+        const configs = loadLocatorsFromExcel(LOCATOR_URL, "BuildABetPage");
         this.buildABetLocatorsRegistry = {
             mobileInput: getLocator(this.page, configs["mobileInput"]),
             passwordInput: getLocator(this.page, configs["passwordInput"]),
@@ -43,7 +43,7 @@ export class BuildABetPage {
 
     // 1. Navigation & Setup Methods
     async goto() {
-         await this.page.goto('https://www.betway.co.zm/sport/soccer', { waitUntil: 'domcontentloaded' });
+        await this.page.goto('https://www.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
         // await this.page.waitForLoadState('domcontentloaded');
     }
 

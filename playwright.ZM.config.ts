@@ -1,7 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
 import path from 'path';
-import dotenv from 'dotenv';
-dotenv.config();
 
 export default defineConfig({
     testDir: './src/regions/ZM/tests',
@@ -21,12 +19,23 @@ export default defineConfig({
     reporter: [
         ['html', { outputFolder: 'playwright-report', open: 'never' }],
         ['list'],
-        ['json', { outputFile: path.resolve(__dirname, 'src/regions/ZM/reports', process.env.PLAYWRIGHT_JSON_OUTPUT_NAME || 'test-results.json') }],
-        ['allure-playwright', { resultsDir: path.resolve(__dirname, 'src/regions/ZM/reports/allure-results') }],
+        [
+            'json',
+            {
+                outputFile: path.resolve(
+                    'src/regions/ZM/reports',
+                    process.env.PLAYWRIGHT_JSON_OUTPUT_NAME || 'test-results.json'
+                ),
+            },
+        ],
+        [
+            'allure-playwright',
+            {
+                resultsDir: path.resolve('src/regions/ZM/reports/allure-results'),
+            },
+        ],
     ],
 
-    // ['json', { outputFile: 'test-results.json' }],
-    // ['allure-playwright', { resultsDir: path.resolve(__dirname, 'src/regions/ZA/reports/allure-results') }],
     use: {
         baseURL: process.env.BASE_URL_ZM,
 

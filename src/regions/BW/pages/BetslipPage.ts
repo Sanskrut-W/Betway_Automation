@@ -53,8 +53,8 @@ export class BetslipPage extends SportsPage {
       cashBtnMulti: getLocator(this.page, configs["cashBtnMulti"]),
       freebetBtnMulti: getLocator(this.page, configs["freebetBtnMulti"]),
       cashOutIcon: getLocator(this.page, configs["cashOutIcon"]),
-      winBoostToolTip: getLocator(this.page, configs["winBoostToolTipZM"]),
-      winBoostValue: getLocator(this.page, configs["winBoostValueZM"]),
+      winBoostToolTip: getLocator(this.page, configs["winBoostToolTip"]),
+      winBoostValue: getLocator(this.page, configs["winBoostValue"]),
       betSaverText: getLocator(this.page, configs["betSaverText"]),
       totalBetwayReturnMulti: getLocator(this.page, configs["totalBetwayReturnMulti"]),
       totalBetwayReturnSingle: getLocator(this.page, configs["totalBetwayReturnSingle"]),
@@ -74,26 +74,47 @@ export class BetslipPage extends SportsPage {
 
     // Special handling for winBoostInfoIcon (complex locator)
     this.BetslipPageLocatorsRegistry.winBoostInfoIcon = this.page.locator('div', {
-      hasText: /^Win Boost 3%\. 1 more for 5% \(Min odds 1\.2\)Bet Saver not active$/
+      hasText: /^Win Boost 2.5%\. 1 more for 3% \(Min odds 1\.2\)Bet Saver not active$/
     }).getByRole('img').nth(1);
   }
 
   // Navigation Methods
   async goto() {
-    await this.page.goto('https://www.betway.co.zm/sport/soccer', { waitUntil: 'domcontentloaded' });
+    await this.page.goto('https://www.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
     // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
     // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
   }
 
   // Login Methods
+  // async Login() {
+  //   await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
+  //   await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
+  //   await this.page.keyboard.press('Enter');
+  //   // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
+  //   // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
+  //   await this.page.waitForLoadState('domcontentloaded');
+  // }
+
   async Login() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
+    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(userData.user4.mobile);
+    await this.BetslipPageLocatorsRegistry.passwordInput.fill(userData.user4.password);
     await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
+
+    // Try to close promotion popup ONLY if it appears
+    const popup = this.BetslipPageLocatorsRegistry.closePromotionPopup;
+
+    try {
+      await popup.waitFor({ state: 'visible', timeout: 9000 });
+      if (await popup.isVisible()) {
+        await popup.click();
+      }
+    } catch {
+      // Popup did not appear → ignore
+    }
+
     await this.page.waitForLoadState('domcontentloaded');
   }
+
 
   async loginWithoutFreebet() {
     await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user5.mobile}`);

@@ -2,7 +2,7 @@
 import { test } from '../../../fixtures/MasterFixtureFile';
 import path from 'path';
 import { ScreenshotHelper } from '../../../../Common-Flows/ScreenshotHelper';
-import {  OddsSelectionAbove } from '../../../commonflows/OddSelection';
+import { OddsSelectionAbove } from '../../../commonflows/OddSelection';
 
 const projectRoot = path.resolve(__dirname, '../../..');
 const screenshotDir = path.join(projectRoot, 'screenshots/smoke/betslip');
