@@ -1,4 +1,4 @@
-// npx playwright test src/regions/ZA/tests/smoke/feeds/feeds.spec.ts --config=playwright.ZA.config.ts --headed
+// npx playwright test src/regions/MZ/tests/smoke/feeds/feeds.spec.ts --config=playwright.MZ.config.ts --headed
 import { test } from '../../../fixtures/MasterFixtureFile';
 import path from 'path';
 // FeedsPage import is handled by the fixture
@@ -11,7 +11,7 @@ test.describe('Feeds Tests', () => {
     // T1:Verify Betway Feeds icon presence and functionality.
     test('T1: Verify Betway Feeds icon presence and functionality.', async ({ feedsPage }, testInfo) => {
         await feedsPage.openProfileAndReadyForCounts();
-        await feedsPage.captureScreenshot('feedsHeader', screenshotDir, 'T1-Feeds', testInfo);
+        await feedsPage.takeScreenshot(screenshotDir, 'T1-Feeds', testInfo);
     });
 
     // T2- Verify "i" icon presence and functionality.

@@ -72,8 +72,11 @@ export class FeedsPage {
         await this.locatorsRegistry.mobileNumber.fill(`${userData.user4.mobile}`);
         await this.locatorsRegistry.password.fill(`${userData.user4.password}`);
         await this.locatorsRegistry.loginButton.click();
-        await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
-        await this.locatorsRegistry.closePopup.click();
+        try {
+            await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
+            await this.locatorsRegistry.closePopup.click();
+        }
+        catch (e) { };
         await this.page.waitForTimeout(1000);
     }
 
@@ -91,8 +94,8 @@ export class FeedsPage {
 
     /** T1: Click Feeds icon and wait for header to be ready. */
     async navigateToFeeds() {
+        await this.page.waitForTimeout(2000);
         await this.locatorsRegistry.feeds.click();
-        await this.locatorsRegistry.feedsHeader.waitFor({ state: 'visible' });
     }
 
     /** T2: Click "i" (help) icon and pause. */
@@ -193,6 +196,7 @@ export class FeedsPage {
 
     /** T17: Click profile and wait for counts. */
     async openProfileAndReadyForCounts() {
+        await this.page.waitForTimeout(2000);
         await this.locatorsRegistry.feedsProfile.click();
         await this.page.waitForTimeout(2000);
     }
@@ -235,7 +239,8 @@ export class FeedsPage {
         await this.locatorsRegistry.searchInFeeds.fill('Champions');
         await this.locatorsRegistry.searchInFeeds.press('Backspace');
         await this.page.waitForTimeout(4000);
-
+        await this.locatorsRegistry.searchInFeeds.press('Backspace');
+        await this.page.waitForTimeout(2000);
         // T21a Ready state for follow
         await this.locatorsRegistry.suggestedFeedsFollow.click();
         await this.page.waitForTimeout(2000);

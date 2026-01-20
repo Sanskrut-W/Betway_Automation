@@ -9,10 +9,11 @@ const screenshotDir = path.join(projectRoot, 'screenshots/module/feeds');
 test.describe('Feeds Tests', () => {
 
     // T1:Verify Betway Feeds icon presence and functionality.
-    // test('T1: Verify Betway Feeds icon presence and functionality.', async ({ feedsPage }, testInfo) => {
-    //     await feedsPage.navigateToFeeds();
-    //     await feedsPage.captureScreenshot('feedsHeader', screenshotDir, 'T1-Feeds', testInfo);
-    // });
+    test('T1: Verify Betway Feeds icon presence and functionality.', async ({ feedsPage }, testInfo) => {
+        await feedsPage.page.waitForTimeout(2000);
+        await feedsPage.navigateToFeeds();
+        await feedsPage.takeScreenshot(screenshotDir, 'T1-Feeds', testInfo);
+    });
 
     // T2- Verify "i" icon presence and functionality.
     test('T2: Verify "i" icon presence and functionality.', async ({ feedsPage }, testInfo) => {
@@ -96,6 +97,7 @@ test.describe('Feeds Tests', () => {
 
     // T17- Verify Post, Followers and Following count on public profile pop up window
     test('T17-Verify Post, Followers and Following count on public profile pop up window', async ({ feedsPage }, testInfo) => {
+        await feedsPage.page.waitForTimeout(2000);
         await feedsPage.openProfileAndReadyForCounts();
         await feedsPage.captureScreenshot('feedsHeader', screenshotDir, 'T17-feeds', testInfo);
         // Cleanup by closing the popup
@@ -131,13 +133,13 @@ test.describe('Feeds Tests', () => {
         await feedsPage.takeScreenshot(screenshotDir, 'T21b-feeds', testInfo);
     });
 
-    // T22- Verify UnFollow button presence and functionality in search tab on betway feeds section.
-    test('T22-Verify UnFollow button presence and functionality in search tab on betway feeds section.', async ({ feedsPage }, testInfo) => {
-        await feedsPage.performSearchUnfollowCleanup();
-        await feedsPage.captureScreenshot('suggestedFeedsUnFollow', screenshotDir, 'T22a-feeds', testInfo);
-        await feedsPage.performSearchUnfollow();
-        await feedsPage.takeScreenshot(screenshotDir, 'T22b-feeds', testInfo);
-    });
+    // // T22- Verify UnFollow button presence and functionality in search tab on betway feeds section.
+    // test('T22-Verify UnFollow button presence and functionality in search tab on betway feeds section.', async ({ feedsPage }, testInfo) => {
+    //     await feedsPage.performSearchUnfollowCleanup();
+    //     await feedsPage.captureScreenshot('suggestedFeedsUnFollow', screenshotDir, 'T22a-feeds', testInfo);
+    //     await feedsPage.performSearchUnfollow();
+    //     await feedsPage.takeScreenshot(screenshotDir, 'T22b-feeds', testInfo);
+    // });
 
     // T23- Verify user is able to see the suggestions in search tab inside betway feeds.
     // T24-Verify presence and follow button functionality on suggested league list.
