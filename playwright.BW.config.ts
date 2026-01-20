@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 import path from 'path';
 
 export default defineConfig({
-  testDir: './src/regions/NG/tests',
+  testDir: './src/regions/BW/tests',
 
   fullyParallel: true,
   timeout: 90000,
@@ -19,12 +19,12 @@ export default defineConfig({
   reporter: [
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
     ['list'],
-    ['json', { outputFile: path.resolve('src/regions/NG/reports', process.env.PLAYWRIGHT_JSON_OUTPUT_NAME || 'test-results.json') }],
-    ['allure-playwright', { resultsDir: path.resolve('src/regions/NG/reports/allure-results') }],
+    ['json', { outputFile: path.resolve('src/regions/BW/reports', process.env.PLAYWRIGHT_JSON_OUTPUT_NAME || 'test-results.json') }],
+    ['allure-playwright', { resultsDir: path.resolve('src/regions/BW/reports/allure-results') }],
   ],
 
   use: {
-    baseURL: 'https://www.betway.com.ng/sport/soccer',
+    baseURL: 'https://www.betway.co.bw/sport/soccer',
 
     // Use real browser window size
     viewport: null,
@@ -43,7 +43,7 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'NG Region',
+      name: 'BW Region',
       use: {
         ...devices['Desktop Chrome'],
         viewport: null,

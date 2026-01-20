@@ -3,7 +3,7 @@ import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelRea
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElements } from '../../Common-Flows/HighlightElements';
 import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
-import { OddsSelection, LiveOddsSelection, DrawNoBetOddsSelection, EsportsOddsSelection } from '../commonflows/OddSelection'; // Import odds selection helpers
+import { OddsSelection, LiveOddsSelection, DrawNoBetOddsSelection, EsportsOddsSelection } from '../../Common-Flows/OddSelection'; // Import odds selection helpers
 import { OddsSelectionAbove } from '../commonflows/OddSelection';
 
 const userData = require('../json-data/userData.json');
@@ -92,7 +92,7 @@ export class BetSaverPage {
     }
 
     async goto() {
-        await this.page.goto('https://betway.co.zm/sport/soccer');
+        await this.page.goto('https://www.betway.co.za/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
     }
     async Login() {
@@ -156,12 +156,12 @@ export class BetSaverPage {
     }
 
     async navigateToMyBets() {
-        await this.page.goto('https://betway.co.zm/sport/soccer/upcoming?account=my-bets');
+        await this.page.goto('https://new.betway.co.za/sport/soccer/upcoming?account=my-bets');
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async outrightsSelection() {
-        await this.page.goto('https://betway.co.zm/sport/football/outrights');
+        await this.page.goto('https://new.betway.co.za/sport/football/outrights');
         await this.page.waitForTimeout(2000);
         const firstOdds = this.page.locator('(//div[contains(@class,"odd-value")])[1]');
         if (await firstOdds.isVisible()) {
@@ -170,7 +170,7 @@ export class BetSaverPage {
     }
 
     async clickBookingCode() {
-        await this.page.goto('https://betway.co.zm/sport/soccer');
+        await this.page.goto('https://new.betway.co.za/sport/soccer');
         await this.page.waitForTimeout(1000);
         await this.locatorsRegistry.clickBookingCode.click();
         await this.page.waitForTimeout(1000);
@@ -253,11 +253,11 @@ export class BetSaverPage {
         await this.safeClick(this.locatorsRegistry.continueInBetSaverInfo, "Continue in BetSaver Info");
     }
 
-    async placeQualifyingBetAndNavigateToMyBets(numberOfOdds: number = 3, oddsAbove: number = 1.5) {
+    async placeQualifyingBetAndNavigateToMyBets(numberOfOdds: number = 3) {
         await this.locatorsRegistry.gotit.click().catch(() => { });
         await this.preparePage();
         await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-        await OddsSelectionAbove(numberOfOdds, oddsAbove, this.page);
+        await OddsSelection(numberOfOdds, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betNowButton, "BetNow Button");
         await this.page.waitForTimeout(5000);
