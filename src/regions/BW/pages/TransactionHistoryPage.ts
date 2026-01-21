@@ -64,7 +64,7 @@ export class TransactionHistoryPage {
     // --- Navigation & Utility Functions (Kept as is) ---
 
     async goto() {
-        await this.page.goto('https://www.betway.co.za/sport/soccer');
+        await this.page.goto('https://www.betway.co.bw/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
     }
 
