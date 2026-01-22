@@ -51,8 +51,8 @@ export class BuildABetPage {
         await this.buildABetLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
         await this.buildABetLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
         await this.page.keyboard.press('Enter');
-        await this.buildABetLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',  timeout: 30000});
-        await this.buildABetLocatorsRegistry.closePromotionPopup.click();
+        // await this.buildABetLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',  timeout: 30000});
+        // await this.buildABetLocatorsRegistry.closePromotionPopup.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 

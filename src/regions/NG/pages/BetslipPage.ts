@@ -3,7 +3,7 @@ import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelRea
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElementBorder, highlightElements } from '../../Common-Flows/HighlightElements';
 import { SportsPage } from "./SportsPage";
-import { OddsSelectionAbove } from '../commonflows/OddSelection';
+import { OddsSelectionAbove } from '../commonflows/OddSelection'; 
 
 const userData = require('../json-data/userData.json');
 // const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx";
@@ -90,8 +90,8 @@ export class BetslipPage extends SportsPage {
     await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
     await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
     await this.page.keyboard.press('Enter');
-    await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', });
-    await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
+    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', });
+    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
     await this.page.waitForLoadState('domcontentloaded');
   }
 

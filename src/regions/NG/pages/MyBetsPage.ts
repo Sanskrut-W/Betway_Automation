@@ -61,8 +61,8 @@ export class MyBetsPage {
     await this.myBetsLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
     await this.myBetsLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
     await this.page.keyboard.press('Enter');
-    await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
-    await this.myBetsLocatorsRegistry.closePromotionPopup.click();
+    // await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
+    // await this.myBetsLocatorsRegistry.closePromotionPopup.click();
     // await this.closePromotionPopup();
     await this.page.waitForLoadState('domcontentloaded');
   }

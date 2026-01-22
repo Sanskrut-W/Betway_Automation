@@ -10,7 +10,7 @@ import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
 import { getFirstBookingCode } from '../commonflows/storeAllBookingCode';
 import { BetslipPage } from './BetslipPage';
 import { GetBookingCode } from '../../Common-Flows/GetBookingCode';
-import { OddsSelection } from '../../Common-Flows/OddSelection';
+import { OddsSelection } from '../commonflows/OddSelection';
 const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
 const userData = require('../json-data/userData.json');
 
