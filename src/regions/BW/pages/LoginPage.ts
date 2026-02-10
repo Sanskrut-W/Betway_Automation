@@ -101,7 +101,7 @@ export class LoginPage extends HomePage {
     }
 
     async gotoAviatorPage() {
-        await this.page.goto('https://www.betway.co.za/lobby/casino-games/game/aviator');
+        await this.page.goto('https://www.betway.co.bw/lobby/casino-games/game/aviator');
         await this.page.waitForLoadState('domcontentloaded');
     }
 

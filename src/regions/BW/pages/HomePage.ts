@@ -151,7 +151,7 @@ export class HomePage {
 
     async clickArsenalLogo() {
         await this.HomePagelocatorsRegistry.arsenalLogo.click();
-        await expect(this.page).toHaveURL('https://www.betway.co.za/sponsorship', { timeout: 15000 });
+        await expect(this.page).toHaveURL('https://www.betway.co.bw/sponsorship', { timeout: 15000 });
         await this.page.waitForLoadState('domcontentloaded');
         await highlightElementBorder(this.page.getByRole('heading', { name: 'Sponsorship' }));
 

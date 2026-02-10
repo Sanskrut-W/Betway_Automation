@@ -64,7 +64,6 @@ export class BookABetPage {
             closePopup: getLocator(this.page, configs['closePopup']),
             betslipDeleteButton: getLocator(this.page, configs['betslipDeleteButton']),
             socialMediaButtons: getLocator(this.page, configs['socialMediaButtons']),
-            closePromotionPopupGH: getLocator(this.page, configs['closePromotionPopupGH']),
         };
         this.locators = this.locatorsRegistry;
     }
@@ -267,7 +266,7 @@ export class BookABetPage {
 
     // T33-T36: Bet Submission Flow actions
     async clickAddToBetSlip() {
-        await this.locatorsRegistry.addToBetSlip.click();
+        await this.locatorsRegistry.addToBetSlipTZ.click();
         await this.locatorsRegistry.multiBetSlip.click();
         await this.page.waitForTimeout(1000);
     }

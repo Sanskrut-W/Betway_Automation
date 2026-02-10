@@ -93,7 +93,6 @@ export class FeedsPage {
     /** T1: Click Feeds icon and wait for header to be ready. */
     async navigateToFeeds() {
         await this.locatorsRegistry.feeds.click();
-        await this.locatorsRegistry.feedsHeader.waitFor({ state: 'visible' });
     }
 
     /** T2: Click "i" (help) icon and pause. */

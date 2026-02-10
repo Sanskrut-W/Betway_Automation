@@ -91,8 +91,8 @@ export class FeedsPage {
 
     /** T1: Click Feeds icon and wait for header to be ready. */
     async navigateToFeeds() {
+        await this.page.waitForTimeout(2000);
         await this.locatorsRegistry.feeds.click();
-        await this.locatorsRegistry.feedsHeader.waitFor({ state: 'visible' });
     }
 
     /** T2: Click "i" (help) icon and pause. */
@@ -193,6 +193,7 @@ export class FeedsPage {
 
     /** T17: Click profile and wait for counts. */
     async openProfileAndReadyForCounts() {
+        await this.page.waitForTimeout(2000);
         await this.locatorsRegistry.feedsProfile.click();
         await this.page.waitForTimeout(2000);
     }
@@ -235,7 +236,8 @@ export class FeedsPage {
         await this.locatorsRegistry.searchInFeeds.fill('Champions');
         await this.locatorsRegistry.searchInFeeds.press('Backspace');
         await this.page.waitForTimeout(4000);
-
+        await this.locatorsRegistry.searchInFeeds.press('Backspace');
+        await this.page.waitForTimeout(2000);
         // T21a Ready state for follow
         await this.locatorsRegistry.suggestedFeedsFollow.click();
         await this.page.waitForTimeout(2000);

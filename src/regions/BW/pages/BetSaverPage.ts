@@ -3,8 +3,8 @@ import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelRea
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElements } from '../../Common-Flows/HighlightElements';
 import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
-import { OddsSelection, LiveOddsSelection, DrawNoBetOddsSelection, EsportsOddsSelection } from '../../Common-Flows/OddSelection'; // Import odds selection helpers
-import { OddsSelectionAbove } from '../commonflows/OddSelection';
+import { OddsSelectionAbove, LiveOddsSelection, DrawNoBetOddsSelection, EsportsOddsSelection } from '../commonflows/OddSelection'; // Import odds selection helpers
+import { OddsSelection } from '../../Common-Flows/OddSelection';
 
 const userData = require('../json-data/userData.json');
 const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx";
@@ -92,7 +92,7 @@ export class BetSaverPage {
     }
 
     async goto() {
-        await this.page.goto('https://www.betway.co.za/sport/soccer');
+        await this.page.goto('https://www.betway.co.bw/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
     }
     async Login() {
@@ -156,12 +156,12 @@ export class BetSaverPage {
     }
 
     async navigateToMyBets() {
-        await this.page.goto('https://new.betway.co.za/sport/soccer/upcoming?account=my-bets');
+        await this.page.goto('https://www.betway.co.bw/sport/soccer/upcoming?account=my-bets');
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async outrightsSelection() {
-        await this.page.goto('https://new.betway.co.za/sport/football/outrights');
+        await this.page.goto('https://www.betway.co.bw/sport/football/outrights');
         await this.page.waitForTimeout(2000);
         const firstOdds = this.page.locator('(//div[contains(@class,"odd-value")])[1]');
         if (await firstOdds.isVisible()) {
@@ -170,7 +170,7 @@ export class BetSaverPage {
     }
 
     async clickBookingCode() {
-        await this.page.goto('https://new.betway.co.za/sport/soccer');
+        await this.page.goto('https://www.betway.co.bw/sport/soccer');
         await this.page.waitForTimeout(1000);
         await this.locatorsRegistry.clickBookingCode.click();
         await this.page.waitForTimeout(1000);
@@ -239,7 +239,6 @@ export class BetSaverPage {
     async setupBetsaverActive() {
         await this.locatorsRegistry.gotit.click().catch(() => { });
         await this.preparePage();
-        await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
         await OddsSelectionAbove(7, 2, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betSaverActive, "BetSaver Active");
@@ -253,11 +252,10 @@ export class BetSaverPage {
         await this.safeClick(this.locatorsRegistry.continueInBetSaverInfo, "Continue in BetSaver Info");
     }
 
-    async placeQualifyingBetAndNavigateToMyBets(numberOfOdds: number = 3) {
+    async placeQualifyingBetAndNavigateToMyBets(numberOfOdds: number = 3, oddsAbove: number = 2) {
         await this.locatorsRegistry.gotit.click().catch(() => { });
         await this.preparePage();
-        await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-        await OddsSelection(numberOfOdds, this.page);
+        await OddsSelectionAbove(numberOfOdds, oddsAbove, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betNowButton, "BetNow Button");
         await this.page.waitForTimeout(5000);
@@ -283,9 +281,8 @@ export class BetSaverPage {
 
     async selectSportBetForMixedSlip() {
         await this.safeClick(this.locatorsRegistry.sportButton, "Sport Button");
-        await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
         await this.preparePage();
-        await OddsSelection(2, this.page);
+        await OddsSelectionAbove(2, 2, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betSaverNotActive, "BetSaver Not Active");
     }
@@ -321,20 +318,16 @@ export class BetSaverPage {
         // Complex logic for selecting suitable smart picks
         if (await this.tryClick(this.locatorsRegistry.smartPicks30, "Smart Picks 30")) {
             await this.preparePage();
-            await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-            await OddsSelection(6, this.page);
+            await OddsSelectionAbove(6, 2, this.page);
         } else if (await this.tryClick(this.locatorsRegistry.smartPicks25, "Smart Picks 25")) {
             await this.preparePage();
-            await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-            await OddsSelection(8, this.page);
+            await OddsSelectionAbove(8, 2, this.page);
         } else if (await this.tryClick(this.locatorsRegistry.smartPicks20, "Smart Picks 20")) {
             await this.preparePage();
-            await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-            await OddsSelection(10, this.page);
+            await OddsSelectionAbove(10, 2, this.page);
         } else if (await this.tryClick(this.locatorsRegistry.smartPicks15, "Smart Picks 15")) {
             await this.preparePage();
-            await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-            await OddsSelection(12, this.page);
+            await OddsSelectionAbove(12, 2, this.page);
         } else {
             console.warn("❌ No Smart Picks option available (30, 25, or 20).");
         }
@@ -347,9 +340,7 @@ export class BetSaverPage {
     async placeBetWithNewWagerChangeAndCheckMyBets() {
         await this.safeClick(this.locatorsRegistry.sportButton, "Sport Button");
         await this.preparePage();
-        await this.page.waitForTimeout(2000);
-        await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-        await OddsSelection(12, this.page);
+        await OddsSelectionAbove(12, 2, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "Multi BetSlip");
         await this.acceptNewWager();
         await this.page.waitForTimeout(2000);
@@ -362,8 +353,7 @@ export class BetSaverPage {
     async shareAndLoadBookingCode() {
         await this.safeClick(this.locatorsRegistry.sportButton, "Sport Button");
         await this.preparePage();
-        await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-        await OddsSelection(10, this.page);
+        await OddsSelectionAbove(10, 2, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "Multi BetSlip");
         await this.safeClick(this.locatorsRegistry.shareButton, "Share Button");
         await this.safeClick(this.locatorsRegistry.copyBookingCode, "Copy Booking Code");
@@ -402,20 +392,16 @@ export class BetSaverPage {
         // Complex logic for selecting suitable smart picks (ensuring enough legs for activation)
         if (await this.tryClick(this.locatorsRegistry.smartPicks30, "Smart Picks 30")) {
             await this.preparePage();
-            await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-            await OddsSelection(6, this.page);
+            await OddsSelectionAbove(6, 2, this.page);
         } else if (await this.tryClick(this.locatorsRegistry.smartPicks25, "Smart Picks 25")) {
             await this.preparePage();
-            await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-            await OddsSelection(8, this.page);
+            await OddsSelectionAbove(8, 2, this.page);
         } else if (await this.tryClick(this.locatorsRegistry.smartPicks20, "Smart Picks 20")) {
             await this.preparePage();
-            await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-            await OddsSelection(10, this.page);
+            await OddsSelectionAbove(10, 2, this.page);
         } else if (await this.tryClick(this.locatorsRegistry.smartPicks15, "Smart Picks 15")) {
             await this.preparePage();
-            await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-            await OddsSelection(12, this.page);
+            await OddsSelectionAbove(12, 2, this.page);
         } else {
             throw new Error("❌ No Smart Picks option available (30, 25, or 20) for T32 flow.");
         }

@@ -23,6 +23,11 @@ export class TransactionHistoryPage {
         this.locatorsRegistry = {
             hamburgerBtn: getLocator(this.page, configs['hamburgerBtn']),
             transactionHistoryButton: getLocator(this.page, configs['transactionHistoryButton']),
+            luckyNumbersBtn: getLocator(this.page, configs['luckyNumbersBtn']),
+            previousMonthBtn: getLocator(this.page, configs['previousMonthBtn']),
+            dateOkBtn: getLocator(this.page, configs['dateOkBtn']),
+            dateClearBtn: getLocator(this.page, configs['dateClearBtn']),
+            accountNav: getLocator(this.page, configs['accountNav']),
 
             allBtn: getLocator(this.page, configs['allBtn']),
             depositBtn: getLocator(this.page, configs['depositBtn']),
@@ -58,7 +63,7 @@ export class TransactionHistoryPage {
             mobileNumber: getLocator(this.page, configs['mobileNumber']),
             password: getLocator(this.page, configs['password']),
             loginButton: getLocator(this.page, configs['loginButton']),
-            closePromotionPopupGH: getLocator(this.page, configs['closePromotionPopupGH']),
+            // closePromotionPopupGH: getLocator(this.page, configs['closePromotionPopupGH']),
         };
     }
 

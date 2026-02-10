@@ -53,7 +53,7 @@ export class MyBetsPage {
     // ------------------------------------------------------------------
  
     async gotoSports() {
-        await this.page.goto('https://new.betway.co.za/sport/soccer');
+        await this.page.goto('https://en.betway.co.tz/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
     }
  
@@ -61,8 +61,8 @@ export class MyBetsPage {
     await this.myBetsLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
     await this.myBetsLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
     await this.page.keyboard.press('Enter');
-    await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
-    await this.myBetsLocatorsRegistry.closePromotionPopup.click();
+    // await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
+    // await this.myBetsLocatorsRegistry.closePromotionPopup.click();
     // await this.closePromotionPopup();
     await this.page.waitForLoadState('domcontentloaded');
   }

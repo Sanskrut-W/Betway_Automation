@@ -10,12 +10,14 @@ test.describe('Feeds Tests', () => {
 
     // T1:Verify Betway Feeds icon presence and functionality.
     test('T1: Verify Betway Feeds icon presence and functionality.', async ({ feedsPage }, testInfo) => {
+        await feedsPage.page.waitForLoadState('domcontentloaded');
         await feedsPage.navigateToFeeds();
-        await feedsPage.captureScreenshot('feedsHeader', screenshotDir, 'T1-Feeds', testInfo);
+        await feedsPage.takeScreenshot(screenshotDir, 'T1-Feeds', testInfo);
     });
 
     // T2- Verify "i" icon presence and functionality.
     test('T2: Verify "i" icon presence and functionality.', async ({ feedsPage }, testInfo) => {
+        await feedsPage.page.waitForLoadState('domcontentloaded');
         await feedsPage.clickHelpIcon();
         await feedsPage.takeScreenshot(screenshotDir, 'T2-Feeds', testInfo);
     });
@@ -96,6 +98,7 @@ test.describe('Feeds Tests', () => {
 
     // T17- Verify Post, Followers and Following count on public profile pop up window
     test('T17-Verify Post, Followers and Following count on public profile pop up window', async ({ feedsPage }, testInfo) => {
+        await feedsPage.page.waitForTimeout(4000);
         await feedsPage.openProfileAndReadyForCounts();
         await feedsPage.captureScreenshot('feedsHeader', screenshotDir, 'T17-feeds', testInfo);
         // Cleanup by closing the popup

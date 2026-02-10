@@ -43,7 +43,7 @@ export class BuildABetPage {
 
     // 1. Navigation & Setup Methods
     async goto() {
-        await this.page.goto('https://www.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
+        await this.page.goto('https://www.betway.co.bw/sport/soccer', { waitUntil: 'domcontentloaded' });
         // await this.page.waitForLoadState('domcontentloaded');
     }
 

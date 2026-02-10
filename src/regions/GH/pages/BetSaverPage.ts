@@ -83,7 +83,7 @@ export class BetSaverPage {
             smartPicks20: getLocator(this.page, configs["smartPicks20"]),
             smartPicks25: getLocator(this.page, configs["smartPicks25"]),
             smartPicks30: getLocator(this.page, configs["smartPicks30"]),
-            closePromotionPopupGH: getLocator(this.page, configs['closePromotionPopupGH']),
+            
 
             // --- Market Dropdowns ---
             marketsDropdown: getLocator(this.page, configs["marketsDropdown"]),

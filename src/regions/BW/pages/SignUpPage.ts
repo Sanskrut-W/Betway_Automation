@@ -102,7 +102,7 @@ export class SignUpPage {
     // ------------------------------------------------------------------
 
     async goto() {
-        await this.page.goto('https://www.betway.co.za/');
+        await this.page.goto('https://www.betway.co.bw/');
         await this.page.waitForLoadState('domcontentloaded');
     }
 

@@ -53,8 +53,8 @@ export class BetslipPage extends SportsPage {
       cashBtnMulti: getLocator(this.page, configs["cashBtnMulti"]),
       freebetBtnMulti: getLocator(this.page, configs["freebetBtnMulti"]),
       cashOutIcon: getLocator(this.page, configs["cashOutIcon"]),
-      winBoostToolTip: getLocator(this.page, configs["winBoostToolTip"]),
-      winBoostValue: getLocator(this.page, configs["winBoostValue"]),
+      winBoostToolTip: getLocator(this.page, configs["winBoostToolTipBW"]),
+      winBoostValue: getLocator(this.page, configs["winBoostValueBW"]),
       betSaverText: getLocator(this.page, configs["betSaverText"]),
       totalBetwayReturnMulti: getLocator(this.page, configs["totalBetwayReturnMulti"]),
       totalBetwayReturnSingle: getLocator(this.page, configs["totalBetwayReturnSingle"]),
@@ -80,7 +80,7 @@ export class BetslipPage extends SportsPage {
 
   // Navigation Methods
   async goto() {
-    await this.page.goto('https://www.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
+    await this.page.goto('https://www.betway.co.bw/sport/soccer', { waitUntil: 'domcontentloaded' });
     // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
     // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
   }
@@ -101,16 +101,16 @@ export class BetslipPage extends SportsPage {
     await this.page.keyboard.press('Enter');
 
     // Try to close promotion popup ONLY if it appears
-    const popup = this.BetslipPageLocatorsRegistry.closePromotionPopup;
+    // const popup = this.BetslipPageLocatorsRegistry.closePromotionPopup;
 
-    try {
-      await popup.waitFor({ state: 'visible', timeout: 9000 });
-      if (await popup.isVisible()) {
-        await popup.click();
-      }
-    } catch {
-      // Popup did not appear → ignore
-    }
+    // try {
+    //   await popup.waitFor({ state: 'visible', timeout: 9000 });
+    //   if (await popup.isVisible()) {
+    //     await popup.click();
+    //   }
+    // } catch {
+    //   // Popup did not appear → ignore
+    // }
 
     await this.page.waitForLoadState('domcontentloaded');
   }

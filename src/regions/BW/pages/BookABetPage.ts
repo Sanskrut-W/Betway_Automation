@@ -80,7 +80,7 @@ export class BookABetPage {
     // --- Core Navigation Methods ---
 
     async goto() {
-        await this.page.goto('https://www.betway.co.za/sport/soccer');
+        await this.page.goto('https://www.betway.co.bw/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
     }
 
