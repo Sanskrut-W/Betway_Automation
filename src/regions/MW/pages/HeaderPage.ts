@@ -87,7 +87,7 @@ export class HeaderPage extends HomePage {
 
   // Navigation Methods
   async goto() {
-    await this.page.goto('https://new.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
+    await this.page.goto('https://www.betway.mw/sport/soccer', { waitUntil: 'domcontentloaded' });
     //   await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',timeout:15000});
     // await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
   }
@@ -97,8 +97,8 @@ export class HeaderPage extends HomePage {
     await this.HeaderPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
     await this.HeaderPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
     await this.page.keyboard.press('Enter');
-    await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
-    await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
+    // await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
+    // await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
     // await this.closePromotionPopup();
     await this.page.waitForLoadState('domcontentloaded');
   }
@@ -166,7 +166,7 @@ export class HeaderPage extends HomePage {
   async verifyEyeButton() {
     // Scope to the login form area that contains both Mobile Number and Password fields
     const formContainer = this.page.locator('form').filter({
-      hasText: '+27Forgot Username?Forgot Password?'
+      hasText: '+265Forgot Username?Forgot Password?'
     });
 
     // From within that form, target the eye SVG next to the password input
@@ -306,7 +306,7 @@ export class HeaderPage extends HomePage {
   }
 
   async clickBettingRules() {
-    await this.HeaderPageLocatorsRegistry.bettingRules.click();
+    await this.HeaderPageLocatorsRegistry.bettingRules.first().click();
   }
 
   async clickStatistics() {
@@ -457,8 +457,8 @@ export class HeaderPage extends HomePage {
 
   async verifyAndClickBettingRulesWithoutLogin() {
     await this.clickHamburgerMenu();
-    await this.HeaderPageLocatorsRegistry.bettingRules.scrollIntoViewIfNeeded();
-    await highlightElementBorder(this.HeaderPageLocatorsRegistry.bettingRules);
+    await this.HeaderPageLocatorsRegistry.bettingRules.first().scrollIntoViewIfNeeded();
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.bettingRules.first());
     await this.clickBettingRules();
     await this.page.waitForTimeout(3000);
   }

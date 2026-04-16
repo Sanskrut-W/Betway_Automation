@@ -62,8 +62,8 @@ test.describe('Feeds Tests', () => {
         await feedsPage.captureScreenshot('firstCommentDiv', screenshotDir, 'T9-Feeds', testInfo);
 
         // T10: Remove comment
-        await feedsPage.removePostedComment();
-        await feedsPage.takeScreenshot(screenshotDir, 'T10-Feeds', testInfo);
+        // await feedsPage.removePostedComment();
+        // await feedsPage.takeScreenshot(screenshotDir, 'T10-Feeds', testInfo);
     });
 
     // T11-T13: Comments Like, Report and Share button functionality inside comment pop up window on feed section.

@@ -97,6 +97,7 @@ export class BetslipPage extends SportsPage {
     await this.page.waitForLoadState('domcontentloaded');
   }
 
+  
   async loginWithoutFreebet() {
     await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user5.mobile}`);
     await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user5.password}`);

@@ -6,27 +6,7 @@
       "size": 20,
       "hasNextPage": false,
       "hasPreviousPage": false,
-      "result": [
-        {
-          "bookingCode": "BW3AAA5414",
-          "accountId": "a0ff17be-78be-451a-c03b-08dd207510a4",
-          "referenceId": "51d4c426-2b90-4b19-b207-3ab66ce666c5",
-          "currencyCode": "GHS",
-          "createdDate": "2026-02-09T14:02:10.433",
-          "activeUntilDate": "2027-02-09T14:02:09.737",
-          "cumulativeWagerAmount": 1,
-          "amountEarned": 0.04,
-          "amountPaid": 0,
-          "lastPayoutDate": "2026-02-09T14:02:10.433",
-          "timesUsed": 1,
-          "lastPayoutTimesUsedStamp": 0,
-          "id": "2c6d81f8-0cdc-47f8-96e8-2dec75c69186",
-          "editedById": "00000000-0000-0000-0000-000000000000",
-          "editedDateTime": "0001-01-01T00:00:00",
-          "isDeleted": false,
-          "version": 0
-        }
-      ]
+      "result": []
     }
   ]
 }

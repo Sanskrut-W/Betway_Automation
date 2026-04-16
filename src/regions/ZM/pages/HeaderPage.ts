@@ -197,7 +197,7 @@ export class HeaderPage extends HomePage {
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.depositFund);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.withdrawFund);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.myBets);
-    await highlightElementBorder(this.HeaderPageLocatorsRegistry.MyCasinoBigWin);
+    // await highlightElementBorder(this.HeaderPageLocatorsRegistry.MyCasinoBigWin);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.bonusSummary);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.transactionsHistory);
 

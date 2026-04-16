@@ -102,7 +102,7 @@ export class SignUpPage {
     // ------------------------------------------------------------------
 
     async goto() {
-        await this.page.goto('https://new.betway.co.za/');
+        await this.page.goto('https://www.betway.mw/');
         await this.page.waitForLoadState('domcontentloaded');
     }
 
@@ -542,4 +542,3 @@ export class SignUpPage {
 // forms role form {} 0
 // signUpCodeField role textbox `{"name": "/sign.?up.?code signup.?code
 // idNumberField role textbox `{"name": "/ID Number IDNumber/i"}`
- 

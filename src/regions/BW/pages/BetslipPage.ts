@@ -74,7 +74,7 @@ export class BetslipPage extends SportsPage {
 
     // Special handling for winBoostInfoIcon (complex locator)
     this.BetslipPageLocatorsRegistry.winBoostInfoIcon = this.page.locator('div', {
-      hasText: /^Win Boost 2.5%\. 1 more for 3% \(Min odds 1\.2\)Bet Saver not active$/
+      hasText: /^Win Boost 2%\. 1 more for 3% \(Min odds 1\.2\)Bet Saver not active$/
     }).getByRole('img').nth(1);
   }
 

@@ -263,7 +263,7 @@ export class HomePage {
     }
 
     async clickBettingRulesLink() {
-        await this.HomePagelocatorsRegistry.BettingRules.click();
+        await this.HomePagelocatorsRegistry.BettingRules.first().click();
         await expect(this.page).toHaveURL(/.*betting-rules*/, { timeout: 15000 });
         await highlightElementBorder(this.page.getByRole('heading', { name: "Betting Rules" }).first());
         await this.page.waitForLoadState('domcontentloaded');

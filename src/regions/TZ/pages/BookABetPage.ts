@@ -266,7 +266,7 @@ export class BookABetPage {
 
     // T33-T36: Bet Submission Flow actions
     async clickAddToBetSlip() {
-        await this.locatorsRegistry.addToBetSlipTZ.click();
+        await this.locatorsRegistry.addToBetSlip.click();
         await this.locatorsRegistry.multiBetSlip.click();
         await this.page.waitForTimeout(1000);
     }

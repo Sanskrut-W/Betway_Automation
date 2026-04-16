@@ -142,12 +142,31 @@ export class LoginPage extends HomePage {
 
 
     // Login Functions
+    // async Login() {
+    //     await this.goto();
+    //     await this.LoginPagelocatorsRegistry.mobileInput.fill(`${userData.user1.mobile}`);
+    //     await this.LoginPagelocatorsRegistry.passwordInput.fill(`${userData.user1.password}`);
+    //     await this.page.keyboard.press('Enter');
+    //     await this.verifyWelcomeUser(userData.user1.name);
+    // }
     async Login() {
-        await this.goto();
-        await this.LoginPagelocatorsRegistry.mobileInput.fill(`${userData.user1.mobile}`);
-        await this.LoginPagelocatorsRegistry.passwordInput.fill(`${userData.user1.password}`);
+        await this.LoginPagelocatorsRegistry.mobileInput.fill(userData.user4.mobile);
+        await this.LoginPagelocatorsRegistry.passwordInput.fill(userData.user4.password);
         await this.page.keyboard.press('Enter');
-        await this.verifyWelcomeUser(userData.user1.name);
+
+        // Try to close promotion popup ONLY if it appears
+        const popup = this.LoginPagelocatorsRegistry.closePromotionPopup;
+
+        try {
+            await popup.waitFor({ state: 'visible', timeout: 9000 });
+            if (await popup.isVisible()) {
+                await popup.click();
+            }
+        } catch {
+            // Popup did not appear → ignore
+        }
+
+        await this.page.waitForLoadState('domcontentloaded');
     }
 
     async LoginArgs(mobile: string, password: string) {

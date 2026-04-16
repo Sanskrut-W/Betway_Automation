@@ -4,15 +4,17 @@ import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElements } from '../../Common-Flows/HighlightElements';
 import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
 import path from 'path';
+import { HeaderPage } from './HeaderPage';
 
 const userData = require('../json-data/userData.json');
 // Using path.resolve to ensure the Excel file is found regardless of execution context
 const Locator_Url = "src/global/utils/file-utils/locators(2).xlsx";
-export class GamingLobbyPage {
+export class GamingLobbyPage extends HeaderPage {
     readonly locatorsRegistry: Record<string, Locator>;
     readonly page: Page;
 
     constructor(page: Page) {
+        super(page);
         this.page = page;
         const configs = loadLocatorsFromExcel(Locator_Url, "GamingLobbyPage");
 
@@ -43,6 +45,7 @@ export class GamingLobbyPage {
             trendingFilter: getLocator(this.page, configs['trendingFilter']),
             gameDivVirtuals: getLocator(this.page, configs['gameDivVirtuals']),
             closePopup: getLocator(this.page, configs['closePopup']),
+            logOut: getLocator(this.page, configs['logOut']),
         };
     }
 
@@ -51,13 +54,32 @@ export class GamingLobbyPage {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
+    // async Login() {
+    //     await this.locatorsRegistry.mobileNumber.fill(`${userData.user4.mobile}`);
+    //     await this.locatorsRegistry.password.fill(`${userData.user4.password}`);
+    //     await this.locatorsRegistry.loginButton.click();
+    //     // await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
+    //     // await this.locatorsRegistry.closePopup.click();
+    //     await this.page.waitForTimeout(1000);
+    // }
     async Login() {
-        await this.locatorsRegistry.mobileNumber.fill(`${userData.user4.mobile}`);
-        await this.locatorsRegistry.password.fill(`${userData.user4.password}`);
-        await this.locatorsRegistry.loginButton.click();
-        // await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
-        // await this.locatorsRegistry.closePopup.click();
-        await this.page.waitForTimeout(1000);
+        await this.locatorsRegistry.mobileNumber.fill(userData.user4.mobile);
+        await this.locatorsRegistry.password.fill(userData.user4.password);
+        await this.page.keyboard.press('Enter');
+
+        // Try to close promotion popup ONLY if it appears
+        const popup = this.locatorsRegistry.closePopup;
+
+        try {
+            await popup.waitFor({ state: 'visible', timeout: 9000 });
+            if (await popup.isVisible()) {
+                await popup.click();
+            }
+        } catch {
+            // Popup did not appear → ignore
+        }
+
+        await this.page.waitForLoadState('domcontentloaded');
     }
 
     async navigateToVertical(verticalKey: string) {
@@ -104,8 +126,8 @@ export class GamingLobbyPage {
     async LogOut() {
         // Only attempt logout if Deposit is visible (logged in state)
         if (await this.page.getByRole('button', { name: 'Deposit' }).isVisible()) {
-            await this.page.getByRole('button', { name: 'Deposit' }).click();
-            await this.page.getByText('Log Out', { exact: true }).click();
+            await this.HeaderPageLocatorsRegistry.hamburgerMenu.click();
+            await this.locatorsRegistry.logOut.click();
             await this.page.getByRole('button', { name: 'Proceed' }).click();
         }
     }

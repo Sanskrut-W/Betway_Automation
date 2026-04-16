@@ -1,6 +1,6 @@
 {
   "user1": {
-    "name":"TEST TEST",
+    "name": "TEST TEST",
     "mobile": "222212222",
     "password": "1234567890"
   },
@@ -12,14 +12,12 @@
     "mobile": "222212222 ",
     "password": "1234567890"
   },
-
   "user4": {
     "mobile": "222212222",
     "password": "1234567890"
   },
-
   "user5": {
-    "mobile": "999845637",
-    "password": "987654321"
+    "mobile": "723287107",
+    "password": "P@ssw0rd3"
   }
 }

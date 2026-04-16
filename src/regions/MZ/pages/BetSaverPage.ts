@@ -236,11 +236,10 @@ export class BetSaverPage {
         await this.safeClick(this.locatorsRegistry.betSaverNotActive, "BetSaver Not Active");
     }
 
-    async setupBetsaverActive(numberOfOdds: number = 8, oddsAbove: number = 2.0) {
+
+    async setupBetsaverActive() {
         await this.locatorsRegistry.gotit.click().catch(() => { });
-        await this.preparePage();
-        await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-        await OddsSelectionAbove(numberOfOdds, oddsAbove, this.page);
+        await OddsSelectionAbove(7, 2, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betSaverActive, "BetSaver Active");
     }
@@ -255,8 +254,6 @@ export class BetSaverPage {
 
     async placeQualifyingBetAndNavigateToMyBets() {
         await this.locatorsRegistry.gotit.click().catch(() => { });
-        await this.preparePage();
-        await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
         await OddsSelectionAbove(3, 2, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betNowButton, "BetNow Button");
@@ -266,7 +263,7 @@ export class BetSaverPage {
         await this.page.waitForTimeout(2000);
     }
 
-    async placeBetsaverActiveBetAndNavigateToMyBets(numberOfOdds: number = 8, oddsAbove: number = 3.0) {
+    async placeBetsaverActiveBetAndNavigateToMyBets(numberOfOdds: number = 8, oddsAbove: number = 2.0) {
         await this.preparePage();
         await OddsSelectionAbove(numberOfOdds, oddsAbove, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
@@ -283,9 +280,7 @@ export class BetSaverPage {
 
     async selectSportBetForMixedSlip() {
         await this.safeClick(this.locatorsRegistry.sportButton, "Sport Button");
-        await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-        await this.preparePage();
-        await OddsSelection(2, this.page);
+        await OddsSelectionAbove(2, 1.5, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betSaverNotActive, "BetSaver Not Active");
     }

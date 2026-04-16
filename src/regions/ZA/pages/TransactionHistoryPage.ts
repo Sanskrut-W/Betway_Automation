@@ -68,15 +68,34 @@ export class TransactionHistoryPage {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async Login() {
-        await this.locatorsRegistry.mobileNumber.fill(`${userData.user4.mobile}`);
-        await this.locatorsRegistry.password.fill(`${userData.user4.password}`);
-        await this.locatorsRegistry.loginButton.click();
-        // await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
-        // await this.locatorsRegistry.closePopup.click();
-        await this.page.waitForTimeout(1000);
-    }
+    // async Login() {
+    //     await this.locatorsRegistry.mobileNumber.fill(`${userData.user4.mobile}`);
+    //     await this.locatorsRegistry.password.fill(`${userData.user4.password}`);
+    //     await this.locatorsRegistry.loginButton.click();
+    //     // await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
+    //     // await this.locatorsRegistry.closePopup.click();
+    //     await this.page.waitForTimeout(1000);
+    // }
 
+    async Login() {
+        await this.locatorsRegistry.mobileNumber.fill(userData.user4.mobile);
+        await this.locatorsRegistry.password.fill(userData.user4.password);
+        await this.page.keyboard.press('Enter');
+
+        // Try to close promotion popup ONLY if it appears
+        const popup = this.locatorsRegistry.closePopup;
+
+        try {
+            await popup.waitFor({ state: 'visible', timeout: 9000 });
+            if (await popup.isVisible()) {
+                await popup.click();
+            }
+        } catch {
+            // Popup did not appear → ignore
+        }
+
+        await this.page.waitForLoadState('domcontentloaded');
+    }
     async navigateToTransactionHistory() {
         await this.locatorsRegistry.hamburgerBtn.click();
         await this.page.waitForTimeout(1000);

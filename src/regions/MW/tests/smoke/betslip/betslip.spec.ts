@@ -7,7 +7,7 @@ import { OddsSelection, OddsSelectionAbove } from '../../../commonflows/OddSelec
 const projectRoot = path.resolve(__dirname, '../../..');
 const screenshotDir = path.join(projectRoot, 'screenshots/smoke/betslip');
 
-test.describe('Betslip Module - ZA', () => {
+test.describe('Betslip Module - MW', () => {
 
   test('T1-Verify Betslip Section without selecting any odd ', async ({ betslipPage }, testInfo) => {
     await betslipPage.verifyBetslipSection();
@@ -110,7 +110,7 @@ test.describe('Betslip Module - ZA', () => {
 
   test('T35-Verify functionality of Wager amount text box inside multi section of the betslip', async ({ betslipPage, page }, testInfo) => {
     await OddsSelectionAbove(2, 1, page);
-    // await betslipPage.clickMultiTab();
+    await betslipPage.clickMultiTab();
     await betslipPage.verifyBetAmountInput();
     await betslipPage.enterBetAmount('10');
     await ScreenshotHelper(page, screenshotDir, 'T35-betslip-bet-amount-input-multi.png', testInfo);
@@ -202,7 +202,8 @@ test.describe('Betslip Module - ZA', () => {
   });
 
   test('T24-Multi- Verify "Win boost" amount calculation on betslip.', async ({ betslipPage, page }, testInfo) => {
-    await OddsSelectionAbove(2, 2, page);
+    await OddsSelectionAbove(3, 2, page);
+    await betslipPage.clickMultiTab();
     await betslipPage.verifyWinBoostCalculation();
     await ScreenshotHelper(page, screenshotDir, 'T24-betslip-Win-boost-amount-calculation-multi.png', testInfo);
   });
@@ -221,13 +222,15 @@ test.describe('Betslip Module - ZA', () => {
   // });
 
   test('T26-Multi-Verify Win Boost tool tip', async ({ betslipPage, page }, testInfo) => {
-    await OddsSelectionAbove(2, 3.57, page);
+    await OddsSelectionAbove(3, 1.21, page);
+    await betslipPage.clickMultiTab();
     await betslipPage.verifyWinBoostToolTip();
     await ScreenshotHelper(page, screenshotDir, 'T26-betslip-Win-boost-tool-tip-multi.png', testInfo);
   });
 
   test('T27-Multi-Verify Win Boost pop up window', async ({ betslipPage, page }, testInfo) => {
-    await OddsSelectionAbove(2, 1.21, page);
+    await OddsSelectionAbove(3, 1.21, page);
+    await betslipPage.clickMultiTab();
     await betslipPage.verifyWinBoostInfoIcon();
     await betslipPage.clickWinBoostInfoIcon();
     await page.waitForTimeout(2000);

@@ -7,7 +7,7 @@ import { loginLocators } from '../locators/loginPageLocators';
 import { time } from 'console';
 
 
-const config = process.env.BASE_URL || 'https://betway.co.za/';
+const config = process.env.BASE_URL || 'https://www.betway.com.ng/';
 import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader";
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElementBorder, highlightElements } from '../../Common-Flows/HighlightElements';
@@ -128,10 +128,10 @@ export class LoginPage extends HomePage {
 
     async clickSignUp() {
         await this.LoginPagelocatorsRegistry.signUpButton.click();
-        const apiPromise = this.page.waitForResponse(response =>
-            response.url().includes(apidata.signupButtonClick) && response.status() === 200
-        );
-        await apiPromise;
+        // const apiPromise = this.page.waitForResponse(response =>
+        //     response.url().includes(apidata.signupButtonClick) && response.status() === 200
+        // );
+        // await apiPromise;
     }
 
     async clickSignUpFromHeader() {

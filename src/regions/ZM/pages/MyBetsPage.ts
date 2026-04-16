@@ -1,20 +1,20 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { highlightElements } from '../../Common-Flows/HighlightElements';
-import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader"; 
-import { getLocator } from "../../../global/utils/file-utils/locatorResolver"; 
- 
+import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader";
+import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
+
 // URL for your central locator file
 const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx";
 const userData = require('../json-data/userData.json');
- 
+
 export class MyBetsPage {
     readonly page: Page;
     readonly myBetsLocatorsRegistry: Record<string, Locator>;
- 
+
     constructor(page: Page) {
         this.page = page;
-  
-        const configs = loadLocatorsFromExcel(LOCATOR_URL, "MyBetPage"); 
+
+        const configs = loadLocatorsFromExcel(LOCATOR_URL, "MyBetPage");
         this.myBetsLocatorsRegistry = {
             closePromotionPopup: getLocator(this.page, configs["closePromotionPopup"]),
             mobileInput: getLocator(this.page, configs["mobileInput"]),
@@ -47,45 +47,45 @@ export class MyBetsPage {
             paginationNext: getLocator(this.page, configs["paginationNext"]),
         };
     }
-   
+
     // ------------------------------------------------------------------
     // 1. Navigation & Login
     // ------------------------------------------------------------------
- 
+
     async gotoSports() {
         await this.page.goto('https://www.betway.co.zm/sport/soccer');
         await this.page.waitForLoadState('domcontentloaded');
     }
- 
-   async login() {
-    await this.myBetsLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
-    await this.myBetsLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
-    await this.page.keyboard.press('Enter');
-    // await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
-    // await this.myBetsLocatorsRegistry.closePromotionPopup.click();
-    // await this.closePromotionPopup();
-    await this.page.waitForLoadState('domcontentloaded');
-  }
- 
+
+    async login() {
+        await this.myBetsLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
+        await this.myBetsLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
+        await this.page.keyboard.press('Enter');
+        // await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
+        // await this.myBetsLocatorsRegistry.closePromotionPopup.click();
+        // await this.closePromotionPopup();
+        await this.page.waitForLoadState('domcontentloaded');
+    }
+
     // ------------------------------------------------------------------
     // 2. Main Actions
     // ------------------------------------------------------------------
- 
+
     async clickMyBets() {
         await this.myBetsLocatorsRegistry.myBetsButton.click();
     }
- 
+
     async clickOpenBetsTab() {
         await this.myBetsLocatorsRegistry.openBetsTab.click();
     }
- 
+
     async clickSettledBetsTab() {
         await this.myBetsLocatorsRegistry.settledBetsTab.click();
     }
- 
+
     async selectCategory(categoryName: 'Betgames' | 'Lucky Numbers' | 'Jackpots' | 'Tote' | 'Sports') {
         let currentDropdown = this.myBetsLocatorsRegistry.categoryDropdown;
-       
+
         switch (categoryName) {
             case 'Betgames':
                 await currentDropdown.click();
@@ -99,21 +99,17 @@ export class MyBetsPage {
                 await this.myBetsLocatorsRegistry.luckyNumbersOption.click(); // Click previous to open
                 await this.myBetsLocatorsRegistry.jackpotsOption.click();
                 break;
-            case 'Tote':
-                await this.myBetsLocatorsRegistry.jackpotsOption.click(); // Click previous to open
-                await this.myBetsLocatorsRegistry.toteOption.click();
-                break;
             case 'Sports':
-                await this.myBetsLocatorsRegistry.toteOption.click(); // Click previous to open
+                await this.myBetsLocatorsRegistry.jackpotsOption.click(); // Click previous to open
                 await this.myBetsLocatorsRegistry.categoryDropdown.click(); // 'categoryDropdown' is 'Sports'
                 break;
         }
         await this.page.waitForTimeout(1000);
     }
- 
+
     async selectFilter(filterName: 'All' | 'Cashout' | 'Win' | 'Loss') {
         let currentDropdown = this.myBetsLocatorsRegistry.filterDropdown;
- 
+
         switch (filterName) {
             case 'All':
                 await currentDropdown.click();
@@ -133,35 +129,35 @@ export class MyBetsPage {
         }
         await this.page.waitForTimeout(1000);
     }
- 
+
     async searchFor(term: string) {
         await this.myBetsLocatorsRegistry.searchBox.fill(term);
         await this.myBetsLocatorsRegistry.searchBox.press('Enter');
         await this.page.waitForTimeout(3000);
     }
- 
+
     async clickDetailView(index = 0) {
         await this.myBetsLocatorsRegistry.detailViewButton.nth(index).click();
         await this.page.waitForTimeout(1000);
     }
- 
+
     async clickShare(index = 0) {
         await this.myBetsLocatorsRegistry.shareButton.nth(index).click();
     }
- 
+
     async placeBet() {
         await this.myBetsLocatorsRegistry.placeBetButton.click();
         await this.page.waitForTimeout(1000);
     }
- 
+
     async performEditBetFlow(action: 'continue' | 'cancel', checkboxIndex = 0) {
         await this.clickDetailView(0);
         await this.myBetsLocatorsRegistry.editBetButton.click();
         await this.page.waitForTimeout(800);
-       
+
         await this.myBetsLocatorsRegistry.editBetCheckbox.nth(checkboxIndex).click({ force: true });
         await this.page.waitForTimeout(500);
- 
+
         if (action === 'continue') {
             await this.myBetsLocatorsRegistry.editContinueButton.click();
         } else {
@@ -169,13 +165,13 @@ export class MyBetsPage {
         }
         await this.page.waitForTimeout(1000);
     }
- 
+
     async attemptCashout(action: 'confirm' | 'cancel', index = 0) {
         await this.clickDetailView(index);
         await this.myBetsLocatorsRegistry.cashoutButton.nth(index).click();
         await this.page.waitForTimeout(800);
         await this.myBetsLocatorsRegistry.cashoutConfirmButton.click();
- 
+
         if (action === 'confirm') {
             await this.myBetsLocatorsRegistry.cashoutConfirmButton.click();
         } else {
@@ -185,61 +181,61 @@ export class MyBetsPage {
         }
         await this.page.waitForTimeout(800);
     }
- 
+
     async toggleHideLosses() {
         await this.myBetsLocatorsRegistry.hideLossesToggle.click();
         await this.page.waitForTimeout(5000);
     }
- 
+
     async clickNextPage() {
         await this.myBetsLocatorsRegistry.paginationNext.click();
     }
- 
+
     // ------------------------------------------------------------------
     // 3. Highlight & Accessor (Get) Methods
     // ------------------------------------------------------------------
- 
+
     async highlightOpenBetsTab() {
         await highlightElements(this.myBetsLocatorsRegistry.openBetsTab);
     }
-   
+
     async highlightSettledBetsTab() {
         await highlightElements(this.myBetsLocatorsRegistry.settledBetsTab);
     }
- 
+
     async highlightSearchBox() {
         await highlightElements(this.myBetsLocatorsRegistry.searchBox);
     }
- 
+
     async highlightDetailViewContainer(index = 0) {
         await highlightElements(this.myBetsLocatorsRegistry.detailViewContainer.nth(index));
     }
- 
+
     async highlightCashoutSuccess() {
         await highlightElements(this.myBetsLocatorsRegistry.cashoutSuccessMessage);
     }
-   
+
     async highlightHideLossesToggle() {
         await highlightElements(this.myBetsLocatorsRegistry.hideLossesToggle);
     }
- 
+
     getOpenBetsTab(): Locator {
         return this.myBetsLocatorsRegistry.openBetsTab;
     }
- 
+
     getSettledBetsTab(): Locator {
         return this.myBetsLocatorsRegistry.settledBetsTab;
     }
- 
+
     getCashoutSuccessMessage(): Locator {
         return this.myBetsLocatorsRegistry.cashoutSuccessMessage;
     }
 
-    async closePromotionPopup(){
+    async closePromotionPopup() {
         await this.myBetsLocatorsRegistry.closePromotionPopup.click();
     }
- 
- 
+
+
     // ------------------------------------------------------------------
     // Mock Data Function (Delete this when your Excel is ready)
     // ------------------------------------------------------------------

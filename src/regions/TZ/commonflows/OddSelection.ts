@@ -126,7 +126,7 @@ export async function OddsSelectionAbove(numberOflegs: number, minOdd: number, p
     try { await page.locator('#modal-close-btn').click({ timeout: 10000 }); } catch { }
 
     // ensure Upcoming tab is active
-    await page.locator('#sports-tabs div').filter({ hasText: 'Upcoming' }).click();
+    await page.locator('#sports-tabs div').filter({ hasText: 'Upcoming' }).first().click();
 
     // wait for API response
     const apiUrl = "https://en.betway.co.tz/sportsapi/br/v1/BetBook/Upcoming/?countryCode=TZ&sportId=soccer";

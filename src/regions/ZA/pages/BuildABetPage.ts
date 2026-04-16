@@ -47,12 +47,31 @@ export class BuildABetPage {
         // await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async login() {
-        await this.buildABetLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
-        await this.buildABetLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
+    // async login() {
+    //     await this.buildABetLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
+    //     await this.buildABetLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
+    //     await this.page.keyboard.press('Enter');
+    //     // await this.buildABetLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',  timeout: 30000});
+    //     // await this.buildABetLocatorsRegistry.closePromotionPopup.click();
+    //     await this.page.waitForLoadState('domcontentloaded');
+    // }
+    async Login() {
+        await this.buildABetLocatorsRegistry.mobileInput.fill(userData.user4.mobile);
+        await this.buildABetLocatorsRegistry.passwordInput.fill(userData.user4.password);
         await this.page.keyboard.press('Enter');
-        // await this.buildABetLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',  timeout: 30000});
-        // await this.buildABetLocatorsRegistry.closePromotionPopup.click();
+
+        // Try to close promotion popup ONLY if it appears
+        const popup = this.buildABetLocatorsRegistry.closePromotionPopup;
+
+        try {
+            await popup.waitFor({ state: 'visible', timeout: 9000 });
+            if (await popup.isVisible()) {
+                await popup.click();
+            }
+        } catch {
+            // Popup did not appear → ignore
+        }
+
         await this.page.waitForLoadState('domcontentloaded');
     }
 

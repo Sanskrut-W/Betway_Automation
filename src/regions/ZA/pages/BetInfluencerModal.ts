@@ -90,7 +90,7 @@ export class BetInfluencerModal extends BetslipPage {
 
     async toggleHambergerMenu() {
         await this.Login();
-        await this.page.waitForLoadState('domcontentloaded');
+        // await this.page.waitForLoadState('domcontentloaded');
         await this.BetInfluencerModalLocatorRegistry.hamburgerMenu.click();
     }
 
@@ -133,7 +133,7 @@ export class BetInfluencerModal extends BetslipPage {
     async User1PlaceBets(legsCount: number) {
         await this.gotoSportsPage();
         await this.LoginArgs(`${userData.user1.mobile}`, `${userData.user1.password}`);
-        await OddsSelectionAbove(legsCount,1.2, this.page);
+        await OddsSelectionAbove(legsCount, 1.2, this.page);
         await this.clickBetNowBtn();
         const bookingCode = await this.SportsPagelocatorRegistry.bookingCodeMessage.locator('..').innerText();
         console.log(bookingCode);

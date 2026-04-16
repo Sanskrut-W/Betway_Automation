@@ -202,7 +202,7 @@ test.describe('Betslip Module - ZA', () => {
   });
 
   test('T24-Multi- Verify "Win boost" amount calculation on betslip.', async ({ betslipPage, page }, testInfo) => {
-    await OddsSelectionAbove(2, 2, page);
+    await OddsSelectionAbove(3, 2, page);
     await betslipPage.verifyWinBoostCalculation();
     await ScreenshotHelper(page, screenshotDir, 'T24-betslip-Win-boost-amount-calculation-multi.png', testInfo);
   });
@@ -221,13 +221,13 @@ test.describe('Betslip Module - ZA', () => {
   // });
 
   test('T26-Multi-Verify Win Boost tool tip', async ({ betslipPage, page }, testInfo) => {
-    await OddsSelectionAbove(2, 3.57, page);
+    await OddsSelectionAbove(3, 1.21, page);
     await betslipPage.verifyWinBoostToolTip();
     await ScreenshotHelper(page, screenshotDir, 'T26-betslip-Win-boost-tool-tip-multi.png', testInfo);
   });
 
   test('T27-Multi-Verify Win Boost pop up window', async ({ betslipPage, page }, testInfo) => {
-    await OddsSelectionAbove(2, 1.21, page);
+    await OddsSelectionAbove(3, 1.21, page);
     await betslipPage.verifyWinBoostInfoIcon();
     await betslipPage.clickWinBoostInfoIcon();
     await page.waitForTimeout(2000);

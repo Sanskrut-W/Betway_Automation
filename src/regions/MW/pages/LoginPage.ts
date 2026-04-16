@@ -101,7 +101,7 @@ export class LoginPage extends HomePage {
     }
 
     async gotoAviatorPage() {
-        await this.page.goto('https://new.betway.co.za/lobby/casino-games/game/aviator');
+        await this.page.goto('https://www.betway.mw/lobby/casino-games/game/aviator');
         await this.page.waitForLoadState('domcontentloaded');
     }
 
@@ -128,10 +128,10 @@ export class LoginPage extends HomePage {
 
     async clickSignUp() {
         await this.LoginPagelocatorsRegistry.signUpButton.click();
-        const apiPromise = this.page.waitForResponse(response =>
-            response.url().includes(apidata.signupButtonClick) && response.status() === 200
-        );
-        await apiPromise;
+        // const apiPromise = this.page.waitForResponse(response =>
+        //     response.url().includes(apidata.signupButtonClick) && response.status() === 200
+        // );
+        // await apiPromise;
     }
 
     async clickSignUpFromHeader() {

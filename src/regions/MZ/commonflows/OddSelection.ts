@@ -92,32 +92,6 @@ export async function LiveOddsSelection(numberOfLegs: number, page: import('@pla
     await page.waitForTimeout(5000);
 }
 
-// export async function OddsSelectionAbove(numberOflegs: number, minOdd: number, page: import('@playwright/test').Page) {
-//     await page.reload({ waitUntil: 'domcontentloaded' });
-//     await page.locator('#modal-close-btn').click();
-//     await page.locator('#sports-tabs div').filter({ hasText: 'Upcoming' }).click();
-//     const apiUrl = "https://new.betway.co.za/sportsapi/br/v1/BetBook/Upcoming/?countryCode=ZA&sportId=soccer";
-//     const response = await page.waitForResponse(
-//         (resp: { url: () => string; status: () => number }) =>
-//             resp.url().startsWith(apiUrl) && resp.status() === 200);
-//     const data = await response.json();
-//     let selected = 0;
-//     for (let i = 0; i < data.events?.length; i++) {
-//         if (selected >= numberOflegs) break;
-//         const eventId = data.events[i]?.eventId;
-//         if (!eventId) continue;
-//         const knownOutcomeId = `${eventId}11`;
-//         const priceObj = data.prices?.find((p: any) => p.outcomeId === knownOutcomeId && parseFloat(p.priceDecimal) > minOdd);
-//         if (!priceObj) continue;
-//         const oddLocator = page.locator(`//div[@id="${eventId}"]`).locator('div[price]').getByText(`${priceObj.priceDecimal}`, { exact: false }).first();
-//         await oddLocator.waitFor({ state: 'visible', timeout: 10000 });
-//         await oddLocator.scrollIntoViewIfNeeded();
-//         await oddLocator.click();
-//         selected++;
-//         await page.waitForTimeout(1000);
-//     }
-// }
-
 export async function OddsSelectionAbove(numberOflegs: number, minOdd: number, page: import('@playwright/test').Page) {
     // stabilize page
     await page.reload({ waitUntil: 'domcontentloaded' });
@@ -126,10 +100,10 @@ export async function OddsSelectionAbove(numberOflegs: number, minOdd: number, p
     try { await page.locator('#modal-close-btn').click({ timeout: 10000 }); } catch { }
 
     // ensure Upcoming tab is active
-    await page.locator('#sports-tabs div').filter({ hasText: 'Upcoming' }).click();
+    await page.locator('#sports-tabs div').filter({ hasText: 'Upcoming' }).first().click();
 
     // wait for API response
-    const apiUrl = "https://en.betway.co.mz/sportsapi/br/v1/BetBook/Upcoming/?countryCode=MZ&sportId=soccer";
+    const apiUrl = "https://feeds-roa2.betwayafrica.com/br/_apis/sport/v1/BetBook/Upcoming/?countryCode=MZ&sportId=soccer";
     const response = await page.waitForResponse((resp: { url: () => string; status: () => number; }) =>
         resp.url().startsWith(apiUrl) && resp.status() === 200);
     const data = await response.json();

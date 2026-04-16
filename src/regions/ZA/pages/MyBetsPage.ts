@@ -57,13 +57,32 @@ export class MyBetsPage {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async login() {
-        await this.myBetsLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
-        await this.myBetsLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
+    // async login() {
+    //     await this.myBetsLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
+    //     await this.myBetsLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
+    //     await this.page.keyboard.press('Enter');
+    //     // await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
+    //     // await this.myBetsLocatorsRegistry.closePromotionPopup.click();
+    //     // await this.closePromotionPopup();
+    //     await this.page.waitForLoadState('domcontentloaded');
+    // }
+    async Login() {
+        await this.myBetsLocatorsRegistry.mobileInput.fill(userData.user4.mobile);
+        await this.myBetsLocatorsRegistry.passwordInput.fill(userData.user4.password);
         await this.page.keyboard.press('Enter');
-        // await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
-        // await this.myBetsLocatorsRegistry.closePromotionPopup.click();
-        // await this.closePromotionPopup();
+
+        // Try to close promotion popup ONLY if it appears
+        const popup = this.myBetsLocatorsRegistry.closePromotionPopup;
+
+        try {
+            await popup.waitFor({ state: 'visible', timeout: 9000 });
+            if (await popup.isVisible()) {
+                await popup.click();
+            }
+        } catch {
+            // Popup did not appear → ignore
+        }
+
         await this.page.waitForLoadState('domcontentloaded');
     }
 

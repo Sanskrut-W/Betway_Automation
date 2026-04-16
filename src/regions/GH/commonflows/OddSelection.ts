@@ -220,10 +220,10 @@ export async function OddsSelectionAbove(numberOflegs: number, minOdd: number, p
     // try { await page.locator('#modal-close-btn').click({ timeout: 10000 }); } catch {}
 
     // ensure Upcoming tab is active
-    await page.locator('#sports-tabs div').filter({ hasText: 'Upcoming' }).click();
+    await page.locator('#sports-tabs div').filter({ hasText: 'Upcoming' }).first().click();
 
     // wait for API response
-    const apiUrl = "https://www.betway.com.gh/sportsapi/br/v1/BetBook/Upcoming/?countryCode=GH&sportId=socce";
+    const apiUrl = "https://www.betway.com.gh/sportsapi/br/v1/BetBook/Upcoming/?countryCode=GH&sportId=soccer";
     const response = await page.waitForResponse((resp: { url: () => string; status: () => number; }) =>
         resp.url().startsWith(apiUrl) && resp.status() === 200);
     const data = await response.json();
