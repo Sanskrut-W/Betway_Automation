@@ -33,7 +33,7 @@ export class HeaderPage extends HomePage {
       closeHamburgerMenu: getLocator(this.page, configs["closeHamburgerMenu"]),
       quickLinks: getLocator(this.page, configs["quickLinks"]),
       myAccount: getLocator(this.page, configs["myAccount"]),
-      bettingRules: getLocator(this.page, configs["bettingRulesMZ"]).nth(0),
+      bettingRules: getLocator(this.page, configs["bettingRulesMZ"]),
       statistics: getLocator(this.page, configs["statistics"]),
       oddsFormat: getLocator(this.page, configs["oddsFormat"]),
       // countryCode: getLocator(this.page, configs["countryCode"]),
@@ -79,6 +79,9 @@ export class HeaderPage extends HomePage {
       notificationBellIcon: getLocator(this.page, configs["notificationBellIcon"]),
       allBalanceTxt: getLocator(this.page, configs["allBalanceTxt"]),
       liveChatIcon: getLocator(this.page, configs["liveChatIcon"]),
+      insiderBlog: getLocator(this.page, configs["insiderBlog"]),
+      betwayScoresApp: getLocator(this.page, configs["betwayScoresApp"]),
+      howTo: getLocator(this.page, configs["howTo"]),
 
 
 
@@ -121,16 +124,40 @@ export class HeaderPage extends HomePage {
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.signUpButtonfromHamburger);
   }
 
-  async verifyQuickLinksDropdown() {
+  async verifyStatistics() {
     await this.clickHamburgerMenu();
-    await this.HeaderPageLocatorsRegistry.quickLinks.waitFor({ state: 'visible', timeout: 15000 });
-    await highlightElementBorder(this.HeaderPageLocatorsRegistry.quickLinks);
+    await this.HeaderPageLocatorsRegistry.statistics.waitFor({ state: 'visible', timeout: 15000 });
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.statistics);
+  }
+
+  async verifyInsiderBlog() {
+    await this.clickHamburgerMenu();
+    await this.HeaderPageLocatorsRegistry.insiderBlog.waitFor({ state: 'visible', timeout: 15000 });
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.insiderBlog);
+  }
+
+  async verifyBetwayScoresApp() {
+    await this.clickHamburgerMenu();
+    await this.HeaderPageLocatorsRegistry.betwayScoresApp.waitFor({ state: 'visible', timeout: 15000 });
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.betwayScoresApp);
   }
 
   async verifyBettingRulesOption() {
     await this.clickHamburgerMenu();
     await this.HeaderPageLocatorsRegistry.bettingRules.scrollIntoViewIfNeeded();
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.bettingRules);
+  }
+
+  async verifyHowToOption() {
+    await this.clickHamburgerMenu();
+    // await this.HeaderPageLocatorsRegistry.howTo.scrollIntoViewIfNeeded();
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.howTo);
+  }
+
+  async verifyResponsibleGamingOption() {
+    await this.clickHamburgerMenu();
+    await this.HeaderPageLocatorsRegistry.responsibleGaming.scrollIntoViewIfNeeded();
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.responsibleGaming);
   }
 
   async verifyStatisticsOption() {
@@ -309,8 +336,20 @@ export class HeaderPage extends HomePage {
     await this.HeaderPageLocatorsRegistry.bettingRules.click();
   }
 
+  async clickHowTo() {
+    await this.HeaderPageLocatorsRegistry.howTo.click();
+  }
+
   async clickStatistics() {
     await this.HeaderPageLocatorsRegistry.statistics.click();
+  }
+
+  async clickInsiderBlog() {
+    await this.HeaderPageLocatorsRegistry.insiderBlog.click();
+  }
+
+  async clickBetwayScoresApp() {
+    await this.HeaderPageLocatorsRegistry.betwayScoresApp.click();
   }
 
   // Login Methods
@@ -396,7 +435,7 @@ export class HeaderPage extends HomePage {
   }
 
   async clickResponsibleGaming() {
-    await this.HeaderPageLocatorsRegistry.responsibleGaming.click();
+    await this.HeaderPageLocatorsRegistry.responsibleGaming.click({ force: true });
   }
 
   async clickDocumentVerification() {

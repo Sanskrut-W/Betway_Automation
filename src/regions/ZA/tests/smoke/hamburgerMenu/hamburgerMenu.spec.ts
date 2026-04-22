@@ -17,32 +17,21 @@ test.describe('Hamburger Module Tests', () => {
         await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T2-hamburgerMenu.png', testInfo);
     });
 
-    // test('T2-Veify presence and functionality of all Balance fields in Hamburger Menu', async ({ hamburgerMenuPage }, testInfo) => {
-    //     await hamburgerMenuPage.verifyAllBalanceFields();
-    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T2-balanceFields.png', testInfo);
-    // });
-
-    // test('T3-Verify Refresh Balance button is visible and clickable in Hamburger Menu', async ({ hamburgerMenuPage }, testInfo) => {
-    //     await hamburgerMenuPage.verifyRefreshBalance();
-    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T3-refreshBalanceButton.png', testInfo);
-    // });
-
     test('13-Verify functionality of Hide/Show balance button in Hamburger', async ({ hamburgerMenuPage }, testInfo) => {
         await hamburgerMenuPage.verifyEyeButton2();
         await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T15-eyeButton.png', testInfo);
     });
-
-    //  test('14-Verify functionality of close Hamburger button', async ({ hamburgerMenuPage }, testInfo) => {
-    //     await hamburgerMenuPage.verifyCloseHamburgerBtn();
-    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T15-eyeButton.png', testInfo);
-    // });
 
     test('23-Verify My account drop down is visible and clickable in Hamburger Menu', async ({ hamburgerMenuPage }, testInfo) => {
         await hamburgerMenuPage.verifyAndClickMyAccount();
         await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T31-myAccountClicked-loggedin.png', testInfo);
     });
 
-
+    test('24-Verify Deposited Funds option functionality inside Hamburger menu.', async ({ hamburgerMenuPage }, testInfo) => {
+        await hamburgerMenuPage.Login();
+        await hamburgerMenuPage.clickHamburgerMenu();
+        await hamburgerMenuPage.verifyAndClickDepositButton();
+    });
 
     test.describe('Hamburger Menu - My Account Options Tests', () => {
 
@@ -105,11 +94,11 @@ test.describe('Hamburger Module Tests', () => {
             // await hamburgerMenuPage.clickCloseMyAccountOptions();
         });
 
-        test('33-Verify Update Details option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-            await hamburgerMenuPage.verifyAndClickUpdateDetails();
-            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'UpdateDetails.png', testInfo);
-            // await hamburgerMenuPage.clickCloseMyAccountOptions();
-        });
+        // test('33-Verify Update Details option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+        //     await hamburgerMenuPage.verifyAndClickUpdateDetails();
+        //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'UpdateDetails.png', testInfo);
+        //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        // });
 
         test('34-Verify Responsible Gaming option functionality', async ({ hamburgerMenuPage }, testInfo) => {
             await hamburgerMenuPage.verifyAndClickResponsibleGaming();
@@ -136,6 +125,7 @@ test.describe('Hamburger Module Tests', () => {
         });
 
         test('38-Verify Change Password option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.clickMyAccount();
             await hamburgerMenuPage.verifyAndClickChangePassword();
             await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'ChangePassword.png', testInfo);
             // await hamburgerMenuPage.clickCloseMyAccountOptions();
@@ -152,28 +142,68 @@ test.describe('Hamburger Module Tests', () => {
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
     });
 
-    test('4-Verify Quick Links drop down is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyQuickLinksDropdown();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks1.png', testInfo);
-        await headerPage.clickQuickLinks();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks2.png', testInfo);
-    });
-
     test('5-Verify Betting Rules option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
         await headerPage.verifyAndClickBettingRulesWithoutLogin();
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-bettingRulesClicked.png', testInfo);
     });
 
-    test('6-Verify Statistics option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyAndClickStatisticsWithoutLogin();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-statistics.png', testInfo);
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-statisticsClicked.png', testInfo);
-    });
 
     test('8-Verify Odds Format button with Decimal & Fractional options is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
         await headerPage.verifyOddsFormat();
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T7-oddsFormat.png', testInfo);
     });
+
+    test('4-Verify Statistics is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyStatistics();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-Statistics.png', testInfo);
+        await headerPage.clickStatistics();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-Statistics2.png', testInfo);
+    });
+
+    test('5-Verify Insider Blog is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyInsiderBlog();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-InsiderBlog.png', testInfo);
+        await headerPage.clickInsiderBlog();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-InsiderBlog2.png', testInfo);
+    });
+
+    test('6-Verify Betway Scores App is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyBetwayScoresApp();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-BetwayScoresApp.png', testInfo);
+        await headerPage.clickBetwayScoresApp();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-BetwayScoresApp2.png', testInfo);
+    });
+
+    test('8-Verify How to is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyHowToOption();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T8-HowTo.png', testInfo);
+        await headerPage.clickHowTo();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T8-HowTo2.png', testInfo);
+    });
+
+    test('9-Verify Responsible gaming is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyResponsibleGamingOption();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming.png', testInfo);
+        await headerPage.clickResponsibleGaming();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming2.png', testInfo);
+    });
+
+
+
+    // test('T2-Veify presence and functionality of all Balance fields in Hamburger Menu', async ({ hamburgerMenuPage }, testInfo) => {
+    //     await hamburgerMenuPage.verifyAllBalanceFields();
+    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T2-balanceFields.png', testInfo);
+    // });
+
+    // test('T3-Verify Refresh Balance button is visible and clickable in Hamburger Menu', async ({ hamburgerMenuPage }, testInfo) => {
+    //     await hamburgerMenuPage.verifyRefreshBalance();
+    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T3-refreshBalanceButton.png', testInfo);
+    // });
+
+    //  test('14-Verify functionality of close Hamburger button', async ({ hamburgerMenuPage }, testInfo) => {
+    //     await hamburgerMenuPage.verifyCloseHamburgerBtn();
+    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T15-eyeButton.png', testInfo);
+    // });
 
 
     // // // With Login
