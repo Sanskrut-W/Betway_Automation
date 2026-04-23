@@ -36,7 +36,7 @@ test.describe('Header Module Tests', () => {
     //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T15-eyeButton.png', testInfo);
     // });
 
-        test('23-Verify My account drop down is visible and clickable in Hamburger Menu', async ({ hamburgerMenuPage }, testInfo) => {
+    test('23-Verify My account drop down is visible and clickable in Hamburger Menu', async ({ hamburgerMenuPage }, testInfo) => {
         await hamburgerMenuPage.verifyAndClickMyAccount();
         await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'T31-myAccountClicked-loggedin.png', testInfo);
     });
@@ -48,119 +48,113 @@ test.describe('Header Module Tests', () => {
     });
 
     test.describe('Hamburger Menu - My Account Options Tests', () => {
- 
 
-    test.beforeEach(async ({ hamburgerMenuPage }) => {
-        // await hamburgerMenuPage.goto();
-        await hamburgerMenuPage.Login();
-         await hamburgerMenuPage.clickHamburgerMenu();
+
+        test.beforeEach(async ({ hamburgerMenuPage }) => {
+            // await hamburgerMenuPage.goto();
+            await hamburgerMenuPage.Login();
+            await hamburgerMenuPage.clickHamburgerMenu();
+        });
+
+        test('24-Verify Deposited Funds option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickDepositButton();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'DepositFund.png', testInfo);
+
+        });
+
+        test('25-Verify Withdraw Funds option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickWithdrawFund();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'WithdrawFund.png', testInfo);
+        });
+
+        test('26-Verify My Bets option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickMyBets();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'MyBets.png', testInfo);
+            // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        });
+
+        test('27-Verify My Casino Big Win option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickMyCasinoBigWin();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'CasinoBigWin.png', testInfo);
+            // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        });
+
+        test('28-Verify Bonus Summary option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickBonusSummary();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'BonusSummary.png', testInfo);
+            // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        });
+
+        test('29-Verify Transactions History option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickTransactionsHistory();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'TransactionHistory.png', testInfo);
+            // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        });
+
+        // test('30-Verify My Coupons option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+        //     await hamburgerMenuPage.verifyAndClickMyCoupons();
+        //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'MyCoupons.png', testInfo);
+        //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        // });
+
+        test('31-Verify Bet Influencer option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickBetInfluencer();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'BetInfluencer.png', testInfo);
+            // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        });
+
+        test('32-Verify Promo Vouchers option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickPromoVouchers();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'PromoVouchers.png', testInfo);
+            // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        });
+
+        // test('33-Verify Update Details option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+        //     await hamburgerMenuPage.verifyAndClickUpdateDetails();
+        //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'UpdateDetails.png', testInfo);
+        //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        // });
+
+        test('34-Verify Responsible Gaming option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickResponsibleGaming();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'ResponsibleGaming.png', testInfo);
+            // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        });
+
+        // test('35-Verify Document Verification option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+        //     await hamburgerMenuPage.verifyAndClickDocumentVerification();
+        //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'DocVerification.png', testInfo);
+        //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        // });
+
+        test('36-Verify Betway Benefits option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickBetwayBenefits();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'BetwayBenefits.png', testInfo);
+            // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        });
+
+        test('37-Verify Betway Rewards option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickBetwayRewards();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'BetwayRewards.png', testInfo);
+            // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        });
+
+        test('38-Verify Change Password option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.clickMyAccount();
+            await hamburgerMenuPage.verifyAndClickChangePassword();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'ChangePassword.png', testInfo);
+            // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        });
+
+        test('39-Verify Logout functionality', async ({ hamburgerMenuPage }, testInfo) => {
+            await hamburgerMenuPage.verifyAndClickLogout();
+            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'Logout.png', testInfo);
+            // Note: We do not click close options here as logout redirects us
+        });
     });
-
-    test('24-Verify Deposited Funds option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickDepositButton();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'DepositFund.png', testInfo);
-        
-    });
-
-    test('25-Verify Withdraw Funds option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickWithdrawFund();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'WithdrawFund.png', testInfo);
-    });
-
-    test('26-Verify My Bets option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickMyBets();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'MyBets.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('27-Verify My Casino Big Win option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickMyCasinoBigWin();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'CasinoBigWin.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('28-Verify Bonus Summary option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickBonusSummary();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'BonusSummary.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('29-Verify Transactions History option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickTransactionsHistory();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'TransactionHistory.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    // test('30-Verify My Coupons option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-    //     await hamburgerMenuPage.verifyAndClickMyCoupons();
-    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'MyCoupons.png', testInfo);
-    //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    // });
-
-    test('31-Verify Bet Influencer option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickBetInfluencer();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'BetInfluencer.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('32-Verify Promo Vouchers option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickPromoVouchers();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'PromoVouchers.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('33-Verify Update Details option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickUpdateDetails();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'UpdateDetails.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('34-Verify Responsible Gaming option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickResponsibleGaming();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'ResponsibleGaming.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('35-Verify Document Verification option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickDocumentVerification();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'DocVerification.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('36-Verify Betway Benefits option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickBetwayBenefits();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'BetwayBenefits.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('37-Verify Betway Rewards option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickBetwayRewards();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'BetwayRewards.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('38-Verify Change Password option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickChangePassword();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'ChangePassword.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
-
-    test('39-Verify Logout functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickLogout();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'Logout.png', testInfo);
-        // Note: We do not click close options here as logout redirects us
-    });
-});
     test('3-Verify login and sign up button in hamburger window are visible', async ({ headerPage }, testInfo) => {
         await headerPage.verifyLoginAndSignUpButtons();
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
-    });
-
-    test('4-Verify Quick Links drop down is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyQuickLinksDropdown();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks1.png', testInfo);
-        await headerPage.clickQuickLinks();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks2.png', testInfo);
     });
 
     test('5-Verify Betting Rules option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
@@ -168,22 +162,51 @@ test.describe('Header Module Tests', () => {
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-bettingRulesClicked.png', testInfo);
     });
 
-    test('6-Verify Statistics option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyAndClickStatisticsWithoutLogin();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-statistics.png', testInfo);
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-statisticsClicked.png', testInfo);
-    });
-
-    // // // test('7-Verify country code +27 is visible on Homepage', async ({ headerPage }, testInfo) => {
-    // // //     await headerPage.verifyCountryCode();
-    // // //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T10-countryCode.png', testInfo);
-
-    // // // });
 
     test('8-Verify Odds Format button with Decimal & Fractional options is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
         await headerPage.verifyOddsFormat();
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T7-oddsFormat.png', testInfo);
     });
+
+    test('4-Verify Statistics is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyStatistics();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-Statistics.png', testInfo);
+        await headerPage.clickStatistics();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-Statistics2.png', testInfo);
+    });
+
+    test('5-Verify Insider Blog is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyInsiderBlog();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-InsiderBlog.png', testInfo);
+        await headerPage.clickInsiderBlog();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-InsiderBlog2.png', testInfo);
+    });
+
+    test('6-Verify Betway Scores App is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyBetwayScoresApp();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-BetwayScoresApp.png', testInfo);
+        await headerPage.clickBetwayScoresApp();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-BetwayScoresApp2.png', testInfo);
+    });
+
+    test('8-Verify How to is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyHowToOption();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T8-HowTo.png', testInfo);
+        await headerPage.clickHowTo();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T8-HowTo2.png', testInfo);
+    });
+
+    test('9-Verify Responsible gaming is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyResponsibleGamingOption();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming.png', testInfo);
+        await headerPage.clickResponsibleGaming();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming2.png', testInfo);
+    });
+    // // // test('7-Verify country code +27 is visible on Homepage', async ({ headerPage }, testInfo) => {
+    // // //     await headerPage.verifyCountryCode();
+    // // //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T10-countryCode.png', testInfo);
+
+    // // // });
 
 
 

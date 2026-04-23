@@ -79,6 +79,9 @@ export class HeaderPage extends HomePage {
       notificationBellIcon: getLocator(this.page, configs["notificationBellIcon"]),
       allBalanceTxt: getLocator(this.page, configs["allBalanceTxt"]),
       liveChatIcon: getLocator(this.page, configs["liveChatIcon"]),
+      insiderBlog: getLocator(this.page, configs["insiderBlog"]),
+      betwayScoresApp: getLocator(this.page, configs["betwayScoresApp"]),
+      howTo: getLocator(this.page, configs["howTo"]),
 
 
 
@@ -137,6 +140,35 @@ export class HeaderPage extends HomePage {
     await this.clickHamburgerMenu();
     await this.HeaderPageLocatorsRegistry.statistics.scrollIntoViewIfNeeded();
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.statistics);
+  }
+
+  async verifyStatistics() {
+    await this.clickHamburgerMenu();
+    await this.HeaderPageLocatorsRegistry.statistics.waitFor({ state: 'visible', timeout: 15000 });
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.statistics);
+  }
+
+  async verifyInsiderBlog() {
+    await this.clickHamburgerMenu();
+    await this.HeaderPageLocatorsRegistry.insiderBlog.waitFor({ state: 'visible', timeout: 15000 });
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.insiderBlog);
+  }
+
+  async verifyBetwayScoresApp() {
+    await this.clickHamburgerMenu();
+    await this.HeaderPageLocatorsRegistry.betwayScoresApp.waitFor({ state: 'visible', timeout: 15000 });
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.betwayScoresApp);
+  }
+
+  async verifyHowToOption() {
+    await this.clickHamburgerMenu();
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.howTo);
+  }
+
+  async verifyResponsibleGamingOption() {
+    await this.clickHamburgerMenu();
+    await this.HeaderPageLocatorsRegistry.responsibleGaming.scrollIntoViewIfNeeded();
+    await highlightElementBorder(this.HeaderPageLocatorsRegistry.responsibleGaming);
   }
 
   async verifyOddsFormat() {
@@ -311,6 +343,18 @@ export class HeaderPage extends HomePage {
 
   async clickStatistics() {
     await this.HeaderPageLocatorsRegistry.statistics.click();
+  }
+
+  async clickInsiderBlog() {
+    await this.HeaderPageLocatorsRegistry.insiderBlog.click();
+  }
+
+  async clickBetwayScoresApp() {
+    await this.HeaderPageLocatorsRegistry.betwayScoresApp.click();
+  }
+
+  async clickHowTo() {
+    await this.HeaderPageLocatorsRegistry.howTo.click();
   }
 
   // Login Methods
