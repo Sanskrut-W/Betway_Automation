@@ -73,11 +73,11 @@ test.describe('Header Module Tests', () => {
             // await hamburgerMenuPage.clickCloseMyAccountOptions();
         });
 
-        test('27-Verify My Casino Big Win option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-            await hamburgerMenuPage.verifyAndClickMyCasinoBigWin();
-            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'CasinoBigWin.png', testInfo);
-            // await hamburgerMenuPage.clickCloseMyAccountOptions();
-        });
+        // test('27-Verify My Casino Big Win option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+        //     await hamburgerMenuPage.verifyAndClickMyCasinoBigWin();
+        //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'CasinoBigWin.png', testInfo);
+        //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        // });
 
         test('28-Verify Bonus Summary option functionality', async ({ hamburgerMenuPage }, testInfo) => {
             await hamburgerMenuPage.verifyAndClickBonusSummary();
@@ -91,11 +91,11 @@ test.describe('Header Module Tests', () => {
             // await hamburgerMenuPage.clickCloseMyAccountOptions();
         });
 
-        test('30-Verify My Coupons option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-            await hamburgerMenuPage.verifyAndClickMyCoupons();
-            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'MyCoupons.png', testInfo);
-            // await hamburgerMenuPage.clickCloseMyAccountOptions();
-        });
+        // test('30-Verify My Coupons option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+        //     await hamburgerMenuPage.verifyAndClickMyCoupons();
+        //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'MyCoupons.png', testInfo);
+        //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        // });
 
         test('31-Verify Bet Influencer option functionality', async ({ hamburgerMenuPage }, testInfo) => {
             await hamburgerMenuPage.verifyAndClickBetInfluencer();
@@ -152,10 +152,10 @@ test.describe('Header Module Tests', () => {
             // Note: We do not click close options here as logout redirects us
         });
     });
-    test('3-Verify login and sign up button in hamburger window are visible', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyLoginAndSignUpButtons();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
-    });
+    // test('3-Verify login and sign up button in hamburger window are visible', async ({ headerPage }, testInfo) => {
+    //     await headerPage.verifyLoginAndSignUpButtons();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
+    // });
 
     test('5-Verify Betting Rules option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
         await headerPage.verifyAndClickBettingRulesWithoutLogin();

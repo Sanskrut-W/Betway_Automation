@@ -81,7 +81,7 @@ export class HeaderPage extends HomePage {
       liveChatIcon: getLocator(this.page, configs["liveChatIcon"]),
       insiderBlog: getLocator(this.page, configs["insiderBlog"]),
       betwayScoresApp: getLocator(this.page, configs["betwayScoresApp"]),
-      howTo: getLocator(this.page, configs["howTo"]),
+      howTo: this.page.locator('a[href="/how-to-bet"]').locator('..'),
 
 
 

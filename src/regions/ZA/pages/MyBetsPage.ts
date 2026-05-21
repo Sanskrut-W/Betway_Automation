@@ -66,7 +66,7 @@ export class MyBetsPage {
     //     // await this.closePromotionPopup();
     //     await this.page.waitForLoadState('domcontentloaded');
     // }
-    async Login() {
+    async login() {
         await this.myBetsLocatorsRegistry.mobileInput.fill(userData.user4.mobile);
         await this.myBetsLocatorsRegistry.passwordInput.fill(userData.user4.password);
         await this.page.keyboard.press('Enter');

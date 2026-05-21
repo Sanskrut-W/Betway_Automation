@@ -3,6 +3,8 @@ import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelRea
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElements } from '../../Common-Flows/HighlightElements';
 import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
+import { OddsSelection } from '../../Common-Flows/OddSelection';
+import { OddsSelectionAbove } from '../commonflows/OddSelection';
 
 const userData = require('../json-data/userData.json');
 const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx";
@@ -35,7 +37,7 @@ export class TransactionHistoryPage {
 
             accountMain: getLocator(this.page, configs['accountMain']),
 
-            datePicker: getLocator(this.page, configs['datePicker']),
+            datePicker: getLocator(this.page, configs['datePicker']).nth(1),
             dateDialog: getLocator(this.page, configs['dateDialog']),
 
             transactionIDButton: getLocator(this.page, configs['transactionIDButton']),
@@ -120,13 +122,6 @@ export class TransactionHistoryPage {
     }
 
     async placeBet() {
-        await this.locatorsRegistry.smartPicksButton.click();
-        await this.locatorsRegistry.smartPicks5.click();
-        try {
-            await this.locatorsRegistry.multipleBetsButton.click();
-        } catch (err) {
-            console.warn('Betslip Multi tab not clickable:', err);
-        }
         await this.locatorsRegistry.gotitButton?.click().catch(() => { /* Ignore if not present */ });
         await this.locatorsRegistry.betNowButton.scrollIntoViewIfNeeded();
         await this.locatorsRegistry.betNowButton.click();

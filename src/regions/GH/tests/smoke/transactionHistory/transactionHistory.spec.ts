@@ -1,4 +1,5 @@
 // npx playwright test src/regions/ZA/tests/smoke/transactionHistory/transactionHistory.spec.ts --config=playwright.ZA.config.ts --headed
+import { OddsSelectionAbove } from '../../../commonflows/OddSelection';
 import { test } from '../../../fixtures/MasterFixtureFile';
 import path from 'path';
 
@@ -84,7 +85,8 @@ test.describe('Transaction History Module Tests', () => {
     });
 
     // T9: Bet Now to Transaction History
-    test('T9 - Verify Bet Now to Transaction History', async ({ transactionHistoryPage }, testInfo) => {
+    test('T9 - Verify Bet Now to Transaction History', async ({ transactionHistoryPage, page }, testInfo) => {
+        await OddsSelectionAbove(2, 1, page);
         await transactionHistoryPage.placeBet();
         await transactionHistoryPage.navigateToTransactionHistory();
         await transactionHistoryPage.page.waitForTimeout(1000);

@@ -222,7 +222,7 @@ export const test = base.extend<PageFixtures>({
     await bookABetPage.goto();
     await use(bookABetPage);
   },
-  
+
   betSaverPage: async ({ page }, use) => {
     await page.setViewportSize({ width: 1300, height: 780 });
     const betSaverPage = new BetSaverPage(page);

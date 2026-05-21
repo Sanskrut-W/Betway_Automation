@@ -84,7 +84,8 @@ export async function OddsSelectionAbove(numberOflegs: number, minOdd: number, p
     await page.locator('#sports-tabs div').filter({ hasText: 'Upcoming' }).first().click();
 
     // wait for API response
-    const apiUrl = "https://www.betway.co.bw/sportsapi/br/v1/BetBook/Upcoming/?countryCode=BW&sportId=soccer";
+    const apiUrl = "https://feeds-roa2.betwayafrica.com/br/_apis/sport/v1/BetBook/Upcoming/?countryCode=BW&sportId=soccer";
+
     const response = await page.waitForResponse((resp: { url: () => string; status: () => number; }) =>
         resp.url().startsWith(apiUrl) && resp.status() === 200);
     const data = await response.json();

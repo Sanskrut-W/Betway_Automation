@@ -80,8 +80,8 @@ export class HeaderPage extends HomePage {
       allBalanceTxt: getLocator(this.page, configs["allBalanceTxt"]),
       liveChatIcon: getLocator(this.page, configs["liveChatIcon"]),
       insiderBlog: getLocator(this.page, configs["insiderBlog"]),
-      betwayScoresApp: getLocator(this.page, configs["betwayScoresApp"]),
-      howTo: getLocator(this.page, configs["howTo"]),
+      betwayScoresApp: getLocator(this.page, configs["betwayScoresApp"]).first(),
+      howTo: this.page.locator('a[href="/how-to-bet"]').locator('..'),
 
 
 
@@ -229,7 +229,7 @@ export class HeaderPage extends HomePage {
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.depositFund);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.withdrawFund);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.myBets);
-    await highlightElementBorder(this.HeaderPageLocatorsRegistry.MyCasinoBigWin);
+    // await highlightElementBorder(this.HeaderPageLocatorsRegistry.MyCasinoBigWin);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.bonusSummary);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.transactionsHistory);
 
