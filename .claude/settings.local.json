@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($userPath = [System.Environment]::GetEnvironmentVariable\\(\"PATH\", \"User\"\\); Write-Host \"User PATH:\"; $userPath -split \";\" | Select-String \"claude\" -SimpleMatch)",
+      "Bash(ls \"/c/Users/SW115406/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/claude-code/2.1.142/\")",
+      "Read(//c/Users/SW115406/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/claude-code/2.1.142//**)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\SW115406\\\\Desktop\\\\Betway\\\\Betway-Automation\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(xargs -I {} basename {})"
+    ]
+  }
+}

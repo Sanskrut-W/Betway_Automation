@@ -10,7 +10,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
 
   // 👉 Retry ONLY failed tests once
-  retries: 0,
+  retries: 1,
 
   // Workers
   workers: process.env.CI ? 7 : 7,

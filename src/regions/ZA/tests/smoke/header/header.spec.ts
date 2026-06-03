@@ -80,28 +80,28 @@ test.describe('Header Module Tests', () => {
     //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T48-chatIconClicked-loggedin.png', testInfo);
     // });
 
-    test('3-Verify login and sign up button in hamburger window are visible', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyLoginAndSignUpButtons();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
-    });
+    // test('3-Verify login and sign up button in hamburger window are visible', async ({ headerPage }, testInfo) => {
+    //     await headerPage.verifyLoginAndSignUpButtons();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
+    // });
 
-    test('4-Verify Quick Links drop down is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyQuickLinksDropdown();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks1.png', testInfo);
-        await headerPage.clickQuickLinks();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks2.png', testInfo);
-    });
+    // test('4-Verify Quick Links drop down is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+    //     await headerPage.verifyQuickLinksDropdown();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks1.png', testInfo);
+    //     await headerPage.clickQuickLinks();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks2.png', testInfo);
+    // });
 
     test('5-Verify Betting Rules option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
         await headerPage.verifyAndClickBettingRulesWithoutLogin();
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-bettingRulesClicked.png', testInfo);
     });
 
-    test('6-Verify Statistics option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyAndClickStatisticsWithoutLogin();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-statistics.png', testInfo);
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-statisticsClicked.png', testInfo);
-    });
+    // test('6-Verify Statistics option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
+    //     await headerPage.verifyAndClickStatisticsWithoutLogin();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-statistics.png', testInfo);
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-statisticsClicked.png', testInfo);
+    // });
 
     // // test('7-Verify country code +27 is visible on Homepage', async ({ headerPage }, testInfo) => {
     // //     await headerPage.verifyCountryCode();

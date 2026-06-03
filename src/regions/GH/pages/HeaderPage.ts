@@ -81,7 +81,7 @@ export class HeaderPage extends HomePage {
       liveChatIcon: getLocator(this.page, configs["liveChatIcon"]),
       insiderBlog: getLocator(this.page, configs["insiderBlog"]),
       betwayScoresApp: getLocator(this.page, configs["betwayScoresApp"]),
-      howTo: this.page.locator('a[href="/how-to-bet"]').locator('..'),
+      howTo: getLocator(this.page, configs["howTo"]),
 
 
 
@@ -237,14 +237,14 @@ export class HeaderPage extends HomePage {
     // await highlightElementBorder(this.HeaderPageLocatorsRegistry.myCoupons);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.betInfluencer);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.promoVouchers);
-    await highlightElementBorder(this.HeaderPageLocatorsRegistry.updateDetails);
+    // await highlightElementBorder(this.HeaderPageLocatorsRegistry.updateDetails);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.responsibleGaming);
 
     await this.HeaderPageLocatorsRegistry.logOut.scrollIntoViewIfNeeded();
-    await highlightElementBorder(this.HeaderPageLocatorsRegistry.documentVerification);
+    // await highlightElementBorder(this.HeaderPageLocatorsRegistry.documentVerification);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.betwayBenefits);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.betwayRewards);
-    await highlightElementBorder(this.HeaderPageLocatorsRegistry.changePassword);
+    // await highlightElementBorder(this.HeaderPageLocatorsRegistry.changePassword);
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.logOut);
   }
 

@@ -26,4 +26,14 @@ src/regions/ZA/screenshots/module/
 C:\Users\SW115406\Desktop\Betway\Betway-Automation\src\regions\ZA\reports
 src\regions\ZA\reports
 src/regions/ZM/screenshots/module/
+src/regions/MW/screenshots/module
 src/regions/ZM/reports
+src/regions/MW/reports
+# Ignore all screenshots under src/regions
+/src/regions/**/screenshots/**
+# Also ignore any PNG artifacts (including accidental double extensions)
+**/screenshots/**/*.png
+**/screenshots/**/*.png.png
+# Preserve README/.gitkeep exceptions if needed
+!**/screenshots/**/.gitkeep
+!**/screenshots/**/README.md

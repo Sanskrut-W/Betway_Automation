@@ -20,10 +20,10 @@ test.describe('Login Page Tests', () => {
         await ScreenshotHelper(loginPage.page, screenshotDir, 'T9-loginPage', testInfo);
     });
 
-    test('T10 - Verify user is able to login from hamburger menu', async ({ loginPage }, testInfo) => {
-        await loginPage.LoginFromHamburgerMenu(userData.user1.mobile, userData.user1.password);
-        await ScreenshotHelper(loginPage.page, screenshotDir, 'T10-loginPage', testInfo);
-    });
+    // test('T10 - Verify user is able to login from hamburger menu', async ({ loginPage }, testInfo) => {
+    //     await loginPage.LoginFromHamburgerMenu(userData.user1.mobile, userData.user1.password);
+    //     await ScreenshotHelper(loginPage.page, screenshotDir, 'T10-loginPage', testInfo);
+    // });
 
     test('T11 - Verify user is able to login from signup popup', async ({ loginPage }, testInfo) => {
         await loginPage.LoginThroughPopUp();

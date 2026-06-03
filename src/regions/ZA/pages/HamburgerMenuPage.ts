@@ -19,7 +19,7 @@ export class HamburgerMenuPage extends HeaderPage {
         this.HamburgerPageLocatorRegistry = {
             ...this.HeaderPageLocatorsRegistry,
             refreshBalHam: getLocator(this.page, configs["refreshBalHam"]),
-            hideBalanceHamburger: getLocator(this.page, configs["hide_closeDiveHam"]),
+            hideBalanceHamburger: getLocator(this.page, configs["hamburgerEyeButton"]),
             closeHamburger: getLocator(this.page, configs["hide_closeDiveHam"])?.locator('svg').nth(1),
         };
     }
