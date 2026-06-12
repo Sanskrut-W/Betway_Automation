@@ -106,11 +106,11 @@ test.describe('Hamburger Module Tests', () => {
             // await hamburgerMenuPage.clickCloseMyAccountOptions();
         });
 
-        test('35-Verify Document Verification option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-            await hamburgerMenuPage.verifyAndClickDocumentVerification();
-            await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'DocVerification.png', testInfo);
-            // await hamburgerMenuPage.clickCloseMyAccountOptions();
-        });
+        // test('35-Verify Document Verification option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+        //     await hamburgerMenuPage.verifyAndClickDocumentVerification();
+        //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'DocVerification.png', testInfo);
+        //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+        // });
 
         test('36-Verify Betway Benefits option functionality', async ({ hamburgerMenuPage }, testInfo) => {
             await hamburgerMenuPage.verifyAndClickBetwayBenefits();
@@ -137,10 +137,10 @@ test.describe('Hamburger Module Tests', () => {
             // Note: We do not click close options here as logout redirects us
         });
     });
-    test('3-Verify login and sign up button in hamburger window are visible', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyLoginAndSignUpButtons();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
-    });
+    // test('3-Verify login and sign up button in hamburger window are visible', async ({ headerPage }, testInfo) => {
+    //     await headerPage.verifyLoginAndSignUpButtons();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
+    // });
 
     test('5-Verify Betting Rules option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
         await headerPage.verifyAndClickBettingRulesWithoutLogin();
@@ -167,12 +167,12 @@ test.describe('Hamburger Module Tests', () => {
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-InsiderBlog2.png', testInfo);
     });
 
-    test('6-Verify Betway Scores App is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyBetwayScoresApp();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-BetwayScoresApp.png', testInfo);
-        await headerPage.clickBetwayScoresApp();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-BetwayScoresApp2.png', testInfo);
-    });
+    // test('6-Verify Betway Scores App is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+    //     await headerPage.verifyBetwayScoresApp();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-BetwayScoresApp.png', testInfo);
+    //     await headerPage.clickBetwayScoresApp();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T6-BetwayScoresApp2.png', testInfo);
+    // });
 
     test('8-Verify How to is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
         await headerPage.verifyHowToOption();

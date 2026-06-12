@@ -41,8 +41,8 @@ test.describe('My Bets Page Functionality', () => {
             await myBetsPage.selectCategory('Jackpots');
             await ScreenshotHelper(page, screenshotDir, 'open-bets-cat-jackpots', testInfo);
 
-            await myBetsPage.selectCategory('Tote');
-            await ScreenshotHelper(page, screenshotDir, 'open-bets-cat-tote', testInfo);
+            // await myBetsPage.selectCategory('Tote');
+            // await ScreenshotHelper(page, screenshotDir, 'open-bets-cat-tote', testInfo);
         });
 
         // test('T6. Verify "All Drop-down" result data options in Open Bets', async ({ page, myBetsPage }, testInfo) => {

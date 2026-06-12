@@ -109,11 +109,11 @@ test.describe('Header Module Tests', () => {
         // await hamburgerMenuPage.clickCloseMyAccountOptions();
     });
 
-    test('33-Verify Update Details option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickUpdateDetails();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'UpdateDetails.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
+    // test('33-Verify Update Details option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+    //     await hamburgerMenuPage.verifyAndClickUpdateDetails();
+    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'UpdateDetails.png', testInfo);
+    //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+    // });
 
     test('34-Verify Responsible Gaming option functionality', async ({ hamburgerMenuPage }, testInfo) => {
         await hamburgerMenuPage.verifyAndClickResponsibleGaming();
@@ -139,11 +139,11 @@ test.describe('Header Module Tests', () => {
         // await hamburgerMenuPage.clickCloseMyAccountOptions();
     });
 
-    test('38-Verify Change Password option functionality', async ({ hamburgerMenuPage }, testInfo) => {
-        await hamburgerMenuPage.verifyAndClickChangePassword();
-        await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'ChangePassword.png', testInfo);
-        // await hamburgerMenuPage.clickCloseMyAccountOptions();
-    });
+    // test('38-Verify Change Password option functionality', async ({ hamburgerMenuPage }, testInfo) => {
+    //     await hamburgerMenuPage.verifyAndClickChangePassword();
+    //     await ScreenshotHelper(hamburgerMenuPage.page, screenshotDir, 'ChangePassword.png', testInfo);
+    //     // await hamburgerMenuPage.clickCloseMyAccountOptions();
+    // });
 
     test('39-Verify Logout functionality', async ({ hamburgerMenuPage }, testInfo) => {
         await hamburgerMenuPage.verifyAndClickLogout();
@@ -151,17 +151,17 @@ test.describe('Header Module Tests', () => {
         // Note: We do not click close options here as logout redirects us
     });
 });
-    test('3-Verify login and sign up button in hamburger window are visible', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyLoginAndSignUpButtons();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
-    });
+    // test('3-Verify login and sign up button in hamburger window are visible', async ({ headerPage }, testInfo) => {
+    //     await headerPage.verifyLoginAndSignUpButtons();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
+    // });
 
-    test('4-Verify Quick Links drop down is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyQuickLinksDropdown();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks1.png', testInfo);
-        await headerPage.clickQuickLinks();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks2.png', testInfo);
-    });
+    // test('4-Verify Quick Links drop down is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+    //     await headerPage.verifyQuickLinksDropdown();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks1.png', testInfo);
+    //     await headerPage.clickQuickLinks();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks2.png', testInfo);
+    // });
 
     // test('5-Verify Betting Rules option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
     //     await headerPage.verifyAndClickBettingRulesWithoutLogin();

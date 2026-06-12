@@ -92,7 +92,7 @@ test.describe('Header Module Tests', () => {
     //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T4-quickLinks2.png', testInfo);
     // });
 
-    test('5-Verify Betting Rules option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
+    test('5-Verify Betting Rules option is visible and clickable inside Hamburger Menu WithoutLogin', async ({ headerPage }, testInfo) => {
         await headerPage.verifyAndClickBettingRulesWithoutLogin();
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-bettingRulesClicked.png', testInfo);
     });

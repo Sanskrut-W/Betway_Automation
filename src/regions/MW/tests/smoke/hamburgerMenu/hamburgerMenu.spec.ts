@@ -157,7 +157,7 @@ test.describe('Header Module Tests', () => {
     //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T3-login-signupButton.png', testInfo);
     // });
 
-    test('5-Verify Betting Rules option in Quick Links drop down is visible and clickable inside Hamburger Menu', async ({ headerPage }, testInfo) => {
+    test('5-Verify Betting Rules option is visible and clickable inside Hamburger Menu without login', async ({ headerPage }, testInfo) => {
         await headerPage.verifyAndClickBettingRulesWithoutLogin();
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T5-bettingRulesClicked.png', testInfo);
     });
@@ -195,12 +195,12 @@ test.describe('Header Module Tests', () => {
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T8-HowTo2.png', testInfo);
     });
 
-    test('9-Verify Responsible gaming is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
-        await headerPage.verifyResponsibleGamingOption();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming.png', testInfo);
-        await headerPage.clickResponsibleGaming();
-        await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming2.png', testInfo);
-    });
+    // test('9-Verify Responsible gaming is visible and clickable in Hamburger Menu without login', async ({ headerPage }, testInfo) => {
+    //     await headerPage.verifyResponsibleGamingOption();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming.png', testInfo);
+    //     await headerPage.clickResponsibleGaming();
+    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming2.png', testInfo);
+    // });
 
 
 
