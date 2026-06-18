@@ -1,0 +1,222 @@
+import { Page, Locator, expect, FrameLocator } from '@playwright/test';
+import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader";
+import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
+import { highlightElements } from '../../Common-Flows/HighlightElements';
+import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
+import path from 'path';
+import { HeaderPage } from './HeaderPage';
+
+const userData = require('../json-data/userData.json');
+// Using path.resolve to ensure the Excel file is found regardless of execution context
+const Locator_Url = "src/global/utils/file-utils/locators(2).xlsx";
+export class GamingLobbyPage extends HeaderPage {
+    readonly locatorsRegistry: Record<string, Locator>;
+    readonly page: Page;
+
+    constructor(page: Page) {
+        super(page);
+        this.page = page;
+        const configs = loadLocatorsFromExcel(Locator_Url, "GamingLobbyPage");
+
+        this.locatorsRegistry = {
+            mobileNumber: getLocator(this.page, configs['mobileNumber']),
+            password: getLocator(this.page, configs['password']),
+            loginButton: getLocator(this.page, configs['loginButton']),
+            Aviator: getLocator(this.page, configs['Aviator']),
+            loginInPopup: getLocator(this.page, configs['loginInPopup']),
+            passwordInPopup: getLocator(this.page, configs['passwordInPopup']),
+            submitInPopup: getLocator(this.page, configs['submitInPopup']),
+            myBetTabSelector: getLocator(this.page, configs['myBetTabSelector']),
+            frameSelector: getLocator(this.page, configs['frameSelector']),
+            betNowButtonSelector: getLocator(this.page, configs['betNowButtonSelector']),
+            casinoGames: getLocator(this.page, configs['casinoGames']),
+            casino: getLocator(this.page, configs['casinoGames']),
+            promotionsInCasinoNG: getLocator(this.page, configs['promotionsInCasinoNG']),
+            casinoSearch: getLocator(this.page, configs['casinoSearch']),
+            mostLikedFilter: getLocator(this.page, configs['mostLikedFilter']),
+            gameDiv: getLocator(this.page, configs['gameDiv']),
+            playButton: getLocator(this.page, configs['playButton']),
+            favouriteButton: getLocator(this.page, configs['favouriteButton']),
+            betGames: getLocator(this.page, configs['betGames']),
+            promotionsInBetGamesNG: getLocator(this.page, configs['promotionsInBetGamesNG']),
+            gameDivBetGames: getLocator(this.page, configs['gameDivBetGames']),
+            betGamesFilter: getLocator(this.page, configs['betGamesFilter']),
+            virtuals: getLocator(this.page, configs['virtuals']),
+            promotionsInVirtualsNG: getLocator(this.page, configs['promotionsInVirtualsNG']),
+            trendingFilter: getLocator(this.page, configs['trendingFilter']),
+            gameDivVirtuals: getLocator(this.page, configs['gameDivVirtuals']),
+            closePopup: getLocator(this.page, configs['closePopup']),
+            logOut: getLocator(this.page, configs['logOut']),
+        };
+    }
+
+    async goto() {
+        await this.page.goto('https://www.betway.com.ng/');
+        await this.page.waitForLoadState('domcontentloaded');
+    }
+
+
+    async closePromotionOverlay() {
+    const closeBtn = this.page.locator('svg#modal-close-btn, #modal-close-btn').first();
+    try {
+        await closeBtn.waitFor({ state: 'visible', timeout: 3000 });
+        await closeBtn.click({ force: true });
+        await this.page.waitForTimeout(250);
+        return true;
+    } catch {
+        return false;
+    }
+} 
+    // async Login() {
+    //     await this.locatorsRegistry.mobileNumber.fill(`${userData.user4.mobile}`);
+    //     await this.locatorsRegistry.password.fill(`${userData.user4.password}`);
+    //     await this.locatorsRegistry.loginButton.click();
+    //     // await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
+    //     // await this.locatorsRegistry.closePopup.click();
+    //     await this.page.waitForTimeout(1000);
+    // }
+    async Login() {
+        await this.locatorsRegistry.mobileNumber.fill(userData.user4.mobile);
+        await this.locatorsRegistry.password.fill(userData.user4.password);
+        await this.page.keyboard.press('Enter');
+
+        // Try to close promotion popup ONLY if it appears
+        const popup = this.locatorsRegistry.closePopup;
+
+        // try {
+        //     await popup.waitFor({ state: 'visible', timeout: 9000 });
+        //     if (await popup.isVisible()) {
+        //         await popup.click();
+        //     }
+        // } catch {
+        //     // Popup did not appear → ignore
+        // }
+
+        await this.page.waitForLoadState('domcontentloaded');
+    }
+
+    async navigateToVertical(verticalKey: string) {
+        await this.locatorsRegistry[verticalKey].first().click();
+    }
+
+    async searchGame(term: string) {
+        await this.locatorsRegistry.casinoSearch.click();
+        await this.locatorsRegistry.casinoSearch.fill(term);
+    }
+
+    async selectFilter(filterKey: string) {
+        await this.locatorsRegistry[filterKey].click();
+    }
+
+    async launchGame(gameDivKey: string) {
+        await this.locatorsRegistry[gameDivKey].first().hover();
+        await this.locatorsRegistry.playButton.first().waitFor({ state: 'visible' });
+        await this.locatorsRegistry.playButton.first().click({ force: true });
+    }
+
+    async toggleFavourite() {
+        await this.locatorsRegistry.favouriteButton.first().click();
+    }
+
+    async clickVisiblePromotion(promoKey: string) {
+    const promo = this.locatorsRegistry[promoKey].first();
+    
+    // Scroll into view and wait for scroll to settle
+    await promo.scrollIntoViewIfNeeded();
+    await this.page.waitForTimeout(500); // let scroll animation complete
+    
+    // Confirm it's visible after scroll
+    await promo.waitFor({ state: 'visible', timeout: 30000 });
+    
+    // Use dispatchEvent as fallback — works even if element is at viewport edge
+    await promo.dispatchEvent('click');
+    
+    await this.page.waitForTimeout(3000);
+}
+     
+    async verifyLoginPopup() {
+    await this.locatorsRegistry.loginInPopup.waitFor({ state: 'visible', timeout: 15000 });
+    await expect(this.locatorsRegistry.loginInPopup).toBeVisible();
+    await expect(this.locatorsRegistry.passwordInPopup).toBeVisible();
+    await expect(this.locatorsRegistry.submitInPopup).toBeVisible();
+}
+    
+    async triggerLoginPopupViaAction(actionType: 'play' | 'favourite', gameDivKey?: string) {
+        if (actionType === 'play' && gameDivKey) {
+            await this.locatorsRegistry[gameDivKey].first().hover();
+            await this.locatorsRegistry.playButton.first().click();
+        } else {
+            await this.locatorsRegistry.favouriteButton.first().click();
+        }
+    }
+
+    // --- Core Flows ---
+
+    async LogOut() {
+        // Only attempt logout if Deposit is visible (logged in state)
+        if (await this.page.getByRole('button', { name: 'Deposit' }).isVisible()) {
+            await this.HeaderPageLocatorsRegistry.hamburgerMenu.click();
+            await this.locatorsRegistry.logOut.click();
+            await this.page.getByRole('button', { name: 'Proceed' }).click();
+        }
+    }
+
+    async loginToAviator() {
+        await this.locatorsRegistry.loginInPopup.fill(`${userData.user4.mobile}`);
+        await this.locatorsRegistry.passwordInPopup.fill(`${userData.user4.password}`);
+        await this.locatorsRegistry.submitInPopup.click();
+    }
+
+    async waitForAviatorVisibility() {
+        await this.locatorsRegistry.Aviator.waitFor({ state: 'visible' });
+    }
+
+  async clickAviatorAndWaitForLoginPopup() {
+    // Dismiss promotion popup if present
+    try {
+        await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 5000 });
+        await this.locatorsRegistry.closePopup.click();
+    } catch {
+        // No popup — continue
+    }
+
+    // Scroll Aviator into view and click
+    await this.locatorsRegistry.Aviator.scrollIntoViewIfNeeded();
+    await this.locatorsRegistry.Aviator.click();
+
+    // Wait for login popup
+    await this.locatorsRegistry.loginInPopup.waitFor({ state: 'visible', timeout: 15000 });
+}
+
+    async completeAviatorLoginAndInteractionFlow() {
+        await this.loginToAviator();
+        await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
+        await this.locatorsRegistry.closePopup.click();
+        await this.locatorsRegistry.Aviator.click();
+        await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
+        await this.locatorsRegistry.closePopup.click();
+        await this.interactWithGameFrame();
+    }
+
+    async interactWithGameFrame() {
+        await this.locatorsRegistry.Aviator.click();
+        const frameSelector = 'iframe[id*="lobby_game"]';
+        const gameFrame = this.page.frameLocator(frameSelector);
+        await gameFrame.locator('//*[@class="btn btn-success bet ng-star-inserted"]').first().waitFor({ state: 'visible' });
+        await gameFrame.locator('//*[@class="btn btn-success bet ng-star-inserted"]').first().click();
+        await this.page.waitForTimeout(5000);
+        await gameFrame.locator('//*[@class="tab ng-star-inserted"]').first().click();
+    }
+
+    // --- Screenshot Helpers ---
+
+    async captureScreenshot(locatorName: string, screenshotDir: string, fileName: string, testInfo: any) {
+        const locator = this.locatorsRegistry[locatorName];
+        await highlightElements(locator);
+        await ScreenshotHelper(this.page, screenshotDir, fileName, testInfo);
+    }
+
+    async takeScreenshot(screenshotDir: string, fileName: string, testInfo: any) {
+        await ScreenshotHelper(this.page, screenshotDir, fileName, testInfo);
+    }
+}
