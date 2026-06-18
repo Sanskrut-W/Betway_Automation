@@ -24,11 +24,7 @@ export class HamburgerMenuPage extends HeaderPage {
         };
     }
 
-    async goto() {
-        await this.page.goto('https://www.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
-        //   await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',timeout:15000});
-        // await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
-    }
+    // goto() is inherited from BasePage (via HeaderPage)
 
 
     // ==========================================

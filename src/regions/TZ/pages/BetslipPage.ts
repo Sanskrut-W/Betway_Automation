@@ -78,29 +78,19 @@ export class BetslipPage extends SportsPage {
     }).getByRole('img').nth(1);
   }
 
-  // Navigation Methods
-  async goto() {
-    await this.page.goto('https://en.betway.co.tz/sport/soccer', { waitUntil: 'domcontentloaded' });
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-  }
+  // goto() is inherited from BasePage (via SportsPage chain)
 
-  // Login Methods
-  async Login() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
+  // Different-behavior variant: logs in IN PLACE via the header form (no navigation),
+  // because betslip specs build the slip first and then log in without losing it.
+  async Login(user: { mobile: string; password: string } = userData.user4) {
+    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${user.mobile}`);
+    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${user.password}`);
     await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
     await this.page.waitForLoadState('domcontentloaded');
   }
 
   async loginWithoutFreebet() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user5.mobile}`);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user5.password}`);
-    await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-    await this.page.waitForLoadState('domcontentloaded');
+    await this.Login(userData.user5);
   }
 
   async closePromotionPopup() {

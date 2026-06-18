@@ -75,7 +75,8 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: 'https://www.betway.com.gh/',
+    // Domain root — page objects pass their own path to BasePage.goto()
+    baseURL: 'https://www.betway.com.gh',
 
     // Real browser window
     viewport: null,

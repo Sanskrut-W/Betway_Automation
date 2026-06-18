@@ -2,16 +2,16 @@ import { Page, Locator, expect } from '@playwright/test';
 import { highlightElements } from '../../../regions/Common-Flows/HighlightElements';
 import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader";
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
+import { BasePage } from './BasePage';
 
 const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx";
 const userData = require('../json-data/userData.json');
 
-export class BuildABetPage {
-    readonly page: Page;
+export class BuildABetPage extends BasePage {
     readonly buildABetLocatorsRegistry: Record<string, Locator>;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         const configs = loadLocatorsFromExcel(LOCATOR_URL, "BuildABetPage");
         this.buildABetLocatorsRegistry = {
             mobileInput: getLocator(this.page, configs["mobileInput"]),
@@ -42,19 +42,7 @@ export class BuildABetPage {
     }
 
     // 1. Navigation & Setup Methods
-    async goto() {
-        await this.page.goto('https://www.betway.mw/sport/soccer', { waitUntil: 'domcontentloaded' });
-        // await this.page.waitForLoadState('domcontentloaded');
-    }
-
-    async login() {
-        await this.buildABetLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
-        await this.buildABetLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
-        await this.page.keyboard.press('Enter');
-        // await this.buildABetLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
-        // await this.buildABetLocatorsRegistry.closePromotionPopup.click();
-        await this.page.waitForLoadState('domcontentloaded');
-    }
+    // goto() and Login()/login() are inherited from BasePage
 
     /**
      * This is the main setup method. It handles all navigation

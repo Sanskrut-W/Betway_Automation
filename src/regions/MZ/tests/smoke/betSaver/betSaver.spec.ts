@@ -29,11 +29,12 @@ test.describe('BetSaver Module Tests', () => {
     test('T4-5 - Betsaver gray out in My Bets', async ({ betSaverPage }, testInfo) => {
         // T4 Upcoming
         await betSaverPage.placeQualifyingBetAndNavigateToMyBets();
-        await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T4', testInfo);
 
-        // T5 Settled
+        // T5 Settled — BetSaver text should NOT be visible in the Detail View (grayed out / non-qualifying)
         await betSaverPage.clickSettledBetsButton();
-        await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T5', testInfo);
+        await betSaverPage.clickDetailViewButton();
+        await betSaverPage.verifyBetSaverTextNotVisibleInDetail();
+        await betSaverPage.takeScreenshot(screenshotDir, 'T5', testInfo);
     });
 
     // T6-9 Betsaver Active in My Bets
@@ -41,18 +42,20 @@ test.describe('BetSaver Module Tests', () => {
         await betSaverPage.placeBetsaverActiveBetAndNavigateToMyBets(8);
 
         // T6 My Bets (Active)
-        await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T6', testInfo);
+        // await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T6', testInfo);
 
-        // T7 Detail View
+        // T7 Detail View — BetSaver text SHOULD be visible
         await betSaverPage.clickDetailViewButton();
-        await betSaverPage.captureScreenshot('detailViewButton', screenshotDir, 'T7', testInfo);
+        await betSaverPage.verifyBetSaverTextVisibleInDetail();
+        await betSaverPage.captureScreenshot('betSaverTextInDetail', screenshotDir, 'T7', testInfo);
 
         // T8 Settled Bets
         await betSaverPage.clickSettledBetsButton();
-        await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T8', testInfo);
+        await betSaverPage.captureScreenshot('betSaverTextInDetail', screenshotDir, 'T8', testInfo);
 
-        // T9 Settled Detail View
+        // T9 Settled Detail View — BetSaver text SHOULD be visible
         await betSaverPage.clickDetailViewButton();
-        await betSaverPage.captureScreenshot('detailViewButton', screenshotDir, 'T9', testInfo);
+        await betSaverPage.verifyBetSaverTextVisibleInDetail();
+        await betSaverPage.captureScreenshot('betSaverTextInDetail', screenshotDir, 'T9', testInfo);
     });
 });

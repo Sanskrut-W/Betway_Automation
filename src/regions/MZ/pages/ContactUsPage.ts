@@ -13,7 +13,6 @@ export class ContactUsPage extends HomePage {
     ContactUsPagelocatorRegistry: Record<string, import('@playwright/test').Locator>;
     constructor(page: import('@playwright/test').Page) {
         super(page);
-        this.page = page;
         const configs = loadLocatorsFromExcel(file, "ContactUsPage");
         this.ContactUsPagelocatorRegistry = {
             ...this.HomePagelocatorsRegistry,
@@ -158,6 +157,6 @@ export class ContactUsPage extends HomePage {
     }
 
     async gotoContactUs(){
-        await this.page.goto('/contact-us')
+        await this.goto('/contact-us')
     }
 }

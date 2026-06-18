@@ -8,12 +8,10 @@ const file = "src/global/utils/file-utils/locators.xlsx";
 
 
 export class BetgamesPage extends SportsPage {
-    page: import('@playwright/test').Page;
     BetGamesPagelocatorsRegistry: Record<string, import('@playwright/test').Locator>;
 
     constructor(page: import('@playwright/test').Page) {
         super(page);
-        this.page = page;
         const configs = loadLocatorsFromExcel(file, "BetGamesPage");
         this.BetGamesPagelocatorsRegistry = {
             ...this.SportsPagelocatorRegistry,
@@ -26,7 +24,7 @@ export class BetgamesPage extends SportsPage {
     }
 
     async gotoBetgames() {
-        await this.page.goto('/lobby/betgames');
+        await this.goto('/lobby/betgames');
     }
 
     async searchgame(gameName: string) {

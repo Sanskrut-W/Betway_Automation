@@ -78,29 +78,18 @@ export class BetslipPage extends SportsPage {
     }).getByRole('img').nth(1);
   }
 
-  // Navigation Methods
-  async goto() {
-    await this.page.goto('https://www.betway.co.zm/sport/soccer', { waitUntil: 'domcontentloaded' });
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-  }
-
-  // Login Methods
-  async Login() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
+  // goto() is inherited from BasePage (via SportsPage chain).
+  // Login() is overridden here because LoginPage (in the inheritance chain) defines a
+  // different, verification-based Login(); the betslip flow needs the simple header login.
+  async Login(user: { mobile: string; password: string } = userData.user4) {
+    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(user.mobile);
+    await this.BetslipPageLocatorsRegistry.passwordInput.fill(user.password);
     await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
     await this.page.waitForLoadState('domcontentloaded');
   }
 
   async loginWithoutFreebet() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user5.mobile}`);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user5.password}`);
-    await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-    await this.page.waitForLoadState('domcontentloaded');
+    await this.Login(userData.user5);
   }
 
   async closePromotionPopup() {

@@ -7,6 +7,20 @@ const screenshotDir = path.join(projectRoot, 'screenshots/module/betSaver');
 
 test.describe('BetSaver Module Tests', () => {
 
+       // T6-9 Betsaver Active in My Bets
+    test('T6-9 - Betsaver Active in My Bets', async ({ betSaverPage }, testInfo) => {
+        await betSaverPage.placeBetsaverActiveBetAndNavigateToMyBets(7);
+        // T7 Detail View — BetSaver text SHOULD be visible
+        await betSaverPage.clickDetailViewButton();
+        await betSaverPage.verifyBetSaverTextVisibleInDetail();
+        await betSaverPage.captureScreenshot('betSaverTextInDetail', screenshotDir, 'T7', testInfo);
+
+        // T9 Opened Detail View — BetSaver text SHOULD be visible
+        await betSaverPage.clickDetailViewButton();
+        await betSaverPage.verifyBetSaverTextVisibleInDetail();
+        await betSaverPage.captureScreenshot('betSaverTextInDetail', screenshotDir, 'T9', testInfo);
+    });
+
     // T1: Verify Betsaver not active
     test('T1 - Verify Betsaver not active', async ({ betSaverPage }, testInfo) => {
         await betSaverPage.verifyBetsaverNotActiveForFewSelections();
@@ -29,30 +43,12 @@ test.describe('BetSaver Module Tests', () => {
     test('T4-5 - Betsaver gray out in My Bets', async ({ betSaverPage }, testInfo) => {
         // T4 Upcoming
         await betSaverPage.placeQualifyingBetAndNavigateToMyBets(3);
-        await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T4', testInfo);
+        // await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T4', testInfo);
 
-        // T5 Settled
+        // T5 Settled — BetSaver text should NOT be visible in the Detail View (grayed out / non-qualifying)
         await betSaverPage.clickSettledBetsButton();
-        await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T5', testInfo);
-    });
-
-    // T6-9 Betsaver Active in My Bets
-    test('T6-9 - Betsaver Active in My Bets', async ({ betSaverPage }, testInfo) => {
-        await betSaverPage.placeBetsaverActiveBetAndNavigateToMyBets(7);
-
-        // T6 My Bets (Active)
-        await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T6', testInfo);
-
-        // T7 Detail View
         await betSaverPage.clickDetailViewButton();
-        await betSaverPage.captureScreenshot('detailViewButton', screenshotDir, 'T7', testInfo);
-
-        // T8 Settled Bets
-        await betSaverPage.clickSettledBetsButton();
-        await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T8', testInfo);
-
-        // T9 Settled Detail View
-        await betSaverPage.clickDetailViewButton();
-        await betSaverPage.captureScreenshot('detailViewButton', screenshotDir, 'T9', testInfo);
+        await betSaverPage.verifyBetSaverTextNotVisibleInDetail();
+        await betSaverPage.takeScreenshot(screenshotDir, 'T5', testInfo);
     });
 });

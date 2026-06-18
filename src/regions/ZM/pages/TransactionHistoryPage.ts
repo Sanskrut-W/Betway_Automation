@@ -5,19 +5,19 @@ import { highlightElements } from '../../Common-Flows/HighlightElements';
 import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
 import { OddsSelection } from '../../Common-Flows/OddSelection';
 import { OddsSelectionAbove } from '../commonflows/OddSelection';
+import { BasePage } from './BasePage';
 
 const userData = require('../json-data/userData.json');
 const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx";
 
-export class TransactionHistoryPage {
+export class TransactionHistoryPage extends BasePage {
 
     readonly locatorsRegistry: Record<string, Locator>;
-    readonly page: Page;
     // New Private Property to store the specific ID for testing
     private readonly TEST_TRANSACTION_ID = "12345678";
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
 
         // Load all locators for the TransactionHistory sheet
         const configs = loadLocatorsFromExcel(LOCATOR_URL, "TransactionHistoryPage");
@@ -65,11 +65,9 @@ export class TransactionHistoryPage {
 
     // --- Navigation & Utility Functions (Kept as is) ---
 
-    async goto() {
-        await this.page.goto('https://betway.co.zm/sport/soccer');
-        await this.page.waitForLoadState('domcontentloaded');
-    }
+    // goto() and login() are inherited from BasePage
 
+    // Login() overrides BasePage: this page logs in via a dedicated login button (not Enter)
     async Login() {
         await this.locatorsRegistry.mobileNumber.fill(`${userData.user4.mobile}`);
         await this.locatorsRegistry.password.fill(`${userData.user4.password}`);

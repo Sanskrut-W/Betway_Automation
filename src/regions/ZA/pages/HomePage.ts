@@ -2,19 +2,19 @@ import { expect, Page } from '@playwright/test';
 import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader";
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElementBorder, highlightElements } from '../../Common-Flows/HighlightElements';
+import { BasePage } from './BasePage';
 
 
 const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
 
-export class HomePage {
+export class HomePage extends BasePage {
 
     readonly HomePagelocatorsRegistry: Record<string, import('@playwright/test').Locator>;
 
-    page: import('@playwright/test').Page;
     footerLinksContainer: any;
 
     constructor(page: import('@playwright/test').Page) {
-        this.page = page;
+        super(page);
         const configs = loadLocatorsFromExcel(LOCATOR_URL, "HomePage");
         this.footerLinksContainer = getLocator(this.page, configs["ContactUs"]).locator('..');
         this.HomePagelocatorsRegistry = {
@@ -295,8 +295,8 @@ export class HomePage {
 
     // Navigation Methods
     async gotoHomePage() {
-        await this.page.goto('/');
-        await this.page.waitForLoadState('domcontentloaded');
+        // Footer is rendered on the sports page; land there so all footer scripts run reliably
+        await this.goto('/sport/soccer');
     }
 
     async clickHowToBet() {

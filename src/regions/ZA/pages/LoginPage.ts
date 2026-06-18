@@ -91,14 +91,7 @@ export class LoginPage extends HomePage {
         await this.LoginPagelocatorsRegistry.loginButtonFromPopup.click();
     }
 
-    async goto() {
-        await this.page.goto('/');
-        await this.page.waitForLoadState('domcontentloaded');
-        if (await this.page.locator('#modal-close-btn').nth(1).isVisible()) {
-            await this.page.locator('#modal-close-btn').nth(1).waitFor({ state: 'visible', });
-            await this.page.locator('#modal-close-btn').nth(1).click();
-        }
-    }
+    // goto() is inherited from BasePage (via HomePage)
 
     async gotoAviatorPage() {
         await this.page.goto('https://www.betway.co.za/lobby/casino-games/game/aviator');
@@ -142,32 +135,7 @@ export class LoginPage extends HomePage {
 
 
     // Login Functions
-    // async Login() {
-    //     await this.goto();
-    //     await this.LoginPagelocatorsRegistry.mobileInput.fill(`${userData.user1.mobile}`);
-    //     await this.LoginPagelocatorsRegistry.passwordInput.fill(`${userData.user1.password}`);
-    //     await this.page.keyboard.press('Enter');
-    //     await this.verifyWelcomeUser(userData.user1.name);
-    // }
-    async Login() {
-        await this.LoginPagelocatorsRegistry.mobileInput.fill(userData.user4.mobile);
-        await this.LoginPagelocatorsRegistry.passwordInput.fill(userData.user4.password);
-        await this.page.keyboard.press('Enter');
-
-        // Try to close promotion popup ONLY if it appears
-        const popup = this.LoginPagelocatorsRegistry.closePromotionPopup;
-
-        try {
-            await popup.waitFor({ state: 'visible', timeout: 9000 });
-            if (await popup.isVisible()) {
-                await popup.click();
-            }
-        } catch {
-            // Popup did not appear → ignore
-        }
-
-        await this.page.waitForLoadState('domcontentloaded');
-    }
+    // Login() is inherited from BasePage (via HomePage)
 
     async LoginArgs(mobile: string, password: string) {
         await this.goto();

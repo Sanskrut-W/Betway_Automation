@@ -2,21 +2,21 @@ import { expect, Page } from '@playwright/test';
 import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader";
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElementBorder, highlightElements } from '../../Common-Flows/HighlightElements';
+import { BasePage } from './BasePage';
 import dotenv from 'dotenv';
 dotenv.config();
 
 const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
 const Locator_Url = "src/global/utils/file-utils/locators(2).xlsx";
 
-export class HomePage {
+export class HomePage extends BasePage {
 
     readonly HomePagelocatorsRegistry: Record<string, import('@playwright/test').Locator>;
 
-    page: import('@playwright/test').Page;
     footerLinksContainer: any;
 
     constructor(page: import('@playwright/test').Page) {
-        this.page = page;
+        super(page);
         const configs = loadLocatorsFromExcel(Locator_Url, "HomePage");
         this.footerLinksContainer = getLocator(this.page, configs["ContactUs"]).locator('..');
         this.HomePagelocatorsRegistry = {
@@ -297,8 +297,8 @@ export class HomePage {
 
     // Navigation Methods
     async gotoHomePage() {
-        await this.page.goto(process.env.BASE_URL_ZM);
-        await this.page.waitForLoadState('domcontentloaded');
+        // Footer is rendered on the sports page; land there so all footer scripts run reliably
+        await this.goto('/sport/soccer');
     }
 
     async clickHowToBet() {

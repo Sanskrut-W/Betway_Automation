@@ -10,7 +10,6 @@ export class PromotionPage extends SportsPage {
 
     constructor(page: import('@playwright/test').Page) {
         super(page);
-        this.page = page;
         const configs = loadLocatorsFromExcel("src/global/utils/file-utils/locators.xlsx", "PromotionPage");
         this.promotionPagelocatorsRegistry = {
             ...this.SportsPagelocatorRegistry,

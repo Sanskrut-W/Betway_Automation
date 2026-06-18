@@ -26,7 +26,7 @@ export class BetgamesPage extends SportsPage {
     }
 
     async gotoBetgames() {
-        await this.page.goto('/lobby/betgames');
+        await this.goto('/lobby/betgames');
     }
 
     async searchgame(gameName: string) {

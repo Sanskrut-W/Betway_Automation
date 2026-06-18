@@ -147,7 +147,7 @@ export class HowToPage extends HomePage {
     }
 
     async gotoHowTo() {
-        await this.page.goto('/how-to-bet');
+        await this.goto('/how-to-bet');
     }
 
 

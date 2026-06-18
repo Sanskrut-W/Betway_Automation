@@ -37,6 +37,8 @@ export default defineConfig({
     ],
 
     use: {
+        // Must be the domain root (e.g. https://www.betway.co.zm/) — page objects pass
+        // their own path to BasePage.goto(). Set via BASE_URL_ZM in .env.
         baseURL: process.env.BASE_URL_ZM,
 
         // Use real browser window size

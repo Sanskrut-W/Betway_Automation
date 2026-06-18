@@ -91,13 +91,10 @@ export class LoginPage extends HomePage{
         await this.LoginPagelocatorsRegistry.loginButtonFromPopup.click();
     }
 
-    async goto() {
-        await this.page.goto('/');
-        await this.page.waitForLoadState('domcontentloaded');
-        if(await this.page.locator('#modal-close-btn').nth(1).isVisible()){
-            await this.page.locator('#modal-close-btn').nth(1).waitFor({ state: 'visible', });
-            await this.page.locator('#modal-close-btn').nth(1).click();
-        }
+    async goto(path: string = '/sport/soccer') {
+        // Delegate to BasePage.goto so the promotion popup is *waited for* and closed
+        // (it appears a few seconds after landing, so an immediate visibility check misses it).
+        await super.goto(path);
     }
 
     async gotoAviatorPage() {
@@ -142,11 +139,14 @@ export class LoginPage extends HomePage{
 
 
     // Login Functions
-    async Login() {
+    // Different-behavior variant: navigates to '/' first and verifies the welcome user.
+    async Login(user: { mobile: string; password: string } = userData.user1) {
         await this.goto();
-        await this.LoginPagelocatorsRegistry.mobileInput.fill(`${userData.user1.mobile}`);
-        await this.LoginPagelocatorsRegistry.passwordInput.fill(`${userData.user1.password}`);
+        await this.LoginPagelocatorsRegistry.mobileInput.fill(`${user.mobile}`);
+        await this.LoginPagelocatorsRegistry.passwordInput.fill(`${user.password}`);
         await this.page.keyboard.press('Enter');
+        // The promotion popup can reappear right after login and overlay the welcome banner
+        await this.closePromotionPopupIfVisible();
         await this.verifyWelcomeUser(userData.user1.name);
     }
 

@@ -17,11 +17,9 @@ const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main
 export class LoginPage extends HomePage {
 
     readonly LoginPagelocatorsRegistry: Record<string, import('@playwright/test').Locator>;
-    page: import('@playwright/test').Page;
 
     constructor(page: import('@playwright/test').Page) {
         super(page);
-        this.page = page;
         const configs = loadLocatorsFromExcel(LOCATOR_URL, "LoginPage");
 
         this.LoginPagelocatorsRegistry = {
@@ -91,14 +89,7 @@ export class LoginPage extends HomePage {
         await this.LoginPagelocatorsRegistry.loginButtonFromPopup.click();
     }
 
-    async goto() {
-        await this.page.goto('/');
-        await this.page.waitForLoadState('domcontentloaded');
-        if (await this.page.locator('#modal-close-btn').nth(1).isVisible()) {
-            await this.page.locator('#modal-close-btn').nth(1).waitFor({ state: 'visible', });
-            await this.page.locator('#modal-close-btn').nth(1).click();
-        }
-    }
+    // goto() is inherited from BasePage (via HomePage)
 
     async gotoAviatorPage() {
         await this.page.goto('https://new.betway.co.za/lobby/casino-games/game/aviator');
@@ -142,13 +133,7 @@ export class LoginPage extends HomePage {
 
 
     // Login Functions
-    async Login() {
-        await this.goto();
-        await this.LoginPagelocatorsRegistry.mobileInput.fill(`${userData.user1.mobile}`);
-        await this.LoginPagelocatorsRegistry.passwordInput.fill(`${userData.user1.password}`);
-        await this.page.keyboard.press('Enter');
-        await this.verifyWelcomeUser(userData.user1.name);
-    }
+    // Login() is inherited from BasePage (via HomePage)
 
     async LoginArgs(mobile: string, password: string) {
         await this.goto();

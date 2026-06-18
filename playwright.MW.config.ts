@@ -26,7 +26,8 @@ export default defineConfig({
   // ['json', { outputFile: 'test-results.json' }],
   // ['allure-playwright', { resultsDir: path.resolve(__dirname, 'src/regions/ZA/reports/allure-results') }],
   use: {
-    baseURL: 'https://www.betway.mw/',
+    // Domain root — page objects pass their own path to BasePage.goto()
+    baseURL: 'https://www.betway.mw',
 
     // Use real browser window size
     viewport: null,

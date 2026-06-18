@@ -3,18 +3,18 @@ import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelRea
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElements } from '../../Common-Flows/HighlightElements';
 import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
+import { BasePage } from './BasePage';
 
 const userData = require('../json-data/userData.json');
 const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx";
 
-export class FeedsPage {
+export class FeedsPage extends BasePage {
 
     readonly locatorsRegistry: Record<string, Locator>;
-    readonly page: Page;
     private readonly TEST_TRANSACTION_ID = "12345678";
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         const configs = loadLocatorsFromExcel(LOCATOR_URL, "FeedsPage");
 
         this.locatorsRegistry = {
@@ -63,19 +63,7 @@ export class FeedsPage {
 
     // --- Utility Functions (Keep for page object internal use) ---
 
-    async goto() {
-        await this.page.goto('https://www.betway.com.ng/sport/soccer');
-        await this.page.waitForLoadState('domcontentloaded');
-    }
-
-    async Login() {
-        await this.locatorsRegistry.mobileNumber.fill(`${userData.user4.mobile}`);
-        await this.locatorsRegistry.password.fill(`${userData.user4.password}`);
-        await this.locatorsRegistry.loginButton.click();
-        // await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
-        // await this.locatorsRegistry.closePopup.click();
-        await this.page.waitForTimeout(1000);
-    }
+    // goto() and Login() are inherited from BasePage
 
     /** This helper must remain as it performs page context manipulation and returns a Page object. */
     async clickWhatsAppButtonAndGetNewPage() {

@@ -8,11 +8,9 @@ const Locator_Url = "src/global/utils/file-utils/locators(2).xlsx";
 
 export class HamburgerMenuPage extends HeaderPage {
     readonly HamburgerPageLocatorRegistry: Record<string, Locator>;
-    page: Page;
 
     constructor(page: Page) {
         super(page);
-        this.page = page;
 
         const configs = loadLocatorsFromExcel(Locator_Url, "HeaderPage");
 

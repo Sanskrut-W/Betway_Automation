@@ -1,20 +1,20 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { highlightElements } from '../../Common-Flows/HighlightElements';
 import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader"; 
-import { getLocator } from "../../../global/utils/file-utils/locatorResolver"; 
- 
+import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
+import { BasePage } from './BasePage';
+
 // URL for your central locator file
 const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx";
 const userData = require('../json-data/userData.json');
- 
-export class MyBetsPage {
-    readonly page: Page;
+
+export class MyBetsPage extends BasePage {
     readonly myBetsLocatorsRegistry: Record<string, Locator>;
- 
+
     constructor(page: Page) {
-        this.page = page;
-  
-        const configs = loadLocatorsFromExcel(LOCATOR_URL, "MyBetPage"); 
+        super(page);
+
+        const configs = loadLocatorsFromExcel(LOCATOR_URL, "MyBetPage");
         this.myBetsLocatorsRegistry = {
             closePromotionPopup: getLocator(this.page, configs["closePromotionPopup"]),
             mobileInput: getLocator(this.page, configs["mobileInput"]),
@@ -53,20 +53,11 @@ export class MyBetsPage {
     // ------------------------------------------------------------------
  
     async gotoSports() {
-        await this.page.goto('https://en.betway.co.tz/sport/soccer');
-        await this.page.waitForLoadState('domcontentloaded');
+        await this.goto();
     }
- 
-   async login() {
-    await this.myBetsLocatorsRegistry.mobileInput.fill(`${userData.user4.mobile}`);
-    await this.myBetsLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
-    await this.page.keyboard.press('Enter');
-    // await this.myBetsLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
-    // await this.myBetsLocatorsRegistry.closePromotionPopup.click();
-    // await this.closePromotionPopup();
-    await this.page.waitForLoadState('domcontentloaded');
-  }
- 
+
+    // login()/Login() are inherited from BasePage
+
     // ------------------------------------------------------------------
     // 2. Main Actions
     // ------------------------------------------------------------------

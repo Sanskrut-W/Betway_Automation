@@ -15,7 +15,7 @@ const screenshotDir = path.join(projectRoot, 'screenshots/smoke/buildABet'); // 
  test.describe('Build A Bet Section Tests', () => {
  
      test.beforeEach(async ({ buildABetPage, testData }) => {
-         await buildABetPage.gotoSports();
+         await buildABetPage.goto();
          await buildABetPage.login();
          await buildABetPage.navigateToBuildABet();
      });

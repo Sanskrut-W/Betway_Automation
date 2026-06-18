@@ -3,7 +3,8 @@ import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelRea
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElementBorder, highlightElements } from '../../Common-Flows/HighlightElements';
 import { SportsPage } from "./SportsPage";
-import { OddsSelectionAbove } from '../commonflows/OddSelection'; 
+import { BasePage } from "./BasePage";
+import { OddsSelectionAbove } from '../commonflows/OddSelection';
 
 const userData = require('../json-data/userData.json');
 // const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx";
@@ -11,11 +12,9 @@ const Locator_Url = "src/global/utils/file-utils/locators(2).xlsx";
 
 export class BetslipPage extends SportsPage {
   readonly BetslipPageLocatorsRegistry: Record<string, import('@playwright/test').Locator>;
-  page: import('@playwright/test').Page;
 
   constructor(page: import('@playwright/test').Page) {
     super(page);
-    this.page = page;
 
     const configs = loadLocatorsFromExcel(Locator_Url, "BetslipPage");
 
@@ -78,29 +77,18 @@ export class BetslipPage extends SportsPage {
     }).getByRole('img').nth(1);
   }
 
-  // Navigation Methods
-  async goto() {
-    await this.page.goto('https://www.betway.com.ng/sport/soccer', { waitUntil: 'domcontentloaded' });
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
+  // goto() is inherited from BasePage (via SportsPage chain).
+  //
+  // Login(): NG's LoginPage (mid-chain) overrides Login() with a user1 / home-page /
+  // verify-welcome flow. Betslip specs build the slip first, then expect an IN-PLACE
+  // header login (no navigation) — so re-assert the standard BasePage login here.
+  async Login(user: { mobile: string; password: string } = userData.user4) {
+    await BasePage.prototype.Login.call(this, user);
   }
 
-  // Login Methods
-  async Login() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
-    await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', });
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-    await this.page.waitForLoadState('domcontentloaded');
-  }
-
+  // Distinct variant: logs in as user5 (no freebet) without the welcome-banner verification.
   async loginWithoutFreebet() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user5.mobile}`);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user5.password}`);
-    await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-    await this.page.waitForLoadState('domcontentloaded');
+    await this.Login(userData.user5);
   }
 
   async closePromotionPopup() {

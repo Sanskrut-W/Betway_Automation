@@ -158,6 +158,6 @@ export class ContactUsPage extends HomePage {
     }
 
     async gotoContactUs(){
-        await this.page.goto('/contact-us')
+        await this.goto('/contact-us')
     }
 }

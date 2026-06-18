@@ -5,16 +5,16 @@ import { highlightElements } from '../../Common-Flows/HighlightElements';
 import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
 import { OddsSelection, LiveOddsSelection, DrawNoBetOddsSelection, EsportsOddsSelection } from '../commonflows/OddSelection'; // Import odds selection helpers
 import { OddsSelectionAbove } from '../commonflows/OddSelection';
+import { BasePage } from './BasePage';
 
 const userData = require('../json-data/userData.json');
 const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx";
-export class BetSaverPage {
-    readonly page: Page;
+export class BetSaverPage extends BasePage {
     readonly locatorsRegistry: Record<string, Locator>;
     readonly locators: Record<string, Locator>; // Added for compatibility with spec file helpers
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
 
         const configs = loadLocatorsFromExcel(LOCATOR_URL, "BetsaverPage");
 
@@ -87,14 +87,14 @@ export class BetSaverPage {
             // --- Market Dropdowns ---
             marketsDropdown: getLocator(this.page, configs["marketsDropdown"]),
             drawNoBetMarket: getLocator(this.page, configs["drawNoBetMarket"]),
+            betSaverTextInDetail: getLocator(this.page, configs["betSaverTextInDetail"]),
         };
         this.locators = this.locatorsRegistry;
     }
 
-    async goto() {
-        await this.page.goto('https://betway.co.zm/sport/soccer');
-        await this.page.waitForLoadState('domcontentloaded');
-    }
+    // goto() and login() are inherited from BasePage
+
+    // Login() overrides BasePage: this page logs in via a dedicated login button (not Enter)
     async Login() {
         await this.locatorsRegistry.mobileNumber.fill(userData.user4.mobile);
         await this.locatorsRegistry.password.fill(userData.user4.password);
@@ -223,6 +223,23 @@ export class BetSaverPage {
         await this.safeClick(this.locatorsRegistry.detailViewButton, "Detail View Button");
     }
 
+    // Active BetSaver: the BetSaver text SHOULD be shown in the bet's Detail View.
+    async verifyBetSaverTextVisibleInDetail() {
+        await expect(
+            this.locatorsRegistry.betSaverTextInDetail,
+            "BetSaver text should be visible in Detail View"
+        ).toBeVisible({ timeout: 10000 });
+        await highlightElements(this.locatorsRegistry.betSaverTextInDetail);
+    }
+
+    // Grayed-out / non-qualifying BetSaver: the BetSaver text should NOT be shown in the Detail View.
+    async verifyBetSaverTextNotVisibleInDetail() {
+        await expect(
+            this.locatorsRegistry.betSaverTextInDetail,
+            "BetSaver text should NOT be visible in Detail View"
+        ).toBeHidden({ timeout: 10000 });
+    }
+
     async clickSettledBetsButton() {
         await this.safeClick(this.locatorsRegistry.settledBetsButton, "Settled Bets Button");
         await this.page.waitForTimeout(3000);
@@ -270,6 +287,8 @@ export class BetSaverPage {
         await this.preparePage();
         await OddsSelectionAbove(numberOfOdds, oddsAbove, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
+        // Scroll the Bet Now button into view before clicking it
+        await this.locatorsRegistry.betNowButton.scrollIntoViewIfNeeded();
         await this.safeClick(this.locatorsRegistry.betNowButton, "BetNow Button");
         await this.page.waitForTimeout(5000);
         await this.closePopup();

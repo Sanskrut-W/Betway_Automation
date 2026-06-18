@@ -11,11 +11,9 @@ const Locator_Url = "src/global/utils/file-utils/locators(2).xlsx";
 
 export class BetslipPage extends SportsPage {
   readonly BetslipPageLocatorsRegistry: Record<string, import('@playwright/test').Locator>;
-  page: import('@playwright/test').Page;
 
   constructor(page: import('@playwright/test').Page) {
     super(page);
-    this.page = page;
 
     const configs = loadLocatorsFromExcel(Locator_Url, "BetslipPage");
 
@@ -78,29 +76,10 @@ export class BetslipPage extends SportsPage {
     }).getByRole('img').nth(1);
   }
 
-  // Navigation Methods
-  async goto() {
-    await this.page.goto('https://en.betway.co.mz/sport/soccer', { waitUntil: 'domcontentloaded' });
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-  }
-
-  // Login Methods
-  async Login() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
-    await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-    await this.page.waitForLoadState('domcontentloaded');
-  }
+  // goto() and Login() are inherited from BasePage (via SportsPage chain)
 
   async loginWithoutFreebet() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user5.mobile}`);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user5.password}`);
-    await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-    await this.page.waitForLoadState('domcontentloaded');
+    await this.Login(userData.user5);
   }
 
   async closePromotionPopup() {

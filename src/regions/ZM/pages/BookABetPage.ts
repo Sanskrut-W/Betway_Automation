@@ -3,20 +3,20 @@ import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelRea
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElements } from '../../Common-Flows/HighlightElements';
 import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
+import { BasePage } from './BasePage';
 
 const userData = require('../json-data/userData.json');
 const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx";
 
-export class BookABetPage {
+export class BookABetPage extends BasePage {
 
     readonly locatorsRegistry: Record<string, Locator>;
-    readonly page: Page;
     private readonly TEST_MOBILE_NUMBER = '964079720';
     private readonly TEST_PASSWORD = '12345';
     private locators: Record<string, Locator>;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
 
         // Load all locators for the BookABet sheet
         const configs = loadLocatorsFromExcel(LOCATOR_URL, "BookABetPage");
@@ -81,10 +81,7 @@ export class BookABetPage {
 
     // --- Core Navigation Methods ---
 
-    async goto() {
-        await this.page.goto('https://betway.co.zm/sport/soccer');
-        await this.page.waitForLoadState('domcontentloaded');
-    }
+    // goto() and login() are inherited from BasePage
 
     async closePopup() {
         const closeButton = this.locatorsRegistry.closePopup;
@@ -94,6 +91,7 @@ export class BookABetPage {
         }
     }
 
+    // Login() overrides BasePage: this page logs in via a dedicated login button (not Enter)
     async Login() {
         // T33/T34 Login details
         await this.locatorsRegistry.mobileNumber.fill(userData.user4.mobile);

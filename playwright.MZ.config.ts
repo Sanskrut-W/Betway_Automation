@@ -41,7 +41,8 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: 'https://en.betway.co.mz/sport/soccer',
+    // Domain root — page objects pass their own path to BasePage.goto()
+    baseURL: 'https://en.betway.co.mz',
 
     // Real browser window size
     viewport: null,

@@ -15,7 +15,6 @@ export class HowToPage extends HomePage {
 
     constructor(page: import('@playwright/test').Page) {
         super(page);
-        this.page = page;
         this.howToPageLocatorRegistry = {
             ...this.HomePagelocatorsRegistry,
             howToBet: this.page.getByText("How To Bet ").first(),
@@ -147,7 +146,7 @@ export class HowToPage extends HomePage {
     }
 
     async gotoHowTo() {
-        await this.page.goto('/how-to-bet');
+        await this.goto('/how-to-bet');
     }
 
 

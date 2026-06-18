@@ -2,6 +2,7 @@ import { Page, Locator, expect } from '@playwright/test';
 import { highlightElements } from '../../../regions/Common-Flows/HighlightElements';
 import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader"; // Adjust path as needed
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver"; // Adjust path as needed
+import { BasePage } from './BasePage';
 
 // URL for your central locator file
 const LOCATOR_URL = "https://zensar-my.sharepoint.com/:x:/r/personal/ujjval_kulkarni_zensar_com/_layouts/15/Doc.aspx?sourcedoc=%7B02896C8A-EC0B-46AF-98B2-F988B799B72C%7D&file=locators.xlsx&action=default&mobileredirect=true&wdPreviousSession=1b46a5c7-0487-4ac7-bf58-931cb3e4f21d&wdOrigin=BROWSELINK%2COFU.EXCEL.EDIT-A-COPY&wdPreviousSessionSrc=OFU";
@@ -45,12 +46,11 @@ const mockSignUpConfigs = {
 // ------------------------------------------------------------------
 
 
-export class SignUpPage {
-    readonly page: Page;
+export class SignUpPage extends BasePage {
     readonly signUpLocatorsRegistry: Record<string, Locator>;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
 
         // ---
         // 🛑 IMPORTANT: This is the MOCKED call.
@@ -102,8 +102,8 @@ export class SignUpPage {
     // ------------------------------------------------------------------
 
     async goto() {
-        await this.page.goto('https://www.betway.mw/');
-        await this.page.waitForLoadState('domcontentloaded');
+        // Always land on the sports page (never the home page)
+        await super.goto('/sport/soccer');
     }
 
     // ------------------------------------------------------------------

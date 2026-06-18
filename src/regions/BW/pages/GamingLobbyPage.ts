@@ -3,17 +3,17 @@ import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelRea
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElements } from '../../Common-Flows/HighlightElements';
 import { ScreenshotHelper } from '../../Common-Flows/ScreenshotHelper';
+import { BasePage } from './BasePage';
 import path from 'path';
 
 const userData = require('../json-data/userData.json');
 // Using path.resolve to ensure the Excel file is found regardless of execution context
 const Locator_Url = "src/global/utils/file-utils/locators(2).xlsx";
-export class GamingLobbyPage {
+export class GamingLobbyPage extends BasePage {
     readonly locatorsRegistry: Record<string, Locator>;
-    readonly page: Page;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         const configs = loadLocatorsFromExcel(Locator_Url, "GamingLobbyPage");
 
         this.locatorsRegistry = {
@@ -46,19 +46,7 @@ export class GamingLobbyPage {
         };
     }
 
-    async goto() {
-        await this.page.goto('https://www.betway.co.bw/sport/soccer');
-        await this.page.waitForLoadState('domcontentloaded');
-    }
-
-    async Login() {
-        await this.locatorsRegistry.mobileNumber.fill(`${userData.user4.mobile}`);
-        await this.locatorsRegistry.password.fill(`${userData.user4.password}`);
-        await this.locatorsRegistry.loginButton.click();
-        // await this.locatorsRegistry.closePopup.waitFor({ state: 'visible', timeout: 30000 });
-        // await this.locatorsRegistry.closePopup.click();
-        await this.page.waitForTimeout(1000);
-    }
+    // goto() and Login() are inherited from BasePage
 
     async navigateToVertical(verticalKey: string) {
         await this.locatorsRegistry[verticalKey].click();

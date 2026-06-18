@@ -78,50 +78,10 @@ export class BetslipPage extends SportsPage {
     }).getByRole('img').nth(1);
   }
 
-  // Navigation Methods
-  async goto() {
-    await this.page.goto('https://www.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-  }
-
-  // Login Methods
-  // async Login() {
-  //   await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
-  //   await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
-  //   await this.page.keyboard.press('Enter');
-  //   // await this.BetslipPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',});
-  //   // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-  //   await this.page.waitForLoadState('domcontentloaded');
-  // }
-
-  async Login() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(userData.user4.mobile);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(userData.user4.password);
-    await this.page.keyboard.press('Enter');
-
-    // Try to close promotion popup ONLY if it appears
-    const popup = this.BetslipPageLocatorsRegistry.closePromotionPopup;
-
-    try {
-      await popup.waitFor({ state: 'visible', timeout: 9000 });
-      if (await popup.isVisible()) {
-        await popup.click();
-      }
-    } catch {
-      // Popup did not appear → ignore
-    }
-
-    await this.page.waitForLoadState('domcontentloaded');
-  }
-
+  // goto() and Login() are inherited from BasePage (via SportsPage chain)
 
   async loginWithoutFreebet() {
-    await this.BetslipPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user5.mobile}`);
-    await this.BetslipPageLocatorsRegistry.passwordInput.fill(`${userData.user5.password}`);
-    await this.page.keyboard.press('Enter');
-    // await this.BetslipPageLocatorsRegistry.closePromotionPopup.click();
-    await this.page.waitForLoadState('domcontentloaded');
+    await this.Login(userData.user5);
   }
 
   async closePromotionPopup() {

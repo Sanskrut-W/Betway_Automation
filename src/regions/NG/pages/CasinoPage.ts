@@ -20,7 +20,6 @@ export class CasinoPage extends LoginPage {
 
     constructor(page: import('@playwright/test').Page) {
         super(page);
-        this.page = page;
         const configs = loadLocatorsFromExcel(file, "CasinoPage");
         this.casinoPagelocatorsRegistry = {
             ...this.LoginPagelocatorsRegistry,

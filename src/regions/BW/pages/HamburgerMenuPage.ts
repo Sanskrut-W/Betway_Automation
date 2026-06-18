@@ -8,11 +8,9 @@ const Locator_Url = "src/global/utils/file-utils/locators(2).xlsx";
 
 export class HamburgerMenuPage extends HeaderPage {
     readonly HamburgerPageLocatorRegistry: Record<string, Locator>;
-    page: Page;
 
     constructor(page: Page) {
         super(page);
-        this.page = page;
 
         const configs = loadLocatorsFromExcel(Locator_Url, "HeaderPage");
 
@@ -24,11 +22,7 @@ export class HamburgerMenuPage extends HeaderPage {
         };
     }
 
-    async goto() {
-        await this.page.goto('https://www.betway.co.bw/sport/soccer', { waitUntil: 'domcontentloaded' });
-        //   await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',timeout:15000});
-        // await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
-    }
+    // goto() is inherited from BasePage (via HeaderPage)
 
 
     // ==========================================

@@ -16,14 +16,12 @@ const userData = require('../json-data/userData.json');
 
 
 export class BetInfluencerModal extends BetslipPage {
-    page: import('@playwright/test').Page;
     BetInfluencerModalLocatorRegistry: Record<string, import('@playwright/test').Locator>;
     revenue: any;
 
 
     constructor(page: import('@playwright/test').Page) {
         super(page);
-        this.page = page;
         this.revenue = this.page.getByText('Revenue').nth(0);
         const configs = loadLocatorsFromExcel(LOCATOR_URL, "BetInfluencerModalPage");
         this.BetInfluencerModalLocatorRegistry = {

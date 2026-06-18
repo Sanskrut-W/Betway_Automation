@@ -4,6 +4,7 @@ import { sportsPageLocators } from '../locators/sportsPageLocators';
 
 const userData = require('../json-data/userData.json');
 import { LoginPage } from './LoginPage';
+import { BasePage } from './BasePage';
 import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelReader";
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElements } from '../../Common-Flows/HighlightElements';
@@ -14,11 +15,9 @@ const LOCATOR_URL="https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/l
 
 export class SportsPage extends LoginPage {
     SportsPagelocatorRegistry: Record<string, import('@playwright/test').Locator>;
-    page: import('@playwright/test').Page;
-    
+
     constructor(page: import('@playwright/test').Page) {
         super(page);
-        this.page = page;
         const configs = loadLocatorsFromExcel(LOCATOR_URL, "SportsPage");
         this.SportsPagelocatorRegistry = {
             ...this.LoginPagelocatorsRegistry,
@@ -52,8 +51,24 @@ export class SportsPage extends LoginPage {
 
     // Clicking Functions :
 
+    /**
+     * Standard header login (user4), inherited from BasePage.
+     * LoginPage overrides Login() with a home-page + user1 + welcome-check
+     * variant; the sports chain needs the plain header login that fills the
+     * form in place (no navigation), so we re-expose BasePage's implementation.
+     */
+    async Login(user?: { mobile: string; password: string }) {
+        await BasePage.prototype.Login.call(this, user);
+    }
+
+    // Sports/betslip branch takes goto() directly from BasePage so it always lands
+    // on the sports page, independent of LoginPage's goto.
+    async goto(path: string = '/sport/soccer') {
+        await BasePage.prototype.goto.call(this, path);
+    }
+
     async gotoSportsPage() {
-        await this.page.goto('/sport/soccer');
+        await this.goto('/sport/soccer');
     }
 
     async gotoAviator() {

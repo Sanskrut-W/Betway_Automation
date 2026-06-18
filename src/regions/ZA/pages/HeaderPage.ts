@@ -88,45 +88,7 @@ export class HeaderPage extends HomePage {
     };
   }
 
-  // Navigation Methods
-  async goto() {
-    await this.page.goto('https://www.betway.co.za/sport/soccer', { waitUntil: 'domcontentloaded' });
-    //   await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible',timeout:15000});
-    // await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
-  }
-
-  // async Login() {
-  //   // await this.goto();
-  //   await this.HeaderPageLocatorsRegistry.mobileNumberInput.fill(`${userData.user4.mobile}`);
-  //   await this.HeaderPageLocatorsRegistry.passwordInput.fill(`${userData.user4.password}`);
-  //   await this.page.keyboard.press('Enter');
-  //   // await this.HeaderPageLocatorsRegistry.closePromotionPopup.waitFor({ state: 'visible', timeout: 30000 });
-  //   // await this.HeaderPageLocatorsRegistry.closePromotionPopup.click();
-  //   // await this.closePromotionPopup();
-  //   await this.page.waitForLoadState('domcontentloaded');
-  // }
-
-  async Login() {
-    await this.HeaderPageLocatorsRegistry.mobileNumberInput.fill(userData.user4.mobile);
-    await this.HeaderPageLocatorsRegistry.passwordInput.fill(userData.user4.password);
-    await this.page.keyboard.press('Enter');
-
-    // Try to close promotion popup ONLY if it appears
-    const popup = this.HeaderPageLocatorsRegistry.closePromotionPopup;
-
-    try {
-      await popup.waitFor({ state: 'visible', timeout: 9000 });
-      if (await popup.isVisible()) {
-        await popup.click();
-      }
-    } catch {
-      // Popup did not appear → ignore
-    }
-
-    await this.page.waitForLoadState('domcontentloaded');
-  }
-
-
+  // goto() and Login() are inherited from BasePage (via HomePage)
 
   // Verification Methods
   async verifyBetwayLogoHeader() {

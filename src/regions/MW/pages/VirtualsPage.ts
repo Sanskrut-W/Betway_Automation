@@ -30,7 +30,7 @@ export class VirtualsPage extends SportsPage {
     }
 
     async gotoVirtuals() {
-        await this.page.goto('/lobby/virtuals');
+        await this.goto('/lobby/virtuals');
     }
 
     async searchgame(gameName: string) {
