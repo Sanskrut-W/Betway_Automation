@@ -65,10 +65,14 @@ export class SignUpPage extends BasePage {
 
         // Initialize the locator registry
         this.signUpLocatorsRegistry = {
-            mobileInput: getLocator(this.page, configs["mobileInput"]),
-            passwordInput: getLocator(this.page, configs["passwordInput"]),
-            firstNameInput: getLocator(this.page, configs["firstNameInput"]),
-            lastNameInput: getLocator(this.page, configs["lastNameInput"]),
+            // Direct data-id selectors (more reliable than label/role lookups)
+            mobileInput: this.page.locator('input[data-id="MobileNumber"]'),
+            passwordInput: this.page.locator('input[data-id="Password"]'),
+            firstNameInput: this.page.locator('input[data-id="FirstName"]'),
+            lastNameInput: this.page.locator('input[data-id="LastName"]'),
+            agreeToAllCheckbox: this.page.locator('input[data-id="AgreeToAll"]'),
+            dobDropdown: this.page.locator('[data-id="DateOfBirth"] input'),
+
             loginButton: getLocator(this.page, configs["loginButton"]),
             signUpButton: getLocator(this.page, configs["signUpButton"]),
             nextButton: getLocator(this.page, configs["nextButton"]),
@@ -85,11 +89,9 @@ export class SignUpPage extends BasePage {
             passportOption: getLocator(this.page, configs["passportOption"]),
             saIdInput: getLocator(this.page, configs["saIdInput"]),
             passportInput: getLocator(this.page, configs["passportInput"]),
-            dobDropdown: getLocator(this.page, configs["dobDropdown"]),
             signupCodeToggle: getLocator(this.page, configs["signupCodeToggle"]),
             voucherCodeField: getLocator(this.page, configs["voucherCodeField"]),
             referralCodeField: getLocator(this.page, configs["referralCodeField"]),
-            agreeToAllCheckbox: getLocator(this.page, configs["agreeToAllCheckbox"]),
             diallingCode: getLocator(this.page, configs["diallingCode"]),
             forms: getLocator(this.page, configs["forms"]),
             signUpCodeField: getLocator(this.page, configs["signUpCodeField"]),
@@ -162,7 +164,14 @@ export class SignUpPage extends BasePage {
         await this.signUpLocatorsRegistry.passwordInput.fill(password);
         await this.signUpLocatorsRegistry.firstNameInput.fill(firstName);
         await this.signUpLocatorsRegistry.lastNameInput.fill(lastName);
-        await this.signUpLocatorsRegistry.emailInput.fill(email);
+        try {
+            const emailField = this.signUpLocatorsRegistry.emailInput;
+            if (await emailField.isVisible({ timeout: 2000 })) {
+                await emailField.fill(email);
+            }
+        } catch {
+            // email field not present on this form step
+        }
     }
 
     async fillEmail(email: string) {

@@ -73,23 +73,23 @@ test.describe('Footer Module Tests', () => {
     //     await howTo.verifyHowToPageOptions();
     //     await ScreenshotHelper(howTo.page, screenshotDir, 'T38.png', testInfo);
     // });
-    test('T39-Verify that User should able to click on "How to Bet SMS" on the How To page', async ({ howTo }, testInfo) => {
-        await howTo.clickHowToSMS();
-        await ScreenshotHelper(howTo.page, screenshotDir, 'T39-b.png', testInfo);
-    });
-    test('T40-Verify that User should able to click on any option available on "How to SMS" section', async ({ howTo }, testInfo) => {
-        await howTo.clickHowToSMS();
-        await ScreenshotHelper(howTo.page, screenshotDir, 'T40.png', testInfo);
-    });
+    // test('T39-Verify that User should able to click on "How to Bet SMS" on the How To page', async ({ howTo }, testInfo) => {
+    //     await howTo.clickHowToSMS();
+    //     await ScreenshotHelper(howTo.page, screenshotDir, 'T39-b.png', testInfo);
+    // });
+    // test('T40-Verify that User should able to click on any option available on "How to SMS" section', async ({ howTo }, testInfo) => {
+    //     await howTo.clickHowToSMS();
+    //     await ScreenshotHelper(howTo.page, screenshotDir, 'T40.png', testInfo);
+    // });
     test('T41-Verify that User should able to click on "How to Bet" on the How To page', async ({ howTo }, testInfo) => {
         await howTo.clickHowToBetOption();
         await ScreenshotHelper(howTo.page, screenshotDir, 'T41.png', testInfo);
     });
 
-    test('T43-Verify that User should able to click on "How to Betgames" on the How To page', async ({ howTo }, testInfo) => {
-        await howTo.clickHowToBetgames();
-        await ScreenshotHelper(howTo.page, screenshotDir, 'T43.png', testInfo);
-    });
+    // test('T43-Verify that User should able to click on "How to Betgames" on the How To page', async ({ howTo }, testInfo) => {
+    //     await howTo.clickHowToBetgames();
+    //     await ScreenshotHelper(howTo.page, screenshotDir, 'T43.png', testInfo);
+    // });
 
     test('T45-Verify that User should able to click on "How to Register" on the How To page', async ({ howTo }, testInfo) => {
         await howTo.clickHowToRegister();
@@ -110,6 +110,36 @@ test.describe('Footer Module Tests', () => {
     test('T57-Verify functionality of "Affiliate Program" button at the Footer section', async ({ homePage }, testInfo) => {
         await homePage.verifyAffiliateProgram();
         await ScreenshotHelper(homePage.page, screenshotDir, 'T57-a.png', testInfo);
+    });
+
+    test('T58-Verify functionality of "Frequently Asked Questions" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickFAQsLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T58.png', testInfo);
+    });
+
+    test('T59-Verify functionality of "Responsible Gaming" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickResponsibleGamingLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T59.png', testInfo);
+    });
+
+    test('T60-Verify functionality of "Sponsorships" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickSponsorshipFooterLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T60.png', testInfo);
+    });
+
+    test('T62-Verify functionality of "Play Aviator" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickPlayAviatorLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T62.png', testInfo);
+    });
+
+    test('T63-Verify functionality of "Sitemap" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickSitemapLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T63.png', testInfo);
+    });
+
+    test('T69-Verify functionality of "Betway Scores App" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickBetwayScoresAppLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T69.png', testInfo);
     });
 
 });

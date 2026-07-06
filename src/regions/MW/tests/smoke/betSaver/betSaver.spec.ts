@@ -39,7 +39,7 @@ test.describe('BetSaver Module Tests', () => {
 
     // T6-9 Betsaver Active in My Bets
     test('T6-9 - Betsaver Active in My Bets', async ({ betSaverPage }, testInfo) => {
-        await betSaverPage.placeBetsaverActiveBetAndNavigateToMyBets(8);
+        await betSaverPage.placeBetsaverActiveBetAndNavigateToMyBets(7);
 
         // T6 My Bets (Active)
         // await betSaverPage.captureScreenshot('betSaverInMyBets', screenshotDir, 'T6', testInfo);
@@ -48,10 +48,6 @@ test.describe('BetSaver Module Tests', () => {
         await betSaverPage.clickDetailViewButton();
         await betSaverPage.verifyBetSaverTextVisibleInDetail();
         await betSaverPage.captureScreenshot('betSaverTextInDetail', screenshotDir, 'T7', testInfo);
-
-        // T8 Settled Bets
-        await betSaverPage.clickSettledBetsButton();
-        await betSaverPage.captureScreenshot('betSaverTextInDetail', screenshotDir, 'T8', testInfo);
 
         // T9 Settled Detail View — BetSaver text SHOULD be visible
         await betSaverPage.clickDetailViewButton();

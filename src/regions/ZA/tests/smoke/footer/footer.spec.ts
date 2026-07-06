@@ -112,6 +112,36 @@ test.describe('Footer Module Tests', () => {
         await ScreenshotHelper(homePage.page, screenshotDir, 'T57-a.png', testInfo);
     });
 
+    test('T58-Verify functionality of "Frequently Asked Questions" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickFAQsLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T58.png', testInfo);
+    });
+
+    test('T59-Verify functionality of "Responsible Gaming" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickResponsibleGamingLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T59.png', testInfo);
+    });
+
+    test('T60-Verify functionality of "Sponsorship" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickSponsorshipFooterLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T60.png', testInfo);
+    });
+
+    test('T61-Verify presence of "PAIA Manual" link at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.verifyPAIAManualLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T61.png', testInfo);
+    });
+
+    test('T62-Verify functionality of "Play Aviator" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickPlayAviatorLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T62.png', testInfo);
+    });
+
+    test('T63-Verify functionality of "Sitemap" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickSitemapLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T63.png', testInfo);
+    });
+
 });
 // npx playwright test src/regions/ZA/tests/smoke/footer/footer.spec.ts --config=playwright.ZA.config.ts --headed
 // 2.allure generate allure-results --clean -o allure-report

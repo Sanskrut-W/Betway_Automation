@@ -49,7 +49,18 @@ export class BasePage {
     }
 
     async goto(path: string = '/sport/soccer') {
-        await this.page.goto(path, { waitUntil: 'domcontentloaded' });
+        let lastError: Error | undefined;
+        for (let attempt = 1; attempt <= 3; attempt++) {
+            try {
+                await this.page.goto(path, { waitUntil: 'domcontentloaded' });
+                lastError = undefined;
+                break;
+            } catch (error) {
+                lastError = error as Error;
+                if (attempt < 3) await new Promise(resolve => setTimeout(resolve, 2000 * attempt));
+            }
+        }
+        if (lastError) throw lastError;
 
         // The promotion popup shows once, shortly after landing — wait for it and close it
         await this.closePromotionPopupIfVisible();

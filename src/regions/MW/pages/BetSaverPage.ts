@@ -262,24 +262,24 @@ export class BetSaverPage extends BasePage {
     async placeQualifyingBetAndNavigateToMyBets(numberOfOdds: number = 3) {
         await this.locatorsRegistry.gotit.click().catch(() => { });
         await this.preparePage();
-        await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
-        await OddsSelectionAbove(numberOfOdds, 1.5, this.page);
+        // await this.safeClick(this.locatorsRegistry.upcomingButton, "Upcoming Button");
+        await OddsSelectionAbove(numberOfOdds, 2.0, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betNowButton, "BetNow Button");
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForTimeout(3000);
         await this.closePopup();
         await this.navigateToMyBets();
         await this.page.waitForTimeout(2000);
     }
 
-    async placeBetsaverActiveBetAndNavigateToMyBets(numberOfOdds: number = 8, oddsAbove: number = 3.0) {
+    async placeBetsaverActiveBetAndNavigateToMyBets(numberOfOdds: number = 7, oddsAbove: number = 2.0) {
         await this.preparePage();
         await OddsSelectionAbove(numberOfOdds, oddsAbove, this.page);
-        await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
+        // await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         // Scroll the Bet Now button into view before clicking it
         await this.locatorsRegistry.betNowButton.scrollIntoViewIfNeeded();
         await this.safeClick(this.locatorsRegistry.betNowButton, "BetNow Button");
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForTimeout(3000);
         await this.closePopup();
         await this.navigateToMyBets();
     }

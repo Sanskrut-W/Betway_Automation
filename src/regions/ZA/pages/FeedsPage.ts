@@ -142,6 +142,9 @@ export class FeedsPage extends BasePage {
 
     /** T10: Remove comment. */
     async removePostedComment() {
+        await this.locatorsRegistry.firstCommentDiv.waitFor({ state: 'visible', timeout: 10000 });
+        await this.locatorsRegistry.firstCommentDiv.hover();
+        await this.locatorsRegistry.helpInComments.waitFor({ state: 'visible', timeout: 10000 });
         await this.locatorsRegistry.helpInComments.click();
         await this.locatorsRegistry.removeComments.click();
         await this.page.waitForTimeout(2000);
@@ -157,6 +160,9 @@ export class FeedsPage extends BasePage {
 
     async showReportButton() {
         // T12: Report button
+        await this.locatorsRegistry.firstCommentDiv.waitFor({ state: 'visible', timeout: 10000 });
+        await this.locatorsRegistry.firstCommentDiv.hover();
+        await this.locatorsRegistry.helpInComments.waitFor({ state: 'visible', timeout: 10000 });
         await this.locatorsRegistry.helpInComments.click();
     }
 

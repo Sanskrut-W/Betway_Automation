@@ -57,7 +57,7 @@ test.describe('Footer Module Tests', () => {
     test('T32 b -Verify functionality of "Betting Rules" at footer section', async ({ homePage }, testInfo) => {
         const [newPage] = await Promise.all([
             homePage.page.context().waitForEvent('page'),
-            homePage.HomePagelocatorsRegistry.BettingRules.click()
+            homePage.HomePagelocatorsRegistry.BettingRules.click({ force: true })
         ]);
         await expect(newPage).toHaveURL('https://cms1.gmgamingsystems.com/medialibraries/content.gmgamingsystems.com/Synapse/Betting%20rules/BettingRules_ZM_en.pdf');
         await ScreenshotHelper(homePage.page, screenshotDir, 'T32-b.png', testInfo);
@@ -74,12 +74,52 @@ test.describe('Footer Module Tests', () => {
         await ScreenshotHelper(homePage.page, screenshotDir, 'T37-b.png', testInfo);
     });
 
+    test('T41-Verify that User should able to click on "How to Bet" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToBetOption();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T41.png', testInfo);
+    });
+
+    test('T45-Verify that User should able to click on "How to Register" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToRegister();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T45.png', testInfo);
+    });
+
+    test('T47-Verify that User should able to click on "How to Deposit" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToDeposit();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T47.png', testInfo);
+    });
+
+    test('T49-Verify that User should able to click on "How to Reset Password" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToResetPassword();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T49.png', testInfo);
+    });
+
     test('T57-Verify functionality of "Affiliate Program" button at the Footer section', async ({ homePage }, testInfo) => {
         await homePage.verifyAffiliateProgram();
         await ScreenshotHelper(homePage.page, screenshotDir, 'T57-a.png', testInfo);
     });
 
+    test('T58-Verify functionality of "Frequently Asked Questions" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickFAQsLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T58.png', testInfo);
+    });
+
+    test('T59-Verify functionality of "Responsible Gaming" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickResponsibleGamingLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T59.png', testInfo);
+    });
+
+    test('T60-Verify functionality of "Sponsorships" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickSponsorshipFooterLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T60.png', testInfo);
+    });
+
+    test('T63-Verify functionality of "Sitemap" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickSitemapLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T63.png', testInfo);
+    });
+
 });
-// npx playwright test src/regions/ZA/tests/smoke/footer/footer.spec.ts --config=playwright.ZA.config.ts --headed
+// npx playwright test src/regions/ZM/tests/smoke/footer/footer.spec.ts --config=playwright.ZM.config.ts --headed
 // 2.allure generate allure-results --clean -o allure-report
-// 3.allure open src/regions/ZA/reports/allure-report 
+// 3.allure open src/regions/ZM/reports/allure-report

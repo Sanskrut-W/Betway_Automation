@@ -18,16 +18,16 @@ export class HowToPage extends HomePage {
         this.page = page;
         this.howToPageLocatorRegistry = {
             ...this.HomePagelocatorsRegistry,
-            howToBet: this.page.getByText("How To Bet ").first(),
-            howToResetPassword: this.page.getByText("How To Reset Password ").first(),
-            howToDeposit: this.page.getByText("How To Deposit ").first(),
-            howToRegister: this.page.getByText("How To Register").first(),
-            howToWithdraw: this.page.getByText("How To Withdraw ").first(),
-            howToBetgames: this.page.getByText("How To Betgames").first(),
-            howToCasino: this.page.getByText("How to Casino ").first(),
-            howToFica: this.page.getByText("how-to-fica ").first(),
-            howToSMS: this.page.getByText("How To Bet SMS ").first(),
-            howToJackpot: this.page.getByText("How To Jackpot ").first(),
+            howToBet: this.page.getByText(/How To Bet/i).first(),
+            howToResetPassword: this.page.getByText(/How to reset your password/i).first(),
+            howToDeposit: this.page.getByText(/How To Deposit/i).first(),
+            howToRegister: this.page.getByText(/How To Register/i).first(),
+            howToWithdraw: this.page.getByText(/How To Withdraw/i).first(),
+            howToBetgames: this.page.getByText(/How To Betgames/i).first(),
+            howToCasino: this.page.getByText(/How to Casino/i).first(),
+            howToFica: this.page.getByText(/how-to-fica/i).first(),
+            howToSMS: this.page.getByText(/How To Bet SMS/i).first(),
+            howToJackpot: this.page.getByText(/How To Jackpot/i).first(),
         }
     }
 
@@ -112,7 +112,7 @@ export class HowToPage extends HomePage {
     }
     async clickHowToResetPassword() {
         await this.howToPageLocatorRegistry.howToResetPassword.click();
-        await expect(this.page).toHaveURL(/.*how-to-reset-password*/, { timeout: 15000 });
+        await expect(this.page).toHaveURL(/.*how-to-reset.*password.*/i, { timeout: 15000 });
         await this.verifyHowToResetPassword();
     }
     async clickHowToDeposit() {

@@ -56,13 +56,10 @@ test.describe('Footer Module Tests', () => {
     });
 
     test('T32 b -Verify functionality of "Betting Rules" at footer section', async ({ homePage }, testInfo) => {
-        const [newPage] = await Promise.all([
-            homePage.page.context().waitForEvent('page'),
-            homePage.HomePagelocatorsRegistry.BettingRules.click()
-        ]);
-        await expect(newPage).toHaveURL('https://cms1.gmgamingsystems.com/medialibraries/content.gmgamingsystems.com/Synapse/Betting%20rules/GhanaBR-Eng.pdf');
+        await homePage.HomePagelocatorsRegistry.BettingRules.click({ force: true });
+        await homePage.page.waitForLoadState('domcontentloaded');
+        await expect(homePage.page.getByRole('heading', { name: 'Betting Rules and Tips' })).toBeVisible({ timeout: 15000 });
         await ScreenshotHelper(homePage.page, screenshotDir, 'T32-b.png', testInfo);
-        await newPage.close();
     });
 
     test('T33 -b -Verify functionality of "Betway App" at Footer section', async ({ homePage }, testInfo) => {
@@ -70,14 +67,95 @@ test.describe('Footer Module Tests', () => {
         await ScreenshotHelper(homePage.page, screenshotDir, 'T33-b.png', testInfo);
     });
 
-    // test('T37-Verify functionality of "How To" button at Footer section', async ({ homePage }, testInfo) => {
-    //     await homePage.verifyHowToLink();
-    //     await ScreenshotHelper(homePage.page, screenshotDir, 'T37-b.png', testInfo);
+    test('T37-Verify functionality of "How To" button at Footer section', async ({ homePage }, testInfo) => {
+        await homePage.verifyHowToLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T37-b.png', testInfo);
+    });
+
+    // T39/T40 - "How to Bet SMS" does not exist on the GH How To page
+    // test('T39-Verify that User should able to click on "How to Bet SMS" on the How To page', async ({ howTo }, testInfo) => {
+    //     await howTo.clickHowToSMS();
+    //     await ScreenshotHelper(howTo.page, screenshotDir, 'T39-b.png', testInfo);
     // });
+    // test('T40-Verify that User should able to click on any option available on "How to SMS" section', async ({ howTo }, testInfo) => {
+    //     await howTo.clickHowToSMS();
+    //     await ScreenshotHelper(howTo.page, screenshotDir, 'T40.png', testInfo);
+    // });
+
+    test('T41-Verify that User should able to click on "How to Bet" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToBetOption();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T41.png', testInfo);
+    });
+
+    // T43 - "How to Betgames" does not exist on the GH How To page
+    // test('T43-Verify that User should able to click on "How to Betgames" on the How To page', async ({ howTo }, testInfo) => {
+    //     await howTo.clickHowToBetgames();
+    //     await ScreenshotHelper(howTo.page, screenshotDir, 'T43.png', testInfo);
+    // });
+
+    test('T45-Verify that User should able to click on "How to Register" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToRegister();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T45.png', testInfo);
+    });
+
+    test('T47-Verify that User should able to click on "How to Deposit" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToDeposit();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T47.png', testInfo);
+    });
+
+    test('T49-Verify that User should able to click on "How to Reset Password" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToResetPassword();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T49.png', testInfo);
+    });
+
+    test('T64-Verify that User should able to click on "How to Withdraw" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToWithdraw();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T64.png', testInfo);
+    });
+
+    test('T65-Verify that User should able to click on "How to Casino" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToCasino();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T65.png', testInfo);
+    });
+
+    test('T66-Verify that User should able to click on "How to Jackpots" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToJackpot();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T66.png', testInfo);
+    });
+
+    test('T67-Verify that User should able to click on "How to Cash Out" on the How To page', async ({ howTo }, testInfo) => {
+        await howTo.clickHowToCashOut();
+        await ScreenshotHelper(howTo.page, screenshotDir, 'T67.png', testInfo);
+    });
 
     test('T57-Verify functionality of "Affiliate Program" button at the Footer section', async ({ homePage }, testInfo) => {
         await homePage.verifyAffiliateProgram();
         await ScreenshotHelper(homePage.page, screenshotDir, 'T57-a.png', testInfo);
+    });
+
+    test('T58-Verify functionality of "Frequently Asked Questions" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickFAQsLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T58.png', testInfo);
+    });
+
+    test('T59-Verify functionality of "Responsible Gaming" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickResponsibleGamingLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T59.png', testInfo);
+    });
+
+    test('T60-Verify functionality of "Sponsorships" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickSponsorshipFooterLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T60.png', testInfo);
+    });
+
+    test('T62-Verify functionality of "Play Aviator" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickPlayAviatorLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T62.png', testInfo);
+    });
+
+    test('T63-Verify functionality of "Sitemap" button at the Footer section', async ({ homePage }, testInfo) => {
+        await homePage.clickSitemapLink();
+        await ScreenshotHelper(homePage.page, screenshotDir, 'T63.png', testInfo);
     });
 
 });

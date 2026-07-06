@@ -98,7 +98,11 @@ export const test = base.extend<PageFixtures>({
     const homePage = new HomePage(page);
     await homePage.gotoHomePage();
     await homePage.page.setViewportSize({ width: 1300, height: 780 });
-    await homePage.page.getByText('Got it').first().click();
+    try {
+      await homePage.page.getByText('Got it').first().click({ timeout: 5000 });
+    } catch {
+      // cookie consent popup not present
+    }
     await use(homePage);
   },
 

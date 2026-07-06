@@ -6,30 +6,27 @@ import { BasePage } from './BasePage';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
 const Locator_Url = "src/global/utils/file-utils/locators(2).xlsx";
 
 export class HomePage extends BasePage {
 
     readonly HomePagelocatorsRegistry: Record<string, import('@playwright/test').Locator>;
 
-    footerLinksContainer: any;
-
     constructor(page: import('@playwright/test').Page) {
         super(page);
         const configs = loadLocatorsFromExcel(Locator_Url, "HomePage");
-        this.footerLinksContainer = getLocator(this.page, configs["ContactUs"]).locator('..');
         this.HomePagelocatorsRegistry = {
-            ContactUs: getLocator(this.page, configs["ContactUs"]),
-            howtobet: getLocator(this.page, configs["howtobet2"]),
-            FAQs: getLocator(this.footerLinksContainer, configs["FAQs"]),
-            TermsAndConditions: getLocator(this.footerLinksContainer, configs["TermsAndConditions"]),
-            BettingRules: getLocator(this.footerLinksContainer, configs["BettingRules"]),
-            BetwayApp: getLocator(this.footerLinksContainer, configs["BetwayApp"]),
-            AffiliateProgram: getLocator(this.footerLinksContainer, configs["AffiliateProgram"]),
-            ResponsibleGaming: getLocator(this.footerLinksContainer, configs["ResponsibleGaming"]),
-            PrivacyPolicy: getLocator(this.footerLinksContainer, configs["PrivacyPolicy"]),
-            Sponsorships: getLocator(this.footerLinksContainer, configs["Sponsorships"]),
+            ContactUs: this.page.locator('a[href="/contact-us"]').last(),
+            howtobet: this.page.locator('a[href="/how-to-bet"]').last(),
+            FAQs: this.page.locator('a[href="/frequently-asked-questions"]').last(),
+            TermsAndConditions: this.page.locator('a[href="/terms-and-conditions"]').last(),
+            BettingRules: this.page.locator('a[href*="BettingRules_ZM"]').last(),
+            BetwayApp: this.page.locator('a[href="/betway-app"]').last(),
+            AffiliateProgram: this.page.locator('a[href="https://www.superpartnersafrica.com/"]').last(),
+            ResponsibleGaming: this.page.locator('a[href="/responsible-gaming"]').last(),
+            PrivacyPolicy: this.page.locator('a[href="/sport/privacy-policy"]').last(),
+            Sponsorships: this.page.locator('a[href="/sponsorship"]').last(),
+            Sitemap: this.page.locator('a[href="/sitemap"]').last(),
             betwayLogo: getLocator(this.page, configs["betwayLogo"]),
             footer: getLocator(this.page, configs["footer"]),
             arsenalLogo: getLocator(this.page, configs["arsenalLogo"]),
@@ -86,9 +83,10 @@ export class HomePage extends BasePage {
         await this.HomePagelocatorsRegistry.TermsAndConditions.waitFor({ state: 'visible', timeout: 10000 });
         await highlightElements(this.HomePagelocatorsRegistry.TermsAndConditions);
     }
+
     async verifyAffiliateProgram() {
         await this.HomePagelocatorsRegistry.AffiliateProgram.waitFor({ state: 'visible', timeout: 10000 });
-        await highlightElements(this.HomePagelocatorsRegistry.Affiliate);
+        await highlightElements(this.HomePagelocatorsRegistry.AffiliateProgram);
     }
 
     async verifyVersion() {
@@ -133,14 +131,21 @@ export class HomePage extends BasePage {
         await highlightElements(this.HomePagelocatorsRegistry.howtobet);
     }
 
+    async verifySponsorshipLink() {
+        await this.HomePagelocatorsRegistry.Sponsorships.waitFor({ state: 'visible', timeout: 10000 });
+        await highlightElements(this.HomePagelocatorsRegistry.Sponsorships);
+    }
+
+    async verifySitemapLink() {
+        await this.HomePagelocatorsRegistry.Sitemap.waitFor({ state: 'visible', timeout: 10000 });
+        await highlightElements(this.HomePagelocatorsRegistry.Sitemap);
+    }
+
     async verifySponsorshipContent() {
         await highlightElementBorder(this.page.getByText('Arsenal').first());
         await highlightElementBorder(this.page.getByText('Brighton').first());
         await highlightElementBorder(this.page.getByText('Atletico Madrid').first());
         await highlightElementBorder(this.page.getByText('Manchester City').first());
-        await highlightElementBorder(this.page.getByText('The Springboks').first());
-        await highlightElementBorder(this.page.getByText('The Betway Premiership').first());
-        await highlightElementBorder(this.page.getByText('Betway SA 2020 XX').first());
     }
 
     // Clicking Methods
@@ -152,11 +157,10 @@ export class HomePage extends BasePage {
     }
 
     async clickArsenalLogo() {
-        await this.HomePagelocatorsRegistry.arsenalLogo.click();
-        await expect(this.page).toHaveURL(/.*sponsorship*/, { timeout: 15000 });
+        await this.HomePagelocatorsRegistry.arsenalLogo.click({ force: true });
+        await expect(this.page).toHaveURL(/.*sponsorship*/i, { timeout: 15000 });
         await this.page.waitForLoadState('domcontentloaded');
         await highlightElementBorder(this.page.getByRole('heading', { name: 'Sponsorship' }));
-
     }
 
     async clickSponsorshipBackButton() {
@@ -167,7 +171,7 @@ export class HomePage extends BasePage {
     }
 
     async clickFooterPrivacyPolicy() {
-        await this.HomePagelocatorsRegistry.PrivacyPolicy.click();
+        await this.HomePagelocatorsRegistry.PrivacyPolicy.click({ force: true });
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.page).toHaveURL(/.*privacy-policy.*/, { timeout: 15000 });
         await highlightElementBorder(this.page.getByRole('heading', { name: 'Privacy Policy' }));
@@ -181,7 +185,7 @@ export class HomePage extends BasePage {
     }
 
     async clickContactUsLink() {
-        await this.HomePagelocatorsRegistry.ContactUs.click();
+        await this.HomePagelocatorsRegistry.ContactUs.click({ force: true });
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.page).toHaveURL(/.*contact-us*/, { timeout: 15000 });
         await highlightElementBorder(this.page.getByRole('heading', { name: 'Contact us - ' }));
@@ -195,10 +199,10 @@ export class HomePage extends BasePage {
     }
 
     async clickFAQsLink() {
-        await this.HomePagelocatorsRegistry.FAQs.click();
+        await this.HomePagelocatorsRegistry.FAQs.click({ force: true });
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.page).toHaveURL(/.*frequently-asked-questions*/, { timeout: 15000 });
-        await highlightElementBorder(this.page.getByRole('heading', { name: "FAQ's" }));
+        await highlightElementBorder(this.page.getByRole('heading', { name: "Frequently asked questions" }));
     }
 
     async clickFAQSBackButton() {
@@ -215,8 +219,8 @@ export class HomePage extends BasePage {
     }
 
     async clickResponsibleGamingLink() {
-        await this.HomePagelocatorsRegistry.ResponsibleGaming.click();
-        await expect(this.page).toHaveURL(/.*responsible-gaming*/, { timeout: 15000 });
+        await this.HomePagelocatorsRegistry.ResponsibleGaming.click({ force: true });
+        await expect(this.page).toHaveURL(/.*responsible-gaming*/i, { timeout: 15000 });
         await highlightElementBorder(this.page.getByRole('heading', { name: "Responsible Gaming" }).first());
         await this.page.waitForLoadState('domcontentloaded');
     }
@@ -262,26 +266,13 @@ export class HomePage extends BasePage {
         await expect(this.page).toHaveURL('/', { timeout: 10000 });
     }
 
-    async clickBettingRulesLink() {
-        await this.HomePagelocatorsRegistry.BettingRules.click();
-        await expect(this.page).toHaveURL(/.*betting-rules-and-tips*/, { timeout: 15000 });
-        await highlightElementBorder(this.page.getByRole('heading', { name: "Betting Rules and Tips" }).first());
-        await this.page.waitForLoadState('domcontentloaded');
-    }
-
-    async clickBettingRulesBackButton() {
-        await highlightElementBorder(this.page.getByRole('heading', { name: "Betting Rules and Tips" }).first().locator('..').locator('a').first());
-        await this.page.getByRole('heading', { name: "Betting Rules and Tips" }).first().locator('..').locator('a').first().click();
-        await this.page.waitForLoadState('domcontentloaded');
-        await expect(this.page).toHaveURL('/', { timeout: 10000 });
-    }
-
     async clickBetwayAppLink() {
-        await this.HomePagelocatorsRegistry.BetwayApp.click();
+        await this.HomePagelocatorsRegistry.BetwayApp.click({ force: true });
         await expect(this.page).toHaveURL(/.*betway-app*/, { timeout: 15000 });
         await highlightElementBorder(this.page.getByRole('heading', { name: "Betway App" }).first());
         await this.page.waitForLoadState('domcontentloaded');
     }
+
     async clickBetwayAppBackButton() {
         await highlightElementBorder(this.page.getByRole('heading', { name: "Betway App" }).first().locator('..').locator('a').first());
         await this.page.getByRole('heading', { name: "Betway App" }).first().locator('..').locator('a').first().click();
@@ -290,8 +281,21 @@ export class HomePage extends BasePage {
     }
 
     async clickHowToLink() {
-        await this.HomePagelocatorsRegistry.BetwayApp.click();
+        await this.HomePagelocatorsRegistry.howtobet.click({ force: true });
         await expect(this.page).toHaveURL(/.*how-to-bet*/, { timeout: 15000 });
+        await this.page.waitForLoadState('domcontentloaded');
+    }
+
+    async clickSponsorshipFooterLink() {
+        await this.HomePagelocatorsRegistry.Sponsorships.click({ force: true });
+        await expect(this.page).toHaveURL(/.*sponsorship*/i, { timeout: 15000 });
+        await this.page.waitForLoadState('domcontentloaded');
+        await highlightElementBorder(this.page.getByRole('heading', { name: 'Sponsorship' }));
+    }
+
+    async clickSitemapLink() {
+        await this.HomePagelocatorsRegistry.Sitemap.click({ force: true });
+        await expect(this.page).toHaveURL(/.*sitemap*/i, { timeout: 15000 });
         await this.page.waitForLoadState('domcontentloaded');
     }
 
