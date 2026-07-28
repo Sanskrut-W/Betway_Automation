@@ -1,23 +1,23 @@
 {
   "user1": {
-    "name": "kiyara nick",
-    "mobile": "99887445",
-    "password": "12345"
+    "name": "Auto Testing",
+    "mobile": "75678918",
+    "password": "123456789"
   },
   "user2": {
-    "mobile": "99887445",
-    "password": "12345"
+    "mobile": "75678918",
+    "password": "123456789"
   },
   "user3": {
-    "mobile": "99887445 ",
-    "password": "12345"
+    "mobile": "75678918",
+    "password": "123456789"
   },
   "user4": {
-    "mobile": "99887445",
-    "password": "12345"
+    "mobile": "75678918",
+    "password": "123456789"
   },
   "user5": {
-    "mobile": "99887445",
-    "password": "12345"
+    "mobile": "75678918",
+    "password": "123456789"
   }
 }

@@ -1,24 +1,24 @@
 {
   "user1": {
-    "name": "Vanie Govender",
-    "mobile": "8323498723",
-    "password": "aa12345678"
+    "name": "Auto Testing",
+    "mobile": "9876543211",
+    "password": "123456789"
   },
   "user2": {
-    "mobile": "8323498723",
-    "password": "aa12345678"
+    "mobile": "9876543211",
+    "password": "123456789"
   },
   "user3": {
-    "mobile": "8323498723",
-    "password": "aa12345678"
+    "mobile": "9876543211",
+    "password": "123456789"
   },
   "user4": {
-    "mobile": "8323498723",
-    "password": "aa1234567890"
+    "mobile": "9876543211",
+    "password": "123456789"
   },
   "user5": {
-    "name": "Vanie Govender",
-    "mobile": "8323498723",
-    "password": "aa1234567890"
+    "name": "Auto Testing",
+    "mobile": "9876543211",
+    "password": "123456789"
   }
 }

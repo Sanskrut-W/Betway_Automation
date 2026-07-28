@@ -3,7 +3,7 @@ import { test } from '../../../fixtures/MasterFixtureFile';
 import path from 'path';
 import { ScreenshotHelper } from '../../../../Common-Flows/ScreenshotHelper';
 const projectRoot = path.resolve(__dirname, '../../..');
-const screenshotDir = path.join(projectRoot, 'screenshots/smoke/buildABet');
+const screenshotDir = path.join(projectRoot, 'screenshots/module/buildABet');
 
 // Global hook for clearing highlights
 // test.afterEach(async ({ signupUtils }) => {

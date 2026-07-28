@@ -3,8 +3,8 @@ import path from 'path';
 import { ScreenshotHelper } from '../../../../Common-Flows/ScreenshotHelper';
  
 // Setup screenshot directory
-const projectRoot = path.resolve(__dirname, '../../../..'); // Adjust depth as needed
-const screenshotDir = path.join(projectRoot, 'screenshots/smoke/buildABet'); // New folder
+const projectRoot = path.resolve(__dirname, '../../..');
+const screenshotDir = path.join(projectRoot, 'screenshots/module/buildABet');
  
 // Global hook for clearing highlights
 // test.afterEach(async ({ signupUtils }) => {
