@@ -238,6 +238,9 @@ export const test = base.extend<PageFixtures>({
     const transactionHistoryPage = new TransactionHistoryPage(page);
     await transactionHistoryPage.goto();
     await transactionHistoryPage.Login();
+    // GH shows a promotional popup right after login; close it now so it
+    // doesn't linger and block later clicks (e.g. transaction history tabs).
+    await transactionHistoryPage.closePopupIfVisible();
     await use(transactionHistoryPage);
   },
 
