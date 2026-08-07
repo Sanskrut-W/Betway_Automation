@@ -12,7 +12,7 @@ test.describe('Transaction History Module Tests', () => {
     test('T1: Verify Transaction History option functionality in My Account dropdown inside Hamburger menu.', async ({ transactionHistoryPage }, testInfo) => {
         await transactionHistoryPage.navigateToTransactionHistory();
         await transactionHistoryPage.captureScreenshot('accountMain', screenshotDir, 'T1-TransactionHistory', testInfo);
-        await transactionHistoryPage.closePopupIfVisible();
+        // await transactionHistoryPage.closePopupIfVisible();
     });
 
     // T2- Verify All tabs functionality in transaction history page.

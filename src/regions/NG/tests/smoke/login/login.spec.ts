@@ -8,6 +8,9 @@ const projectRoot = path.resolve(__dirname, '../../..');
 const screenshotDir = path.join(projectRoot, 'screenshots/module/login');
 
 test.describe('Login Page Tests', () => {
+    // Disabled to match ZA/BW/GH: relies on 2-3 simultaneous "Login"-named buttons on the page
+    // (nth(1)/nth(2)), but NG's hamburger drawer has no login button at all when logged out —
+    // there's only ever the one header #login-btn. No region has this working.
     // test('T5 - Verify that user should able to see the "Login" button on signup popup window', async ({ loginPage }, testInfo) => {
     //     await loginPage.clickLoginButtonFromHamburger();
     //     await loginPage.verifyLoginButtonFromPopupThroughHamburger();

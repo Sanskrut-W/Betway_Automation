@@ -65,8 +65,24 @@ export class SignUpPage extends BasePage {
 
         // Initialize the locator registry
         this.signUpLocatorsRegistry = {
-            mobileInput: getLocator(this.page, configs["mobileInput"]),
-            passwordInput: getLocator(this.page, configs["passwordInput"]),
+            // NG's actual signup modal (id="reg-content", form="partial-reg-form") is a single
+            // step with Mobile Number / Password / ConfirmPassword / Date of Birth / Territory /
+            // age-confirmation checkbox / Continue button — it does NOT have the multi-step
+            // South African ID / Passport flow the Excel-driven locators below assume (that
+            // flow was copied from ZA). The role-based name locators for mobileInput/
+            // passwordInput/registerButton also never matched because the field labels
+            // ("Mobile Number", "Continue") don't match the configured accessible names
+            // ("MobileNumber", "Register"). These are overridden here with locators built
+            // directly from the real DOM (data-id attributes), bypassing the shared Excel
+            // sheet for this region.
+            mobileInput: this.page.locator('input[data-id="MobileNumber"]'),
+            passwordInput: this.page.locator('input[data-id="Password"]'),
+            confirmPasswordInput: this.page.locator('input[data-id="ConfirmPassword"]'),
+            dobInput: this.page.locator('[data-id="DateOfBirth"] input'),
+            territoryDropdown: this.page.locator('[data-id="Territory"]'),
+            ageCheckbox: this.page.locator('input[data-id="ConfirmAge"]'),
+            continueButton: this.page.locator('button[form="partial-reg-form"]'),
+
             firstNameInput: getLocator(this.page, configs["firstNameInput"]),
             lastNameInput: getLocator(this.page, configs["lastNameInput"]),
             loginButton: getLocator(this.page, configs["loginButton"]),
@@ -175,6 +191,65 @@ export class SignUpPage extends BasePage {
 
     async fillPassword(password: string) {
         await this.signUpLocatorsRegistry.passwordInput.fill(password);
+    }
+
+    async fillConfirmPassword(password: string) {
+        await this.signUpLocatorsRegistry.confirmPasswordInput.fill(password);
+    }
+
+    // ------------------------------------------------------------------
+    // NG-specific: single-step form fields (Date of Birth, Territory, age check)
+    // ------------------------------------------------------------------
+
+    async selectDateOfBirth() {
+        await this.signUpLocatorsRegistry.dobInput.click();
+        await this.page.waitForTimeout(500);
+        // PrimeVue Calendar: pick the first enabled day cell in the visible panel (defaults
+        // to a month ~18 years back; later days that month are disabled since they'd make
+        // the user under 18). Clicking a day alone doesn't close the panel — it has explicit
+        // Clear/Cancel/Ok links, so the selection must be confirmed with "Ok".
+        const panel = this.page.locator('.p-datepicker[role="dialog"]');
+        const day = panel.locator('.p-datepicker-calendar td:not(.p-datepicker-other-month) span:not(.p-disabled)').first();
+        if (await day.isVisible({ timeout: 3000 }).catch(() => false)) {
+            await day.click();
+            await this.page.waitForTimeout(300);
+            // Scoped to the panel so this doesn't collide with any other "Ok" text on the page.
+            const okButton = panel.getByText('Ok', { exact: true });
+            if (await okButton.isVisible({ timeout: 1000 }).catch(() => false)) {
+                await okButton.click();
+            }
+        }
+        await this.page.waitForTimeout(300);
+    }
+
+    async selectTerritory() {
+        await this.signUpLocatorsRegistry.territoryDropdown.click();
+        await this.page.waitForTimeout(500);
+        // PrimeVue Dropdown panel is teleported to the end of body; pick the first option.
+        const option = this.page.locator('[role="listbox"] [role="option"], .p-dropdown-item').first();
+        if (await option.isVisible({ timeout: 3000 }).catch(() => false)) {
+            await option.click();
+        }
+        await this.page.waitForTimeout(300);
+    }
+
+    async checkAgeConfirmation() {
+        await this.signUpLocatorsRegistry.ageCheckbox.click({ force: true });
+    }
+
+    async clickContinue() {
+        await this.signUpLocatorsRegistry.continueButton.click();
+        await this.page.waitForTimeout(500);
+    }
+
+    /**
+     * Fills NG's actual single-step signup form: mobile, password, confirm password.
+     * (NG has no first name / last name / email fields at this stage, unlike ZA.)
+     */
+    async fillBasicInfoNG(mobile: string, password: string, confirmPassword: string) {
+        await this.signUpLocatorsRegistry.mobileInput.fill(mobile);
+        await this.signUpLocatorsRegistry.passwordInput.fill(password);
+        await this.signUpLocatorsRegistry.confirmPasswordInput.fill(confirmPassword);
     }
 
     async fillFirstName(firstName: string) {
@@ -377,6 +452,21 @@ export class SignUpPage extends BasePage {
     }
     async highlightRegisterButton() {
         await highlightElements(this.signUpLocatorsRegistry.registerButton);
+    }
+    async highlightConfirmPasswordInput() {
+        await highlightElements(this.signUpLocatorsRegistry.confirmPasswordInput);
+    }
+    async highlightDobInput() {
+        await highlightElements(this.signUpLocatorsRegistry.dobInput);
+    }
+    async highlightTerritoryDropdown() {
+        await highlightElements(this.signUpLocatorsRegistry.territoryDropdown);
+    }
+    async highlightAgeCheckbox() {
+        await highlightElements(this.signUpLocatorsRegistry.ageCheckbox);
+    }
+    async highlightContinueButton() {
+        await highlightElements(this.signUpLocatorsRegistry.continueButton);
     }
     async highlightSAIdInput() {
         await highlightElements(this.signUpLocatorsRegistry.saIdInput);

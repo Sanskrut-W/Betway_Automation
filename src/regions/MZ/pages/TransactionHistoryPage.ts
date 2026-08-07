@@ -68,10 +68,14 @@ export class TransactionHistoryPage extends BasePage {
     // goto() and Login() are inherited from BasePage
 
     async navigateToTransactionHistory() {
+        // A promotional popup can appear at any point; close it proactively
+        // before navigating so it doesn't block the clicks below.
+        await this.closePopupIfVisible();
         await this.locatorsRegistry.hamburgerBtn.click();
         await this.page.waitForTimeout(1000);
         await this.locatorsRegistry.transactionHistoryButton.click();
         await this.page.waitForTimeout(1000);
+        await this.closePopupIfVisible();
     }
 
     async captureScreenshot(locatorName: string, screenshotDir: string, fileName: string, testInfo: any) {
@@ -84,9 +88,16 @@ export class TransactionHistoryPage extends BasePage {
     }
     async closePopupIfVisible() {
         const closeBtn = this.locatorsRegistry.closePopup;
-        if (await closeBtn.isVisible({ timeout: 10000 })) {
-            await closeBtn.click();
-            await this.page.waitForTimeout(500);
+        try {
+            if (await closeBtn.isVisible({ timeout: 10000 })) {
+                // Let the popup finish animating in before clicking, so its own
+                // backdrop doesn't intercept the click meant for the close button.
+                await this.page.waitForTimeout(500);
+                await closeBtn.click({ force: true, timeout: 5000 }).catch(() => { });
+                await this.page.waitForTimeout(500);
+            }
+        } catch {
+            // Popup not present — nothing to do.
         }
     }
 
@@ -101,12 +112,15 @@ export class TransactionHistoryPage extends BasePage {
     // --- Methods for Page Interactions ---
 
     async clickTransactionTab(tabName: string) {
+        // The promo popup can reappear at any point on this screen; clear it first.
+        await this.closePopupIfVisible();
         const tabLocator = this.locatorsRegistry[tabName];
         await tabLocator.click();
         await this.page.waitForTimeout(1000);
     }
 
     async clickDatePicker() {
+        await this.closePopupIfVisible();
         await this.locatorsRegistry.datePicker.click();
         await this.page.waitForTimeout(1000);
     }
@@ -115,6 +129,7 @@ export class TransactionHistoryPage extends BasePage {
      * Searches for a transaction using the internally stored test ID.
      */
     async searchTransactionByID() {
+        await this.closePopupIfVisible();
         const transactionButton = this.locatorsRegistry.transactionIDButton;
         const retrievedId = (await transactionButton.textContent())?.trim();
 
@@ -129,28 +144,33 @@ export class TransactionHistoryPage extends BasePage {
     }
 
     async clickExportButton() {
+        await this.closePopupIfVisible();
         await this.locatorsRegistry.exportBtn.click();
         await this.page.waitForTimeout(1000);
     }
 
     async openTransactionDetailView() {
+        await this.closePopupIfVisible();
         await this.locatorsRegistry.transactionDetailView.click();
         await this.page.waitForTimeout(1000);
     }
 
     async clickDetailViewBackButton() {
         await this.page.waitForTimeout(2000);
+        await this.closePopupIfVisible();
         await this.locatorsRegistry.detailViewBackButton.click();
         await this.page.waitForTimeout(1000);
     }
 
     async openFirstTransactionBetslip() {
+        await this.closePopupIfVisible();
         await this.locatorsRegistry.transactionIDButton.click();
         await this.page.waitForTimeout(1000);
     }
 
     async clickBetslipBackButton() {
         await this.page.waitForTimeout(1000);
+        await this.closePopupIfVisible();
         await this.locatorsRegistry.betslipBackButton.click();
         await this.page.waitForTimeout(1000);
     }

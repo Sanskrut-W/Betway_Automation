@@ -148,6 +148,14 @@ export class BetSaverPage extends BasePage {
         }
     }
 
+    async closeBetConfirmationPopup() {
+        const close = this.locatorsRegistry.betConfirmationClose;
+        if (await close.isVisible({ timeout: 5000 })) {
+            await close.click();
+            await this.page.waitForTimeout(500);
+        }
+    }
+
     async deleteBetslipIfVisible() {
         if (await this.locatorsRegistry.betslipDeleteButton?.isVisible()) {
             await expect(this.locatorsRegistry.betslipDeleteButton).toBeVisible({ timeout: 10000 });
@@ -156,8 +164,10 @@ export class BetSaverPage extends BasePage {
     }
 
     async navigateToMyBets() {
-        await this.page.goto('https://betway.co.zm/sport/soccer/upcoming?account=my-bets');
-        await this.page.waitForLoadState('domcontentloaded');
+        await this.locatorsRegistry.hamburgerMenu.click();
+        await this.page.waitForTimeout(1000);
+        await this.locatorsRegistry.myBetsButton.click();
+        await this.page.waitForTimeout(1000);
     }
 
     async outrightsSelection() {
@@ -291,6 +301,7 @@ export class BetSaverPage extends BasePage {
         await this.locatorsRegistry.betNowButton.scrollIntoViewIfNeeded();
         await this.safeClick(this.locatorsRegistry.betNowButton, "BetNow Button");
         await this.page.waitForTimeout(5000);
+        await this.closeBetConfirmationPopup();
         await this.closePopup();
         await this.navigateToMyBets();
     }

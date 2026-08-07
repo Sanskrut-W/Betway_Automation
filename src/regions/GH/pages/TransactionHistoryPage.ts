@@ -91,7 +91,7 @@ export class TransactionHistoryPage extends BasePage {
         await this.page.waitForTimeout(1000);
         // GH can re-show the promo popup when entering Transaction History;
         // close it now so it doesn't block the tab bar clicks that follow.
-        await this.closePopupIfVisible();
+        // await this.closePopupIfVisible();
     }
 
     async captureScreenshot(locatorName: string, screenshotDir: string, fileName: string, testInfo: any) {

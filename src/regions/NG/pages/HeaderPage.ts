@@ -79,7 +79,9 @@ export class HeaderPage extends HomePage {
       liveChatIcon: getLocator(this.page, configs["liveChatIcon"]),
       insiderBlog: getLocator(this.page, configs["insiderBlog"]),
       betwayScoresApp: getLocator(this.page, configs["betwayScoresApp"]),
-      howTo: this.page.locator('a[href="/how-to-bet"]').locator('..'),
+      // Scoped to the hamburger drawer's nav block: the header's Quick Links flyout has its own
+      // separate "/how-to-bet" link, so an unscoped selector matches 2 elements (strict-mode violation).
+      howTo: this.page.locator('div.mt-8.rounded-lg a[href="/how-to-bet"]').locator('..'),
 
 
 
@@ -162,10 +164,12 @@ export class HeaderPage extends HomePage {
     await highlightElementBorder(this.HeaderPageLocatorsRegistry.passwordInput);
   }
 
-  // async verifyCountryCode() {
-  //   await this.HeaderPageLocatorsRegistry.countryCode.waitFor({ state: 'visible', timeout: 10000 });
-  //   await highlightElementBorder(this.HeaderPageLocatorsRegistry.countryCode);
-  // }
+  async verifyCountryCode() {
+    // NG dials with +234 (Nigeria); the shared HeaderPage locator sheet hardcodes +27 (ZA), so build this locator directly.
+    const countryCode = this.page.getByText('+234', { exact: true });
+    await countryCode.waitFor({ state: 'visible', timeout: 10000 });
+    await highlightElementBorder(countryCode);
+  }
   // async verifyEyeButton() {
   //   await highlightElementBorder(this.HeaderPageLocatorsRegistry.eyeButton);
   //   await this.page.waitForTimeout(3000);
@@ -242,7 +246,9 @@ export class HeaderPage extends HomePage {
 
   async verifyBalanceCurrency() {
     await this.Login();
-    await highlightElementBorder(this.HeaderPageLocatorsRegistry.balanceCurrency);
+    // NG displays "N" (Naira); the shared HeaderPage locator sheet hardcodes "R" (ZA/Rand), so scope to the Balance chip directly.
+    const balanceCurrency = this.page.locator('div').filter({ hasText: /^Balance/ }).locator('span.text-identity.font-bold').first();
+    await highlightElementBorder(balanceCurrency);
   }
 
   async verifyFreebetField() {
@@ -256,7 +262,9 @@ export class HeaderPage extends HomePage {
   async verifyFreebetCurrency() {
     await this.Login();
     await this.clickBalanceDropdown();
-    await highlightElementBorder(this.HeaderPageLocatorsRegistry.freebetCurrency);
+    // NG displays "N" (Naira); the shared HeaderPage locator sheet hardcodes "R" (ZA/Rand), so scope to the Freebet row directly.
+    const freebetCurrency = this.page.locator('div').filter({ hasText: /^Freebet/ }).locator('span.text-identity.font-bold').first();
+    await highlightElementBorder(freebetCurrency);
   }
 
   async verifyFreebetRefreshButton() {
@@ -267,7 +275,9 @@ export class HeaderPage extends HomePage {
 
   async verifyCasinoBonusField() {
     await this.clickBalanceDropdown();
-    await highlightElements(this.HeaderPageLocatorsRegistry.casinoBonusField);
+    // NG renamed this offering from "Casino Bonus" to "Betway Rewards"; the shared HeaderPage locator sheet still says "Casino Bonus".
+    const betwayRewardsField = this.page.getByText('Betway Rewards', { exact: true });
+    await highlightElements(betwayRewardsField);
   }
 
   async verifyCasinoBonusCurrency() {
@@ -621,7 +631,9 @@ export class HeaderPage extends HomePage {
   }
 
   async verifyHamburgerEyeButton() {
-    const hamburgerEyeButton = this.HeaderPageLocatorsRegistry.allBalanceTxt.locator('..').locator('..').getByRole('img').first();
+    // NG has no "All Balances" text; the eye (show/hide balance) icon is an <svg> sitting
+    // next to the Balance chip inside the accordion header, not an <img>.
+    const hamburgerEyeButton = this.page.locator('div.accordion-summary-header').locator('div.mr-2 svg').first();
     await highlightElementBorder(hamburgerEyeButton);
     await hamburgerEyeButton.click();
   }

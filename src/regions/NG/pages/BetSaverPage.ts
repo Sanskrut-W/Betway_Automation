@@ -138,6 +138,14 @@ export class BetSaverPage extends BasePage {
         }
     }
 
+    async closeBetConfirmationPopup() {
+        const close = this.locatorsRegistry.betConfirmationClose;
+        if (await close.isVisible({ timeout: 5000 })) {
+            await close.click();
+            await this.page.waitForTimeout(500);
+        }
+    }
+
     async deleteBetslipIfVisible() {
         if (await this.locatorsRegistry.betslipDeleteButton?.isVisible()) {
             await expect(this.locatorsRegistry.betslipDeleteButton).toBeVisible({ timeout: 10000 });
@@ -146,8 +154,10 @@ export class BetSaverPage extends BasePage {
     }
 
     async navigateToMyBets() {
-        await this.page.goto('https://www.betway.com.ng/sport/soccer/upcoming?account=my-bets');
-        await this.page.waitForLoadState('domcontentloaded');
+        await this.locatorsRegistry.hamburgerMenu.click();
+        await this.page.waitForTimeout(1000);
+        await this.locatorsRegistry.myBetsButton.click();
+        await this.page.waitForTimeout(1000);
     }
 
     async outrightsSelection() {
@@ -236,14 +246,14 @@ export class BetSaverPage extends BasePage {
     }
 
     async verifyBetsaverNotActiveForFewSelections() {
-        await this.locatorsRegistry.gotit.click().catch(() => { });
+        await this.locatorsRegistry.gotit.click({ force: true, timeout: 5000 }).catch(() => { });
         await OddsSelectionAbove(3, 1.5, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betSaverNotActive, "BetSaver Not Active");
     }
 
     async setupBetsaverActive() {
-        await this.locatorsRegistry.gotit.click().catch(() => { })
+        await this.locatorsRegistry.gotit.click({ force: true, timeout: 5000 }).catch(() => { });
         await OddsSelectionAbove(7, 2, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betSaverActive, "BetSaver Active");
@@ -258,7 +268,7 @@ export class BetSaverPage extends BasePage {
     }
 
     async placeQualifyingBetAndNavigateToMyBets(numberOfOdds: number = 3) {
-        await this.locatorsRegistry.gotit.click().catch(() => { });
+        await this.locatorsRegistry.gotit.click({ force: true, timeout: 5000 }).catch(() => { });
         await OddsSelectionAbove(numberOfOdds, 1.5, this.page);
         await this.safeClick(this.locatorsRegistry.multiBetSlip, "BetSaver Not Active");
         await this.safeClick(this.locatorsRegistry.betNowButton, "BetNow Button");
@@ -275,6 +285,7 @@ export class BetSaverPage extends BasePage {
         await this.locatorsRegistry.betNowButton.scrollIntoViewIfNeeded();
         await this.safeClick(this.locatorsRegistry.betNowButton, "BetNow Button");
         await this.page.waitForTimeout(5000);
+        await this.closeBetConfirmationPopup();
         await this.closePopup();
         await this.navigateToMyBets();
     }
