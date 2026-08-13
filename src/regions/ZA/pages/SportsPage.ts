@@ -10,13 +10,13 @@ import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElements } from '../../Common-Flows/HighlightElements';
 const file = "src/global/utils/file-utils/locators.xlsx";
 
-const LOCATOR_URL="https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
+const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx"
 
 
 export class SportsPage extends LoginPage {
     SportsPagelocatorRegistry: Record<string, import('@playwright/test').Locator>;
     page: import('@playwright/test').Page;
-    
+
     constructor(page: import('@playwright/test').Page) {
         super(page);
         this.page = page;
@@ -86,7 +86,7 @@ export class SportsPage extends LoginPage {
 
     async LogOut() {
         await this.SportsPagelocatorRegistry.hamburgerMenu.click();
-        await this.page.getByText('All Balances').waitFor({ state: 'visible' });
+        // await this.page.getByText('All Balances').waitFor({ state: 'visible' });
         await this.page.getByText('Log out').click();
         await this.page.getByRole('button', { name: 'Proceed' }).click();
         await this.SportsPagelocatorRegistry.loginButton.waitFor({ state: 'visible' });
@@ -101,5 +101,5 @@ export class SportsPage extends LoginPage {
         return bookingCode;
     }
 
-    
+
 }

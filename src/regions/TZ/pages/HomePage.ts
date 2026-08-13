@@ -5,7 +5,10 @@ import { highlightElementBorder, highlightElements } from '../../Common-Flows/Hi
 import { BasePage } from './BasePage';
 
 
-const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
+// Was a remote GitHub raw-file download on every construction (HomePage is the base class for
+// nearly every page object) — flaky under concurrent workers. The local shared workbook has an
+// equivalent "HomePage" sheet.
+const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx"
 
 export class HomePage extends BasePage {
 

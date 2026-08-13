@@ -22,9 +22,20 @@ export class HamburgerMenuPage extends HeaderPage {
     }
 
     // ==========================================
-    // Verify and Click Methods 
+    // Verify and Click Methods
     // Note: We DO NOT click hamburgerMenu here because beforeEach handles it
     // ==========================================
+
+    async verifyEyeButton2() {
+        await this.Login();
+        await this.clickHamburgerMenu();
+        // Same "hide/show balance" eye icon as HeaderPage.verifyHamburgerEyeButton(): a bare <svg>
+        // next to the Balance chip, not an <img> — the inherited eyeButton2 registry key is unset.
+        const eyeButton = this.page.locator('div.accordion-summary-header').locator('div.mr-2 svg').first();
+        await eyeButton.waitFor({ state: 'visible' });
+        await eyeButton.click();
+        await highlightElementBorder(eyeButton);
+    }
 
     async verifyAndClickDepositButton() {
         // Ensure element is ready before interacting

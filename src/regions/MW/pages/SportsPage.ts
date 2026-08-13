@@ -10,7 +10,10 @@ import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElements } from '../../Common-Flows/HighlightElements';
 const file = "src/global/utils/file-utils/locators.xlsx";
 
-const LOCATOR_URL="https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
+// Was a remote GitHub raw-file download on every construction — flaky under concurrent workers,
+// and SportsPage sits in the constructor chain of BetInfluencerModal/BetslipPage/etc., so every
+// test using those fixtures paid for it. The local shared workbook has an equivalent sheet.
+const LOCATOR_URL="src/global/utils/file-utils/locators(2).xlsx"
 
 
 export class SportsPage extends LoginPage {

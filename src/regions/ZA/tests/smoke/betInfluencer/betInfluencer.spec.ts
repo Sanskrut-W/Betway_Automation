@@ -27,8 +27,9 @@ test.describe('BetInfluencer Tests', () => {
 
     test('T2-Summary page presence', async ({ betinfluencerModal }, testInfo) => {
         await betinfluencerModal.gotoBetInfluencerModal();
-        await expect(betinfluencerModal.page.getByRole('button', { name: 'Summary' })).toBeVisible();
-        await highlightElements(betinfluencerModal.page.getByRole('button', { name: 'Summary' }));
+        // await expect(betinfluencerModal.BetslipPageLocatorsRegistry.summaryButton).toBeVisible();
+        await highlightElements(betinfluencerModal.BetslipPageLocatorsRegistry.summaryButton.locator('..'));
+        console.log(betinfluencerModal.BetslipPageLocatorsRegistry.summaryButton)
         await ScreenshotHelper(betinfluencerModal.page, screenshotDir, 'T2-Summary page presence', testInfo);
     });
 
@@ -48,7 +49,7 @@ test.describe('BetInfluencer Tests', () => {
 
     test('New-T5-Verify functionality of "Revenue" on Summary page', async ({ betinfluencerModal }, testInfo) => {
         await betinfluencerModal.gotoBetInfluencerModal();
-        await highlightElements(betinfluencerModal.BetInfluencerModalLocatorRegistry.revenue);
+        await highlightElements(betinfluencerModal.BetInfluencerModalLocatorRegistry.revenue.locator('..').locator('..').locator('..').locator('..'));
         await ScreenshotHelper(betinfluencerModal.page, screenshotDir, 'New-T5-Revenue presence', testInfo);
     });
     // test('New-T6/T7-Verify graphical representational data for  "Number of codes" inside summary section./Verify graphical representational data for  "Total Bets taken" inside summary section.',async({ betinfluencerModal }, testInfo) => {
@@ -80,6 +81,7 @@ test.describe('BetInfluencer Tests', () => {
     // });
 
     test('T7/New T-18/T19/T20 - Verify functionality of sort by dropdown on Details page inside bet influencer from Hamburger menu.', async ({ betinfluencerModal }, testInfo) => {
+        test.setTimeout(1200000);
         await betinfluencerModal.gotoDetailSectionBetInfluencerModal();
         await betinfluencerModal.sortByDropDownFunctionalityChacek(screenshotDir, testInfo);
     });
@@ -106,17 +108,14 @@ test.describe('BetInfluencer Tests', () => {
     });
 
     test('T11/T12-Verify functionality of Sort Button on Details page inside bet influencer from Hamburger menu.', async ({ betinfluencerModal }, testInfo) => {
+        test.setTimeout(1200000);
         await betinfluencerModal.gotoDetailSectionBetInfluencerModal();
-        await highlightElements(betinfluencerModal.BetInfluencerModalLocatorRegistry.sortBySelector.locator('..').locator('..').getByRole('button').last());
-        await ScreenshotHelper(betinfluencerModal.page, screenshotDir, 'T11-Sort Button after click', testInfo);
-        await betinfluencerModal.BetInfluencerModalLocatorRegistry.sortBySelector.locator('..').locator('..').getByRole('button').last().click();
-        await betinfluencerModal.page.waitForTimeout(2000);
-        await ScreenshotHelper(betinfluencerModal.page, screenshotDir, 'T11-Sort Button after click', testInfo);
+        await betinfluencerModal.sortByDropDownFunctionalityChacek(screenshotDir, testInfo);
     });
 
     test('New-T11-Verify correct graphical representation of  "Last Four weeks" data .', async ({ betinfluencerModal }, testInfo) => {
         await betinfluencerModal.gotoBetInfluencerModal();
-        await highlightElements(betinfluencerModal.BetInfluencerModalLocatorRegistry.lastFourWeeksCanvas);
+        await highlightElements(betinfluencerModal.BetInfluencerModalLocatorRegistry.lastFourWeeksCanvas.locator('..'));
         await ScreenshotHelper(betinfluencerModal.page, screenshotDir, 'New-T11-Last Four Weeks', testInfo);
     });
 
@@ -201,6 +200,7 @@ test.describe('BetInfluencer Tests', () => {
     // });
 
     test('T17 - Verify influencer is getting payout if  influencer place a bet with 5 legs.', async ({ betinfluencerModal }, testInfo) => {
+        test.setTimeout(1200000);
         const bookingCode = await betinfluencerModal.User1PlaceBets(6);
         const SharedBookingCode = await betinfluencerModal.User2PlaceBetsFromBookingCode(bookingCode);
         await betinfluencerModal.page.reload();

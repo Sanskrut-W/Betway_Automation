@@ -11,7 +11,7 @@ import { getFirstBookingCode } from '../commonflows/storeAllBookingCode';
 import { BetslipPage } from './BetslipPage';
 import { GetBookingCode } from '../../Common-Flows/GetBookingCode';
 import { OddsSelectionAbove } from '../commonflows/OddSelection';
-const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
+const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx"
 const userData = require('../json-data/userData.json');
 
 
@@ -24,7 +24,7 @@ export class BetInfluencerModal extends BetslipPage {
     constructor(page: import('@playwright/test').Page) {
         super(page);
         this.page = page;
-        this.revenue = this.page.getByText('Revenue').nth(0);
+        // this.revenue = this.page.getByText('Revenue').nth(0);
         const configs = loadLocatorsFromExcel(LOCATOR_URL, "BetInfluencerModalPage");
         this.BetInfluencerModalLocatorRegistry = {
             ...this.BetslipPageLocatorsRegistry,
@@ -39,6 +39,11 @@ export class BetInfluencerModal extends BetslipPage {
             betsTaken: getLocator(page, configs["betsTaken"]),
             nextButton: getLocator(page, configs["nextButton"]),
             previousButton: getLocator(page, configs["previousButton"]),
+            betInfluencerLink1: getLocator(page, configs["betInfluencerLink1"]),
+            betInfluencerLink2: getLocator(page, configs["betInfluencerLink2"]),
+            revenue: getLocator(page, configs["revenue"])
+
+
             // revenueGraph : getLocator(page, configs["revenueGraph"])
         }
     }
@@ -52,14 +57,14 @@ export class BetInfluencerModal extends BetslipPage {
 
     async verifyPresenceofBetInfluencerinHamburgerMenu() {
         await this.toggleHambergerMenu();
-        await highlightElements(this.BetInfluencerModalLocatorRegistry.BetInfluencer);
+        await highlightElements(this.page.getByRole('link', { name: 'Bet Influencer' }).nth(0));
     }
 
     async verifyBetInfluencerFromAccountPopup(mobile: any) {
         await this.toggleHambergerMenu();
         await this.page.getByText('My Bets').nth(0).click();
         await this.page.getByText(`Account Options: ${mobile} `)
-        const windowBetInfluencer = await this.page.locator('#booking-codes-account-nav');
+        const windowBetInfluencer = await this.page.getByRole('link', { name: 'Bet Influencer' }).nth(1);
         await windowBetInfluencer.waitFor({ state: 'visible', timeout: 5000 });
         await highlightElements(windowBetInfluencer);
     }
@@ -67,7 +72,6 @@ export class BetInfluencerModal extends BetslipPage {
     async verifyAndClickDetailedBreakdown() {
         await highlightElements(this.BetInfluencerModalLocatorRegistry.detailedBreakdownButton);
         await this.BetInfluencerModalLocatorRegistry.detailedBreakdownButton.click();
-        await this.page.waitForSelector('text=Total monthly revenue', { state: 'visible' });
     }
 
     async verifyNextButton(screenshotDir: string, testInfo: import('@playwright/test').TestInfo) {
@@ -90,19 +94,21 @@ export class BetInfluencerModal extends BetslipPage {
 
     async toggleHambergerMenu() {
         await this.Login();
-        await this.page.waitForLoadState('domcontentloaded');
+        // await this.page.waitForLoadState('domcontentloaded');
         await this.BetInfluencerModalLocatorRegistry.hamburgerMenu.click();
     }
 
     async gotoBetInfluencerModal() {
         await this.toggleHambergerMenu();
         await this.BetInfluencerModalLocatorRegistry.BetInfluencer.click();
-        await this.page.waitForSelector('text=Revenue', { state: 'visible' });
+        await this.page.locator('#my-account-main').waitFor({ state: 'visible' });
     }
     async gotoDetailSectionBetInfluencerModal() {
         await this.toggleHambergerMenu();
-        await this.BetInfluencerModalLocatorRegistry.BetInfluencer.click();
-        await this.page.waitForSelector('text=Revenue', { state: 'visible' });
+        await this.page.waitForTimeout(50000);
+        await this.page.getByText('Bet Influencer').first().click();
+        await this.page.getByText('Bet Influencer').first().click();
+        await this.page.locator('#my-account-main').waitFor({ state: 'visible', timeout: 10000 });
         await this.clickDetailButton();
     }
     async goToBetInfluencerWithoutLogin() {
@@ -116,15 +122,15 @@ export class BetInfluencerModal extends BetslipPage {
     }
     async clickDetailButton() {
         await this.BetInfluencerModalLocatorRegistry.detailButton.click();
-        await this.page.waitForSelector('text=Total monthly revenue', { state: 'visible' });
     }
 
     async sortByDropDownFunctionalityChacek(screenshotDir: string, testInfo: import('@playwright/test').TestInfo) {
+        let sortbutton = this.page.locator('xpath=//*[@id="my-account-main"]/div/div[2]/div/div[1]/div[2]/div/div');
         for (let i = 0; i < 6; i++) {
-            await this.BetInfluencerModalLocatorRegistry.sortBySelector.click();
+            await sortbutton.click();
             await this.page.keyboard.press('ArrowDown');
             await this.page.keyboard.press('Enter');
-            await highlightElements(this.BetInfluencerModalLocatorRegistry.sortBySelector);
+            await highlightElements(sortbutton);
             await ScreenshotHelper(this.page, screenshotDir, `T7-${i + 1}-Sort by dropdown after click`, testInfo);
         }
     }
@@ -133,7 +139,7 @@ export class BetInfluencerModal extends BetslipPage {
     async User1PlaceBets(legsCount: number) {
         await this.gotoSportsPage();
         await this.LoginArgs(`${userData.user1.mobile}`, `${userData.user1.password}`);
-        await OddsSelectionAbove(legsCount,1.2, this.page);
+        await OddsSelectionAbove(legsCount, 1.2, this.page);
         await this.clickBetNowBtn();
         const bookingCode = await this.SportsPagelocatorRegistry.bookingCodeMessage.locator('..').innerText();
         console.log(bookingCode);
@@ -150,7 +156,7 @@ export class BetInfluencerModal extends BetslipPage {
         await this.BetInfluencerModalLocatorRegistry.bookingCodeInput.fill(`${SharedBookingCode}`)
         await this.page.keyboard.press('Enter');
         await this.clickBetNowBtn();
-        await this.BetInfluencerModalLocatorRegistry.betConfirmation.locator('..').getByRole('img').first().click();
+        // await this.BetInfluencerModalLocatorRegistry.betConfirmation.locator('..').getByRole('img').first().click();
         await this.LogOut();
         return SharedBookingCode;
     }

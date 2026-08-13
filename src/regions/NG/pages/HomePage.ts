@@ -6,7 +6,10 @@ import { BasePage } from './BasePage';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
+// Was a remote GitHub raw-file download on every page-object construction (HomePage is the base
+// class for HeaderPage/HamburgerMenuPage/etc.) — flaky under concurrent workers and unnecessary,
+// since the local shared workbook already has an equivalent "HomePage" sheet.
+const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx"
 
 export class HomePage extends BasePage {
 

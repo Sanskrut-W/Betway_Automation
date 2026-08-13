@@ -142,7 +142,7 @@ export class LoginPage extends HomePage {
         await this.LoginPagelocatorsRegistry.mobileInput.fill(`${mobile}`);
         await this.LoginPagelocatorsRegistry.passwordInput.fill(`${password}`);
         await this.page.keyboard.press('Enter');
-        await this.page.waitForTimeout(7000); // Wait for login to complete
+        await this.page.waitForTimeout(5000); // Wait for login to complete
     }
 
     async LoginFromSignupPopupHamburgerMenu() {
