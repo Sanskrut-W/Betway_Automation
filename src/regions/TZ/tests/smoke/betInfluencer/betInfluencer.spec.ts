@@ -27,9 +27,9 @@ test.describe('BetInfluencer Tests', () => {
 
     test('T2-Summary page presence', async ({ betinfluencerModal }, testInfo) => {
         await betinfluencerModal.gotoBetInfluencerModal();
-        // await expect(betinfluencerModal.BetInfluencerModalLocatorRegistry.summaryButton).toBeVisible();
-        await highlightElements(betinfluencerModal.BetInfluencerModalLocatorRegistry.summaryButton.locator('..'));
-        console.log(betinfluencerModal.BetInfluencerModalLocatorRegistry.summaryButton)
+        // await expect(betinfluencerModal.BetslipPageLocatorsRegistry.summaryButton).toBeVisible();
+        await highlightElements(betinfluencerModal.BetslipPageLocatorsRegistry.summaryButton.locator('..'));
+        console.log(betinfluencerModal.BetslipPageLocatorsRegistry.summaryButton)
         await ScreenshotHelper(betinfluencerModal.page, screenshotDir, 'T2-Summary page presence', testInfo);
     });
 

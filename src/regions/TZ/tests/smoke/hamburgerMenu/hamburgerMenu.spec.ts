@@ -180,14 +180,12 @@ test.describe('Hamburger Module Tests', () => {
         await ScreenshotHelper(headerPage.page, screenshotDir, 'T8-HowTo2.png', testInfo);
     });
 
-    // Disabled: verifyResponsibleGamingOption() was never implemented on HeaderPage, and Responsible
-    // Gaming coverage already exists and passes via test 34 above (hamburgerMenuPage.verifyAndClickResponsibleGaming()).
-    // test('9-Verify Responsible gaming is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
-    //     await headerPage.verifyResponsibleGamingOption();
-    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming.png', testInfo);
-    //     await headerPage.clickResponsibleGaming();
-    //     await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming2.png', testInfo);
-    // });
+    test('9-Verify Responsible gaming is visible and clickable in Hamburger Menu', async ({ headerPage }, testInfo) => {
+        await headerPage.verifyResponsibleGamingOption();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming.png', testInfo);
+        await headerPage.clickResponsibleGaming();
+        await ScreenshotHelper(headerPage.page, screenshotDir, 'T9-ResponsibleGaming2.png', testInfo);
+    });
 
 
 

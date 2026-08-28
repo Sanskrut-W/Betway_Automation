@@ -74,7 +74,7 @@ export class MyBetsPage extends BasePage {
         await this.myBetsLocatorsRegistry.settledBetsTab.click();
     }
 
-    async selectCategory(categoryName: 'Betgames' | 'Betway Jackpots' | 'Jackpots' | 'Tote' | 'Sports') {
+    async selectCategory(categoryName: 'Betgames' | 'Lucky Numbers' | 'Jackpots' | 'Tote' | 'Sports') {
         let currentDropdown = this.myBetsLocatorsRegistry.categoryDropdown;
 
         switch (categoryName) {
@@ -82,7 +82,7 @@ export class MyBetsPage extends BasePage {
                 await currentDropdown.click();
                 await this.myBetsLocatorsRegistry.betgamesOption.click();
                 break;
-            case 'Betway Jackpots':
+            case 'Lucky Numbers':
                 await this.myBetsLocatorsRegistry.betgamesOption.click(); // Click previous to open
                 await this.myBetsLocatorsRegistry.luckyNumbersOption.click();
                 break;
@@ -90,10 +90,10 @@ export class MyBetsPage extends BasePage {
                 await this.myBetsLocatorsRegistry.luckyNumbersOption.click(); // Click previous to open
                 await this.myBetsLocatorsRegistry.jackpotsOption.click();
                 break;
-            // case 'Tote':
-            //     await this.myBetsLocatorsRegistry.jackpotsOption.click(); // Click previous to open
-            //     await this.myBetsLocatorsRegistry.toteOption.click();
-            //     break;
+            case 'Tote':
+                await this.myBetsLocatorsRegistry.jackpotsOption.click(); // Click previous to open
+                await this.myBetsLocatorsRegistry.toteOption.click();
+                break;
             case 'Sports':
                 await this.myBetsLocatorsRegistry.toteOption.click(); // Click previous to open
                 await this.myBetsLocatorsRegistry.categoryDropdown.click(); // 'categoryDropdown' is 'Sports'

@@ -185,11 +185,11 @@ export class HomePage extends BasePage {
         await this.HomePagelocatorsRegistry.ContactUs.click();
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.page).toHaveURL(/.*contact-us*/, { timeout: 15000 });
-        await highlightElementBorder(this.page.getByRole('heading', { name: 'Contact us' }));
+        await highlightElementBorder(this.page.getByRole('heading', { name: 'Contact us - ' }));
     }
 
     async clickContactUsBackButton() {
-        await highlightElementBorder(this.page.getByRole('heading', { name: 'Contact us' }).first().locator('..').locator('a').first());
+        await highlightElementBorder(this.page.getByRole('heading', { name: 'Contact us - ' }).first().locator('..').locator('a').first());
         await this.page.getByRole('heading', { name: 'Contact us - ' }).first().locator('..').locator('a').first().click();
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.page).toHaveURL('https://www.betway.co.za/', { timeout: 10000 });

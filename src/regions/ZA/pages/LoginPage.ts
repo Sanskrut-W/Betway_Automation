@@ -12,11 +12,7 @@ import { loadLocatorsFromExcel } from "../../../global/utils/file-utils/excelRea
 import { getLocator } from "../../../global/utils/file-utils/locatorResolver";
 import { highlightElementBorder, highlightElements } from '../../Common-Flows/HighlightElements';
 import { HomePage } from './HomePage';
-// Was a remote GitHub raw-file download on every construction — flaky under concurrent workers,
-// and LoginPage sits in the constructor chain of every page object that extends HomePage/SportsPage/
-// BetslipPage/BetInfluencerModal, so every test using those fixtures paid for it. The local shared
-// workbook has an equivalent sheet.
-const LOCATOR_URL = "src/global/utils/file-utils/locators(2).xlsx"
+const LOCATOR_URL = "https://github.com/athrvzoz/LocatorFile/raw/refs/heads/main/locators.xlsx"
 
 export class LoginPage extends HomePage {
 
