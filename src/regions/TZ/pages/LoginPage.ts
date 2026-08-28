@@ -95,14 +95,10 @@ export class LoginPage extends HomePage{
         await this.LoginPagelocatorsRegistry.loginButtonFromPopup.click();
     }
 
-    async goto(path: string = '/sport/soccer') {
-        // Delegate to BasePage.goto so the promotion popup is *waited for* and closed
-        // (it appears a few seconds after landing, so an immediate visibility check misses it).
-        await super.goto(path);
-    }
+    // goto() is inherited from BasePage (via HomePage)
 
     async gotoAviatorPage() {
-        await this.page.goto('https://new.betway.co.za/lobby/casino-games/game/aviator');
+        await this.page.goto('https://en.betway.co.tz/lobby/casino-games/game/aviator');
         await this.page.waitForLoadState('domcontentloaded');
     }
 
@@ -142,24 +138,14 @@ export class LoginPage extends HomePage{
 
 
 
-    // Login Functions
-    // Different-behavior variant: navigates to '/' first and verifies the welcome user.
-    async Login(user: { mobile: string; password: string } = userData.user1) {
-        await this.goto();
-        await this.LoginPagelocatorsRegistry.mobileInput.fill(`${user.mobile}`);
-        await this.LoginPagelocatorsRegistry.passwordInput.fill(`${user.password}`);
-        await this.page.keyboard.press('Enter');
-        // The promotion popup can reappear right after login and overlay the welcome banner
-        await this.closePromotionPopupIfVisible();
-        await this.verifyWelcomeUser(userData.user1.name);
-    }
+    // Login() is inherited from BasePage (via HomePage)
 
     async LoginArgs(mobile: string, password: string) {
         await this.goto();
         await this.LoginPagelocatorsRegistry.mobileInput.fill(`${mobile}`);
         await this.LoginPagelocatorsRegistry.passwordInput.fill(`${password}`);
         await this.page.keyboard.press('Enter');
-        await this.page.waitForTimeout(7000); // Wait for login to complete
+        await this.page.waitForTimeout(5000); // Wait for login to complete
     }
 
     async LoginFromSignupPopupHamburgerMenu() {

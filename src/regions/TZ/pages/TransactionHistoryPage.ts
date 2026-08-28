@@ -37,7 +37,11 @@ export class TransactionHistoryPage extends BasePage {
 
             accountMain: getLocator(this.page, configs['accountMain']),
 
-            datePicker: getLocator(this.page, configs['datePicker']).nth(1),
+            // The page has TWO elements with id="date" (notification picker + transaction-history
+            // picker), and the shared xlsx config already applies .nth(0) internally — chaining a
+            // further .nth(1) on top re-indexes into that already-1-element result and never resolves.
+            // Scope directly to the transaction-history date picker's container instead.
+            datePicker: this.page.locator('#transaction-history-date-picker').getByRole('combobox', { name: 'Date' }),
             dateDialog: getLocator(this.page, configs['dateDialog']),
 
             transactionIDButton: getLocator(this.page, configs['transactionIDButton']),

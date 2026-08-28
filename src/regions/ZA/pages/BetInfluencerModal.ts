@@ -100,7 +100,7 @@ export class BetInfluencerModal extends BetslipPage {
 
     async gotoBetInfluencerModal() {
         await this.toggleHambergerMenu();
-        await this.BetInfluencerModalLocatorRegistry.BetInfluencer.click();
+        await this.BetInfluencerModalLocatorRegistry.betInfluencerLink1.click();
         await this.page.locator('#my-account-main').waitFor({ state: 'visible' });
     }
     async gotoDetailSectionBetInfluencerModal() {

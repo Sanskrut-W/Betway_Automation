@@ -82,7 +82,9 @@ export class HeaderPage extends HomePage {
       liveChatIcon: getLocator(this.page, configs["liveChatIcon"]),
       insiderBlog: getLocator(this.page, configs["insiderBlog"]),
       betwayScoresApp: getLocator(this.page, configs["betwayScoresApp"]),
-      howTo: this.page.locator('a[href="/how-to-bet"]').locator('..'),
+      // Scoped to the hamburger drawer's nav block: the header's Quick Links flyout has its own
+      // separate "/how-to-bet" link, so an unscoped selector matches 2 elements (strict-mode violation).
+      howTo: this.page.locator('div.mt-8.rounded-lg a[href="/how-to-bet"]').locator('..'),
 
 
 

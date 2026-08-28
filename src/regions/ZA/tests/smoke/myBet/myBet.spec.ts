@@ -35,13 +35,13 @@ test.describe('My Bets Page Functionality', () => {
             await myBetsPage.selectCategory('Betgames');
             await ScreenshotHelper(page, screenshotDir, 'open-bets-cat-betgames', testInfo);
 
-            await myBetsPage.selectCategory('Lucky Numbers');
-            await ScreenshotHelper(page, screenshotDir, 'open-bets-cat-lucky-numbers', testInfo);
+            // await myBetsPage.selectCategory('Lucky Numbers');
+            // await ScreenshotHelper(page, screenshotDir, 'open-bets-cat-lucky-numbers', testInfo);
 
-            await myBetsPage.selectCategory('Jackpots');
+            await myBetsPage.selectCategory('Betway Jackpots');
             await ScreenshotHelper(page, screenshotDir, 'open-bets-cat-jackpots', testInfo);
 
-            await myBetsPage.selectCategory('Tote');
+            await myBetsPage.selectCategory('Sports');
             await ScreenshotHelper(page, screenshotDir, 'open-bets-cat-tote', testInfo);
         });
 

@@ -96,7 +96,7 @@ export class LoginPage extends HomePage {
     // goto() is inherited from BasePage (via HomePage)
 
     async gotoAviatorPage() {
-        await this.page.goto('https://new.betway.co.za/lobby/casino-games/game/aviator');
+        await this.page.goto('https://en.betway.co.mz/lobby/casino-games/game/aviator');
         await this.page.waitForLoadState('domcontentloaded');
     }
 
